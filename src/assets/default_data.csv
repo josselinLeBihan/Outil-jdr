@@ -1,0 +1,392 @@
+Arbres,sousArbre,nom,ultime,modificationPhysique,description,fonctionnement,niveau1,Niveau 2
+Classe,Rodeur,Pisteur,,,"Le rodeur poursuit discrètement les traces d'une personne, acquérant ainsi des informations","Tests : [Survie] + [Investigation]
+
+Types d’infos : ses habitudes, sa taille, ses capacités, et bien plus encore.
+
+Gagne spécialité en survie/investigation",1 info simple par réussite supplémentaires,+1 sur toute les interactions lié a une cible pistée
+Classe,Rodeur,Pièges,,,"Le rodeur est habile à poser des pièges variés, lui offrant ainsi la possibilité de chasser une gamme étendue de proies.","Test : [Artisanat + Astuce]
+Gagne spécialisé artisanat
+Chaque repos : gagne 1 ration
+
+Piège simple : prend quelques minutes à poser
+Piège complexe : prend 1h scène a poser",Pièges simple : tuent les animaux et gênent les humains.,"Piège simple -> 
+Une cible : 3 dégâts  
+Piège complexe ->
+Une cible : 5 dégâts 
+Groupe : 3 dégâts"
+Classe,Rodeur,Dressage,,,Le rodeur est accompagné d’un animal de compagnie avec qui il lie un lien très fort.,"L’animal connait 3 d’ordre.
+Ordre : Bonus à un test égal au niveau de dressage 
+",Ordre simple seulement.,"Ordre complexe.
+Peut combiner leur action et remplacer une partie de son jet."
+Classe,Rodeur,Survivaliste,,,"Le rodeur, habitué à évoluer en plein air, se sent parfaitement adapté à la nature, ce qui accroît considérablement son efficacité dans cet environnement.","Peut effectuer 2 tâches aux campement.
+Le facteur confort est remplie de base.",,Dans la nature +1 aux jets de capacité physique.
+Classe,Rodeur,Campement ,Oui,,Expert des campement le rodeurs aide sont équipe a gagné en efficacité pour effectuer plus de tâches.,Améliore l’efficacité du campement,,Au campement chaque personnage peut éffectuer 1 activité supplémentaire.
+Classe,Chevalier,Formation,,,"Le chevalier excelle dans l'art de la coopération, lui permettant de mettre en place des formations aussi efficaces pour les combats que pour les actions de groupe.","Test : [travail en équipe + commandement] 
+Gagne 1pt de réserve pour chaque dés réussi.
+
+Bonus : Améliore la posture d'un personnage (+2 dégats/-2 dégats subit/-2 cout PE, +2 aux tests)","Max 1 bonus par action
+Gagne une spécialité en commandement","Par défaut : 2pt de commandement
+Action rapide"
+Classe,Chevalier,Porte étendard,,,"Le chevalier joue le rôle de pilier au sein de son équipe, apportant un soutien essentiel en aidant ses coéquipiers à maintenir leur calme et leurs forces, même dans les situations les plus complexes.","Activité de repos -> Discours motivant
+Regain d’1pt de sanité à tout les compagnons.
+
+Actions -> Cris de ralliement 
+ -1 au cout d’endurance des alliés 
+dure 1 tour | coûte 3PE",,"Discours motivant : +1 pt d’endurance aux compagnons
+Crie de ralliement : Une fois par séance bloque toute baisse de la sanité de ses alliés pour la durée d’une scène"
+Classe,Chevalier,Maitre des armures,,,"La maîtrise exceptionnelle de l'armure par le chevalier lui confère une efficacité accrue, tant dans son port que dans son entretien.",Gagne une spécialité en artisanat,Permet d’équiper une armure lourde,"Réduit l’encombrement de 1.
+Double la réparation d’équipement."
+Classe,Chevalier,Sauvetage héroïque,,,Toujours prompte a porter secours a ses équipier le chevalier peut au besoin sauter au secours de l’un des membres du groupe.,"Sauvetage : rediriger vers soit une attaque ou un danger destinée à un allié proche.
+1 fois par tour.",,Prend la moitié des dégâts de l’attaque.
+Classe,Chevalier,Groupe héroïque ,Oui,,Permet au chevalier d'organiser le groupe afin qu'il effectue une tâche impossible,,,L’action de groupe cumule les capacités de chaque participant (passant ainsi les plus grosse difficultés) Un seul action de groupe par scène.
+Classe,Chasseur de prime,Duel,,,Le mercenaire lance un duel implicite ou explicite contre un ennemi. Il gagne des bonus dans le cas d'une réussite du duel. Les duels peuvent être autant verbaux que martiaux.,"Duel : Lors d’un duel le mercenaire ne peut attaquer et se défendre que contre son adversaire.
+
+Bonus : 
++1 attaque ou def
+-1 dés de sanité durant le duel",," 2pt d’endurance pour faire relancer son jet à son adversaire
+
++1 dégâts en duel"
+Classe,Chasseur de prime,Frappe handicapante,,,"Frappe contre son adversaire de façon à l'handicaper, limitant ainsi ses actions. Améliore aussi son aisance avec les armes gênantes.",Tout dés supplémentaires réussi lors d’un jet d’attaque applique une blessure,Blessure légère 1d10 temporaire (dure 1 scène),Blessure grave temporaire (dure 1 scène)
+Classe,Chasseur de prime,Enquêteur,,,Permet au mercenaire d'enquêter et d'analyser les preuves et les personnes. Ils détectent les mensonges et les tromperies comme nul autre.,"+2 au jet d’investigation
+Peut relancer un jet d’investigation (1 fois par séance)",,1 fois par session : peut demander au MJ le lien entre 2 indices
+Classe,Chasseur de prime,Posture de combat,,,Plus que n’importe qui le guerrier maitrise les différentes postures de combat lui permettant d’améliorer leur efficacités.,Amélioration de posture : +1 au bonus,Améliore une posture 1 fois par scène,"Permet de changer de postures a tout moment.
+Pas de limite d’amélioration."
+Classe,Chasseur de prime,Partage de cible,Oui,,,(une fois pas scène),,"Indique une cible prioritaire aux autres membres. 
+Les alliés obtiennent tous +1 a leur actions contre la cible."
+Classe,Voleur,Assassinat,,,Le voleur est un expert des combats en traitre lui permettant d’attaquer au moment ou ses cibles sont les plus vulnérables.,"En combat -> Tests : [Nv arme + Manip] contre [nv arme + astuces] 
+Par surprise -> pas de jet
+
+Assassinat : passe 1 pt d’armure jusqu’à la fin du tour ",,Passe 2pt d’armure
+Classe,Voleur,Langages des voleurs,,,Le voleur se déplace et communique avec aisance dans les lieux les plus malfamés. Il partage avec ses compagnons certains des codes et des habitudes propres à ce milieu.,Crée un langage orale secret a la cohorte.,"Informations simple.
+Langage orale.",Langage des signes
+Classe,Voleur,Bonimenteur,,,"En tant qu'expert en tromperie, le voleur a la capacité de duper aisément n'importe qui. En se préparant à l'avance, il partage une portion de son habileté avec son groupe.","+1 en mensonge
+Au repos gagne l’activité 
+-> Mensonge commun :
+Bonus à tout ceux qui respect le mensonge
+
+-> Préparation de mensonge : Bonus tant que le menteur respect le mensonge","Mensonge commun : +1 a tout le monde
+Préparation de mensonge : +2 au jet de social","Mensonge commun : remplace les jets par les siens
+Préparation de mensonge : pas de jet nécessaire"
+Classe,Voleur,Voleur agile,,,,"+1 capacité physique
+Relance: Accobatie/Larcin/Evasion/Furtivité (une fois par scène)",Coute 3pt d’endurance,Peut toujours relancer Acrobatie/Larcin/Evasion/Furtivité
+Classe,Voleur,Organisateur,Oui,,"Le voleur excelle dans l'élaboration de plans complexes, améliorant ainsi son aisance et celle de son groupe lors de leur mise en œuvre.",,,"Au repos ajoute l’activité : préparation de plan 
+Tant que les joueurs suivent le plan ils obtiennent +1 a tout leur jets"
+Classe,Technicien,Explosif,,,L'érudit maîtrise l'art de manipuler la poudre noire pour fabriquer une variété d'explosifs.,"Chaque effet augmente de le temps de création de 1. On peut passer ce temps en faisant un jet de difficulté égal au nombre d’améliorations.
+
+[nv2 seulement]
+ajouter un effet double le temps de création",Accède à liste des créations explosive,"Peut ajouter des effets supplémentaire. 
+Effets: 
+ +1 puissance
+ +1 zone
++1 effet"
+Classe,Technicien,Concoctions,,,"L'érudit excelle dans l'art des concoctions, lui permettant de fabriquer des poisons, des cataplasmes régénérants et des mixtures gênantes.","Chaque effet augmente de le temps de création de 1. 
+On peut passer ce temps en faisant un jet de difficulté égal au nombre d’améliorations.
+
+[nv2 seulement]
+ajouter un effet double le temps de création",Accède à liste des concoctions,"Peut ajouter des effets supplémentaire. 
+Effet: 
+ +1 puissance
+ +1 zone
+ +1 effets"
+Classe,Technicien,Improvisation,,,"Même dans les situations les plus tendues, l'érudit sait utiliser ses compétences pour les mettre à contribution",peut remplacer la moitié de son jet par sa valeur de sang froid.,1 fois par jour,1 fois par scène
+Classe,Technicien,Analyse,,,Permet d'analyser les émotions ou les objets pour en sortir le plus d'informations possibles.,"1 fois par scène permet de relancer n’importe quel jet de mentale avec un bonus du niveau de la compétence. 
+L’analyse prend 1h à être effectuée.",,"Octroi l’activité Recherche. 
+Permet de passer n’importe quel jet de mental. Le nombre d’heure a effectué dépend de la difficulté."
+Classe,Technicien,Artisanat spécialisé,Oui,,,,,"Fabrique un consommable permettant d’améliorer une compétences d’un allié :
+Intensité améliorée 
+Modification de propriété 
+Ajout d’une propriété"
+Lignage,Las,Liens avec les animaux,,Cornes,Un Las crée un lien avec un animal qui devient son familier. Une connexion se crée alors dans les deux sens. Il ne peut cependant pas forcer son animal a faire ce qu’il ne voudrait pas faire.,Crée un lien avec un animal,Les esprits peuvent fusionner (parler + voir à travers),Gagne une amélioration physique tandis que son animal devient plus intelligent
+Lignage,Las,Peau d’écorce,,Peau marron,Un Las recouvre la peau de son corps par une couche solide ressemblant a de l’écorce.,Augmente son armure pendant une scène.,+1 armure sans encombrement (1 fois par jour),+2 armure sans encombrement (1 fois par jour)
+Lignage,Las,Murmures sauvages,,Oreille fines,Le las communique avec les bêtes des villes et des champs. Les discussions restent bornées au centre d’intérêt des animaux et ceux-ci n’effectueront rien qui les mettent en danger ou vont contre leur nature.,Bonus égal au niveau de murmure sauvage en jet de social avec les animaux.,Permet de discuter avec un type d’annimal,Permet de discuter avec les plantes et les annimaux
+Lignage,Las,Esprit résolu,,Craquelures apparentes,"Le Las acquiert une capacité mystique lui permettant de résister à toute influence, que ce soit par le biais de charme naturel, de coercition ou de la ruse. Cela peut se manifester sous la forme d’une parfaite sérénité ou d’un entêtement hors du commun.",,Reçoit un bonus de +1 en sang froid,"+2 résistance psy (détecte les invasion psy)
+Une condition psy disparait a la fin d’une mission"
+Lignage,Woda,Affinité aquatique,,Branchies dans le cou,La Woda est capable au contact de l’eau d’améliorer ses prouesse physique.,"+2 à la nage.
+
+Au contact de l’eau : 
+Bonus au jet
+Bonus de régénération de vie et d’endurance
+
+","+1 cap physique/Attaque/Défense 
+Regagne 1 d’endurance chaque tour","+1 a tout ses jets.
+Fait disparaitre les dégâts léger a la fin du tour"
+Lignage,Woda,Altération mémoriel,,Cheveux bleu-vert,La Woda est capable d’altérer des pans de l’histoire d’une victime s’il soutient son attention pleine et entière.,"Doit être au calme. 
+
+Il décrit les nouveaux souvenirs de sa cible, qui les acceptent comme les siens. Ce pouvoir ne permet pas d’explorer la véritable mémoire d’un individu.",Les souvenirs s’effacent ou revienne vite comme s’il était oubliés.,"Les souvenirs altèrent de manière permanente. 
+(Chaque information contradictoire ajoute +1 au jet de résistance)"
+Lignage,Woda,Chance,,Coquillage sur le corps,La Woda possède une chance surnaturelle qu’elle est capable de consommer.,Passif : Relance 2 jets par jour,,Permet de relancer ou de faire relancer 3 dés à soit ou à un adversaire
+Lignage,Woda,Poison de la veuve,,Main palmé,La Woda transmute une partie de son sang en poison paralysant. Elle peut enduire une arme tranchante de cet ichor.,"[poison + lignage] contre [constitution + Sang froid]
+
+Poison : 
+Paralysant : rapide -> paralyse 1 tour
+Blessant : long à faire -> 3 dégâts","Au calme : poison paralysant & blessant
+En tension : poison paralysant","Les poisons peuvent être fait en tension.
+Coût paralysant -1
+Ajoute un effet a long terme au blessant."
+Lignage,Shatten,Silence de la mort,,Androgine ,,"Le Shatten réduit au silence tous les sons qu’il produit. Ce pouvoir ne fonctionne que sur l’ouïe. 
+
+Dure 1 tour.",Supprime les bruits qu’il émet,Crée une zone de silence. (5m autour de lui )
+Lignage,Shatten,Sens accru,,Peau grise,"Les sens du Shatten acquière une une acuité hors du commun. Il est capable de voir dans l’obscurité totale, d’entendre les bruits les plus imperceptible et de sentir la peur que dégage les personnes.","Ajoute autant dés que son niveau de lignage.
+Dure une scène.
+
+Si exposé a des sensation extrême ->  Tests : [Astuce + Sang-froid]
+",Se concentre sur 1 sens.,"Active tout les sens.
+Permet de sentir les éléments invisible, les traces de magies apparaissent clairement.
+(activer en continue coute de l’endurance)"
+Lignage,Shatten,Commandement,,Tatouage anarchique,,"Tests : [Manipulation + Contrainte] / [Intelligence + Astuce]
+
+En montrant ses tatouage a une victime le Shatten contrains la volonté la volonté de celui-ci. Il devient ainsi capable de lui donné un ordre que celle-ci accomplira directement.",L’environnement doit être calme et l’ordre contenu en 2 mots. L’ordre disparait rapidement.,"Dans un environnement calme permet de donner un ordre simple qui disparait après un long délais. 
+Dans un environnement agité peut donner un ordre contenu en 1 mot."
+Lignage,Shatten,Lecture d’âme,,Yeux vert,"Par leur yeux les Shatten focalisent leur attention sur une personne pour déchiffrer son état d’esprit, qui lui apparaît sous la forme d’une aura aux couleurs changeantes. Les auras n’apportent pas d’informations précises. En revanche, elles fournissent des indices sur l’état émotionnel de la cible.","Tests : [Intelligence + Contrainte] / [Sang-froid + Représentation]
+
+Gagne autant de question que la marge de réussite.",L’indication de l’émotion est peu précise.,La connaissance de l’émotion est précise. Permet d’accentuer ou de diminuer une émotion.
+Lignage,Bestille,Psychométrie,,Stygmate sur les mains,"En touchant un objet inanimé ou le sol d’un lieu, la Bestille décèle les résidus d’émotions laissé par ceux qui l’ont manipulé ou visité par le passé.","Tests : [Lignage + Intelligence] 
+Ce procédé lui donne un aperçu des personnes concernées, mais aussi de leur actions et des circonstances des évènements. Les informations données sont rarement clair.","Fonctionne sur les objets.
+La trace doit être récente.",Lis les traces ancienne sur les objet et les traces récente sur les lieux.
+Lignage,Bestille,Partage de sens,,Yeux blanc,La Bestille projette son esprit pour se connecter aux sens d’une autre personne qui voit et ressent les même chose que lui. L’utilisateur reste conserve ses propres perceptions et reste conscient de son environnement immédiat.,"Tests: [Lignage + Sang-froid] / [Sang-froid + Constitution]
+
+Si rate la cible sens que quelques choses s’est passé.",Uniquement sur les personnes consentantes.,"Inclus les cibles non consentante
+Permet d’échanger des bribes d’informations à la cible consentante."
+Lignage,Bestille,Attaque psychique,,Cheveux blanc,Bestille projette son esprit violemment contre celui d’un adversaire afin de le désorienter et dans certains cas lui infliger de violente douleur.,"Tests: [Lignage + Sang-froid] / [Sang-froid + Constitution]
+
+","Malus de -2 a la victime & 2 dégâts léger.
+Utilisable à son tour ou en défense","L’attaque peut être utilisé hors du tour mais n’inflige pas de dégâts.
+Dégâts d’attaque: 1 dégâts aggravé"
+Lignage,Bestille,Révérence,,Tatouage évolutif et symétrique,Quiconque se trouve en présence de la Bestille avec ses tatouages visibles éprouve une admiration inexplicable pour elle. Les gens boivent ses paroles et acquiescent a tout va. Ce pouvoir peut même aller a l’envoutement.,"Tests: [Lignage + Charisme] / [Sang-froid + Constitution]
+
+Niveau de lignage ajouté au tests impliquant Persuasion et représentation.
+
+Durée : 1 scène",,Permet de séduire une victime. L’effet dure une journée.
+Lignage,Vuur,Âme de création,,Mains noires,Les mains de Vuur sont capables ajouter une âme aux objets qu’ils créent. Chaque objet créé ainsi possède un objectif qu’il aspire à accomplir et mettra tout en sorte pour le faire.,"Âme temporaire -> Test : [Lignage + Artisanat] / 2
+
+Âme fixe -> Obtient l’activité de camp : Inspiration d’objet. 
+Inspiration simple -> 1 mot : +1 si lien -1 pour tout le reste
+(Nv2 seulement)  Inspiration complexe -> Verbe + sujet  : +2 si lien -2 pour le reste",Temps de création : 10h,"Inspiration simple  : 5h
+Inspiration complexe : 10h"
+Lignage,Vuur,Griffes draconique,,Ecailles qui poussent sur le corps,Une partie du corps de Vuur devient une arme naturelle. Elle peut faire grandir des griffes sur ses mains ou faire apparaitre des crocs.,"Les griffes infligent 2 dégâts. 
++1 au jet de CaC avec
+
+(Nv 2) Adrénaline : gagne une action supplémentaire ce tour. Une fois par scène.",,"+1 dégâts des griffes
+Adrénaline."
+Lignage,Vuur,Focus,,Cœur noir,L’esprit de Vuur se concentre sur une tâche précise si bien que tout disparait autour et rien n’importe plus que son accomplissement.,"La tâche doit être précise.
+
+Tâche focus : +1 a tout les jets.
+-2 a tout les jets ne correspondant pas 
+Si tâche pas accompli -2 sanité
+
+Durée : 1 scène",,"Tâche ultra focus : +2 
+-4 jet ne correspondant pas
+Si tâche pas accomplit -4 sanité"
+Lignage,Vuur,Meilleure régénération,,Sang froid,Les sang froid d’une Vuur lui permet d’avoir une régénération extraordinaire aux blessures. En contre partie ceux-ci possèdent moins d’énergie et sont plus sensible au froid.,"Gagne +1 PV par repos mais -1 PE de régénération
+
+-2 au jets de constitution contre le froid",,"Supprime une condition physique a la fin d’une mission.
+Peut forcer une régénération rapide (+4 PV) mais -2 sanité (une fois par scène)"
+Lignage,Styrke,Force impressionnante,,Géant,Un styrke est capable avec des entrainement de dépasser les limites physiologique de l’être humain que ce soit pour un bref instant ou en continu.,"+1 en capacité physique
+
+Dépassement : Gains d’un bonus de capacité physique pour la durée d’un tour.
+Applique 1 dégâts aggravé.
+
+Max: 3 fois par scène",Bonus dépassement : +2,Dépassement : Double la capacité
+Lignage,Styrke,Douleur salvatrice,,Pâleur,"Les blessures et les lésions renforcent la puissance du Styrke, qui devient plus fort et plus rapide à chaque coup, déchirure ou perforation qu’il subit.","Gagne 1 dés bonus par tranche de dégâts aggravés. 
+Chaque utilisation ajoute 1 dés de sanité",Tranche de 2 dégâts aggravé.,Tranche de dégâts aggravés
+Lignage,Styrke,Anticipation du danger,,Yeux jaune,Le 3ème oeil de styrke lui permet d’anticiper tout les dangers et d’y réagir de manière surnaturelle.,"+2 à l’initiative
+
+Peut se défendre contre toute les attaques surprises.",,N’a pas besoin de jet d’initiative débute chaque scène
+Lignage,Styrke,Loyal,,Tâche de naissance,Un styrke se lie d’une profonde amitié avec quelqu’un qu’il jure de protéger. Cette amitié crée un lien puissant qui dépasse les limites physiques,"Permet de combiner ses actions avec la personnes liée.
+
+Lien magique : Emprunte une capité du compagnon 1 fois par scène. 
+Utilise le niveau d’arbre du compagnon.",Lien magique : Aspect nv1,"-1 en test de sanité tant que la personne lié est là.
+Permet d’échanger des blessures mentales, physiques, et endurance.
+Lien magique : Aspect nv2"
+Magie,Nature,Magie de nature,,,Contrôle et modèle la pierre a l’aide de ses mains.,"Frappe de pierre : 3 dégâts
+Resistance : 3 PV
+Amplification : ajoute 1PV à la résistance pour 1PE","Distance manipulation : 3m
+Distance création & amplification : contact","Distance manipulation, amplification, création : 8m"
+Magie,Nature,Manipulation des plantes,,,Modèle plante et racine vivante par la volonté.,"Enchevêtrement : 2 dgt & immobilise
+Amplification : Ajout d’épine +1 dégât pour 1 PE
+Pour s’en échappé : [adresse + Astuce] / 2
+
+Au repos gagne l’activité sculpture vivante. Permet de fabriquer des objets très résistants.","Distance manipulation : 5m
+Distance création & amplification : contact
+Sculpture : Objet de qualité moyenne","Distance manipulation, amplification, création : 10m
+Sculpture : Objet de très bonne qualité."
+Magie,Nature,Spore,,,Crée une zone de spore mortel,"Spore : 
+Mortel : 2 dégâts en rentrant dans la zone
+Sommeil : +1 coup endurance dans la zone
+Revigorant : -2 dégâts léger à la fin du tour
+Durée : 1 tour et 1 d’endurance pour le maintenir
+Amplification: Permet de choisir les entités pour 1 PE",Rayon : 5m,Rayon : 10m
+Magie,Nature,Contrôle fongique,Oui,,,"Minions : Phy: 3 Soc:0 Ment:0
+Ne peux pas avoir d’arme. 
+Peut avoir une armure moyenne. 
+Cap : 5 
+Attaque :
+Poing : 2 dégâts
+Morsure : 3 dégâts","Peut réanimé pour une scène un cadavre. Il dure une scène.
+Apparait à la fin du tour.","Apparait à la fin du tour du mage.
+Au repos gagner l’activité infestation et crée un minions à partir d’un cadavre."
+Magie,Nature,Vision de vie,Oui,,,"Détecte la vie autour de soit, son état physique, ses spécificité.
+Infos précise (au-delà de sa position): 
+Etat de santé 
+Etat de fatigue
+Magie/Lignage et leur importance ","Rayon : 15m
+Peut se concentrer sur 1 cible pour connaitre ses infos précises","Rayon : 30m
+Peut se concentrer sur 3 cible pour connaitre ses infos précises"
+Magie,Eau,Brume,,,Fait apparaitre une brume dans la zone. Bonus de déplacement et de furtivité.  Peut se combiner avec les autres style de magie d'eau,"Brume : -3 perception, +1 défense et cap combat pour le lanceur 
+Durée : 1 tour + coute 1 par tour suplémentaire
+Amplification : ajoute l’aspect chaud ou froid à la brume pour 1PE supplémentaire
+Eau brulante : 2 dégâts aux personne dans la zone ou qui y rentre
+Eau glacée : -1 capacité physique, attaque & défense","Rayon : 5m
+Distance manipulation : 5m
+Distance création & amplification : autour de soit","Rayon : 10m
+Distance manipulation : 10m
+Distance création & amplification : 5m"
+Magie,Eau,Contrôle de l’eau,,,Manipule une grand quantité d’eau et peut la projeter a haute vitesse.,"Projection contre un mur : 2 dégâts
+Amplification eau brulante : + 2 dégâts","Distance manipulation : 5m
+Distance création & amplification : contact","Distance manipulation, amplification, création : 10m"
+Magie,Eau,Forge de glace ,,,Fabrique n'importe quel objet simple ou complexe rapidement en glace mais ceux-ci sont peu résistant. Peut aussi transformer l’eau en glace.,"Sculpture de glace : dégâts égo à l’arme
+Resistance : 1Pv
+Vitesse de création : Action rapide
+
+Contact de glace : 2 dégâts & abime les objets","Distance manipulation : 5m
+Distance création & amplification : contact","Distance manipulation, amplification, création : 10m"
+Magie,Eau,Contrôle du sang,Oui,,Permet de contrôler son propre sang pour s’en faire une arme a distance ou fabriquer des objets.,"Chaque fois que le personnage perd 1 dégâts aggravé il gagne 1pt de sang
+
+Pointes de sang : 1 + 1 dégâts par pt de sang utilisé
+Résistance : 2 pv + 1 par pt de sang",Distance manipulation : 5m,"Distance manipulation : 10m
+Chaque tour gagne 1pt de sang"
+Magie,Eau,Transfert de sang,Oui,,Permet de transférer la vie entre deux entités.,"Vole de vie : Transfert des PV entre deux entités.
+Resistance : [constitution + Mental]
+
+Récupération : Récupère du sang dans une zone de 5m","Max : 2PV 
+Distance : Contact","Cible consentante.
+Max : 4PV ou 4pt de sang
+Cible non consentante.
+Max : 2PV ou 2pt de sang
+Distance : 5m"
+Magie,Ombre,Ombre terrifiante,,,Création d'illusion menaçante qui effraies les ennemies,"Tests : [Magie + Subterfuge]/[sang-froid + Astuce] 
+La cible est désorienté d’un tour en plus pour chaque dés supplémentaire.
+
+Désorienté : La cible prend l’ombre pour cible.",1 cible.,3 cibles.
+Magie,Ombre,Manteau d’ombres,,,Contrôle les ombres environnante du lanceur. Modifie leur forme et leur taille pour s’y cacher.,"Immobile : devient presque invisible.
+
+En déplacement : malus pour le repérer.",Déplacement : -2 pour le repérer.,"Déplacement : -4 pour le repérer. 
+Peut augmenter la zone de 1m par malus."
+Magie,Ombre,Poche d’ombre,,,Accède la dimension des ombres pour y stocker des objets.,,"Peut mettre jusqu’à 3 objets lourd. 
+Accéder a un objet lourd prend 1 action, un objet léger 1 action rapide.","Peut stocker 6 objets lourds. 
+Accéder un objet lourd en une action rapide et instantané pour un objet léger."
+Magie,Ombre,Voyageur des ombres,Oui,,Permet d’accéder à la dimension des ombres et de voyager à travers celle-ci.,"Les blessures du personnages augmentent en se téléportant. S’il a subit des dégâts aggravé, il en subit 1 supplémentaire par saut.
+
+Esquive d’ombre :  Bonus d’esquive égal au niveau de voyageur. Passif. Coute 1 PE par tour.","Prend une action à faire.
+Permet de se téléporter seul à 2,5m.","Action rapide.
+Permet de se téléporter à 10m seul.
+Peut transporter 1 personne à 5m."
+Magie,Ombre,Ombre tangible,Oui,,Rend tangible les ombres autour de lui. Les attaques d’ombres sont peu puissante mais surprennent et sont très nombreuses.,"Pics d’ombre : 2 dégâts 
+Resistance ombre tangible : 1pv
+Amplification nombre : crée 1 pics supplémentaire
+
+La première utilisation surprend toujours la cible.","Distance manipulation : 5m
+Distance création & amplification : contact","Distance manipulation, amplification, création : 10m
+Peut amplifier une seconde fois contre une action simple."
+Magie,Vent,Contrôle du vent,,,Lance une vague de vent projetant tout sur son chemin.,"Projection contre un objet/mur : 3 dégâts
+Amplification  : +1 dégâts de collision pour 1 PE",Distance : 10m,"Distance : 15m
+Peut toucher 2 cibles"
+Magie,Vent,Manteaux de vent,,,Permet au lanceur de se mouvoir aisément grâce au courant d'air qu'il crée.,"Le sort se lance une fois et peut être maintenu pour 2 PE par tour.
+Les sauts sont plus haut et annule les dégâts de chute.
+
+Relance tout ses jets d’acrobatie et esquive",,"Peut planer.
+Armure de base : +1"
+Magie,Vent,Lame de vent,,,Lorsqu’il utilise ses armes tranchante le mage crée une vague d’énergie qui coupe tout ce qu’elle traverse.,"Lame de vent : 2 dégâts
+Action rapide
+Doit accompagner une attaque par une arme.",Distance : 10m,"Distance : 15m
+Traverse les cibles et touche derrière."
+Magie,Vent,Télékinésie,Oui,,Projette un objet a grande vitesse ou soulève un objet lentement avec dextérité.,"Attaque télékinésie : 
+Objet : 2 dégâts
+Armes : Dégâts de l’arme
+[si lv1]
+Une fois lever lance un jet à chaque tour: 
+réussi -> aucun coût d’endurance
+Rate -> 1PE par objet","2 Petits objet -> distance:10m
+1 Objet moyen ->  Distance:5m","4 Petits objet -> distance:15m
+2 Objets moyen ->  Distance:10m 
+Pas de coût de maintien"
+Magie,Vent,Fouet de vent,Oui,,Projette ou attire un objet très vite,"Amplification : peut être réutiliser 2 fois si l’objet est soit même pour 1 PE
+Projection d’objet : plus l’objet est petit plus cela fait de dégâts (1 à 3 dégâts)
+Tire un objet moins lourd que lui, si l'objet est plus lourd le lanceur part dans la direction inverse. La force va de la cible vers le lanceur en ligne droite.",Distance Projeter/Attirer :  5m,"Distance Projeter/Attirer :  10m
+Peut se maintenir entre 2 phase pour 2 PE par tour"
+Magie,Feu,Aura brulante,,,Crée autour de soit une zone de chaleur invivable. Il est très dangereux de maintenir cette capacité trop longtemps.,"La zone brulante :  2 dégâts à tout ceux à l’intérieur.
+
+A la fin du 2eme tour : 
+inflige 2 dégâts au lanceur par tour
+Les éléments dans la zone prennent feu",Zone de 3m autour de soit.,"Zone de 5m autour de soit.
+Retire une personne de la zone."
+Magie,Feu,Contrôle de flamme,,,Projette des flammes par ses mains.,"Flammes : 3 dégâts.
+L’amplification : + 1pt de dégâts.
+Un objet chauffé a blanc :  2 dégâts.","Distance manipulation : 5m
+Distance création & amplification : contact","Distance manipulation, amplification, création : 10m"
+Magie,Feu,Corps brulant,,,Augmente la température du porteur et améliore ses capacités.,"Chaleur : 5 dégâts léger par pt de chaleur, dure 1 scène
+A chaque tour peut gagner un bonus mais augmente sa chaleur de 1. 
+Bonus : 
++1 physique 
++1 dégâts 
+-1 coût PE sort",,"Pour 1pt de chaleur supplémentaire : 
++1 au bonus 
+ou
+2 bonus en 1 tour."
+Magie,Feu,Explosion/Implosion,Oui,,Attire ou rejette les éléments présent autour d'un point.,"Rayon explosion : 3m
+Explosion : 0 dégâts
+
+[si nv2]
+Amplification de dégâts : 4 dégâts coûte 1PE",Distance : 5m,"Distance : 10m
+Amplification de dégats"
+Magie,Feu,Infusion explosive,Oui,,Rend un élément ou un objet explosif infligeant de lourd dégâts. Excepté le lanceur si quelque chose touche l’infusion celle-ci explose.,"Explosion : inflige 3 dégâts
+Durée : un tour jusqu’à l’explosion.",Peut infuser un objet.,Autant d’objet qu’il le souhaite.
+Magie,Electricite,Arc électrique,,,Permet de créer un arc électrique traversant l'air et les objets métallique. Très puissant mais risqué en cas d’échec.,"Arc électrique : 4 dégâts 
+Coût : +1 Pe
+Si rate : 1 dégâts aggravé à soit même",Distance : 5m,"Distance : 10m
+Touche les adversaire proche : 1 à 2 dégâts en fonction de la distance."
+Magie,Electricite,Stimulus,,,Permet au mage d'accélérer brièvement sa vitesse d'action,Accélération : donne une action simple supplémentaire,,Peut utiliser son action à n’importe quel moment
+Magie,Electricite,Lumière,,,Permet d’invoquer une lumière très puissante.,"[magie + Lumière] / [sang froid + adresse]
+
+Attaque ciblée : -2 cap -2 perception -2 def 
+Attaque groupée : -1 cap -1 perception -1 def
+Durée : 1 round","Ciblée : 1 personne 
+Groupe : 5 m","Ciblée : 2 personne 
+Groupe : 10 m"
+Magie,Electricite,Magnétisme,Oui,,"Au contact permet de magnétiser un ou plusieurs objets de métal les attirants fortement l'un vers l'autre.
+Peut aussi projeter des objets en métal.","Le lanceur choisit 2 objets en métal, ils s’attirent ou se repoussent.
+Pour séparer : [force + astuce] / 2
+Amplification : augmente la difficulté de séparation de 1 pour 1 PE
+Projection d’objet en métal : plus l’objet est petit plus cela fait de dégâts (1 à 4 dégâts)","Distance Attirance/repoussoir : Contact 
+Projection : 5m","Distance Attirance/repoussoir : 5m 
+Projection : 10m"
+Magie,Electricite,Onde de choc,Oui,,Crée une onde de choc électrique qui paralyse les personnes touchées. ,"[Magie + Onde choc] / [constitution + sang froid] 
+
+Si réussi : retire une action à l’adversaire et le fais jouer en dernier
+Si rate : les adversaires touchés jouent en dernier",Zone : 5m,"Zone : 10m
+Si réussi : annule l’action de l’adversaire"
+Magie,Runique,Cicatrice runique,,,Possibilité d'inscrire des runes sur la peau du mage afin de créer sorts,"Coût 1pt d’endurance. 
+Peut combiner 2 sorts en une actions contre 1 dégâts aggravé. 
+Au repos peut utiliser une activité pour inscrire ses sorts. ","Accès a tout les aspect Nv1
+4 emplacements","Accès a tout les aspect Nv2
+8 emplacements"
+Magie,Runique,Forge runique,,,Possibilité de créer un enchantement sur des objets à déclencher au moment voulu,"Rhune : 
+Consommable : utilisable une seul fois 
+Passif : gains léger mais constant 
+Actif : utilisable à chaque fois","Aspect nv 1
+Tps création : 
+Consommable : 1h
+Passif : 15h
+Actif : 15h","Aspect nv 1
+2 Consommable : 1h
+Passif : 7h
+Actif : 7h
+Aspect nv 2 
+Consommable : 1h
+Passif : 15h
+Actif : 15h"
+Magie,Runique,Glyphes runique,,,Possibilité de posé des glyphes qui exploseront au moment voulu par le mage,"Les glyphs sont posé au contact et explose à l’activation. 
+Pose d’un glyph : action rapide 
+
+Effets lié à l’élément.",Aspect Nv1,Aspect Nv2
+Magie,Runique,Spécialisation rhunique,Oui,,Prenable uniquement à la création de personnage,,,Accès à 2 autres magies
