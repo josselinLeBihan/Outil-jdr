@@ -132,6 +132,79 @@ const updateCompetence = (index, field, value) => {
   setCurrentChar(newChar);
 };
 
+
+// Gestion des maîtrises générales
+  const addMaitriseGenerale = () => {
+    const newChar = { ...currentChar };
+    if (!newChar.combat.maitrisesGenerales) newChar.combat.maitrisesGenerales = [];
+    newChar.combat.maitrisesGenerales.push({ type: '', niveau: 1 });
+    setCurrentChar(newChar);
+  };
+
+  const removeMaitriseGenerale = (index) => {
+    const newChar = { ...currentChar };
+    if (newChar.combat.maitrisesGenerales) {
+      newChar.combat.maitrisesGenerales.splice(index, 1);
+    }
+    setCurrentChar(newChar);
+  };
+
+  const updateMaitriseGenerale = (index, field, value) => {
+    const newChar = { ...currentChar };
+    if (!newChar.combat.maitrisesGenerales) newChar.combat.maitrisesGenerales = [];
+    newChar.combat.maitrisesGenerales[index][field] = value;
+    setCurrentChar(newChar);
+  };
+
+// Gestion des maîtrises spécifiques
+  const addMaitriseSpecifique = () => {
+    const newChar = { ...currentChar };
+    if (!newChar.combat.maitrisesSpecifiques) newChar.combat.maitrisesSpecifiques = [];
+    newChar.combat.maitrisesSpecifiques.push({ nom: '', niveau: 1 });
+    setCurrentChar(newChar);
+  };
+
+  const removeMaitriseSpecifique = (index) => {
+    const newChar = { ...currentChar };
+    if (newChar.combat.maitrisesSpecifiques) {
+      newChar.combat.maitrisesSpecifiques.splice(index, 1);
+    }
+    setCurrentChar(newChar);
+  };
+
+  const updateMaitriseSpecifique = (index, field, value) => {
+    const newChar = { ...currentChar };
+    if (!newChar.combat.maitrisesSpecifiques) newChar.combat.maitrisesSpecifiques = [];
+    newChar.combat.maitrisesSpecifiques[index][field] = value;
+    setCurrentChar(newChar);
+  };
+
+// Gestion des armes
+  const addArme = () => {
+    const newChar = { ...currentChar };
+    if (!newChar.combat.armes) newChar.combat.armes = [];
+    newChar.combat.armes.push({ 
+      nom: '', 
+      maitriseGenerale: '', 
+      maitriseSpecifique: '' 
+    });
+    setCurrentChar(newChar);
+  };
+
+  const removeArme = (index) => {
+    const newChar = { ...currentChar };
+    if (newChar.combat.armes) {
+      newChar.combat.armes.splice(index, 1);
+    }
+    setCurrentChar(newChar);
+  };
+
+  const updateArme = (index, field, value) => {
+    const newChar = { ...currentChar };
+    if (!newChar.combat.armes) newChar.combat.armes = [];
+    newChar.combat.armes[index][field] = value;
+    setCurrentChar(newChar);
+  };
   if (!currentChar) {
     return (
       <CharacterListPage
@@ -144,7 +217,7 @@ const updateCompetence = (index, field, value) => {
     );
   }
 
-  return (
+return (
     <CharacterDetailPage
       arbres={arbres}
       character={currentChar}
@@ -161,6 +234,15 @@ const updateCompetence = (index, field, value) => {
       onAddCompetence={addCompetence}
       onRemoveCompetence={removeCompetence}
       onUpdateCompetence={updateCompetence}
+      onAddMaitriseGenerale={addMaitriseGenerale}
+      onRemoveMaitriseGenerale={removeMaitriseGenerale}
+      onUpdateMaitriseGenerale={updateMaitriseGenerale}
+      onAddMaitriseSpecifique={addMaitriseSpecifique}
+      onRemoveMaitriseSpecifique={removeMaitriseSpecifique}
+      onUpdateMaitriseSpecifique={updateMaitriseSpecifique}
+      onAddArme={addArme}
+      onRemoveArme={removeArme}
+      onUpdateArme={updateArme}
     />
   );
 }

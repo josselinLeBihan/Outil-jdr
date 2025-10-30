@@ -24,7 +24,16 @@ const CharacterDetailPage = ({
   onUpdateEquipement,
   onAddCompetence,
   onRemoveCompetence,
-  onUpdateCompetence
+  onUpdateCompetence,
+  onAddMaitriseGenerale,
+  onRemoveMaitriseGenerale,
+  onUpdateMaitriseGenerale,
+  onAddMaitriseSpecifique,
+  onRemoveMaitriseSpecifique,
+  onUpdateMaitriseSpecifique,
+  onAddArme,
+  onRemoveArme,
+  onUpdateArme
 }) => {
   return (
     <div className="min-h-screen  text-gray-100 p-6">
@@ -87,6 +96,15 @@ const CharacterDetailPage = ({
           onAddAttaque={onAddAttaque}
           onRemoveAttaque={onRemoveAttaque}
           onUpdateAttaque={onUpdateAttaque}
+          onAddMaitriseGenerale={onAddMaitriseGenerale}
+          onRemoveMaitriseGenerale={onRemoveMaitriseGenerale}
+          onUpdateMaitriseGenerale={onUpdateMaitriseGenerale}
+          onAddMaitriseSpecifique={onAddMaitriseSpecifique}
+          onRemoveMaitriseSpecifique={onRemoveMaitriseSpecifique}
+          onUpdateMaitriseSpecifique={onUpdateMaitriseSpecifique}
+          onAddArme={onAddArme}
+          onRemoveArme={onRemoveArme}
+          onUpdateArme={onUpdateArme}
         />
 
         <EquipementSection 

@@ -38,10 +38,13 @@ export const EMPTY_CHARACTER = {
   capacites: {
     ...DEFAULT_CAPACITES
   },
-  combat: {
-    armure: '',
-    attaques: [{ titre: '', valeur: '' }]
-  },
+combat: {
+  armure: 'Aucune',
+  attaques: [{ titre: '', valeur: '' }],
+  maitrisesGenerales: [],
+  maitrisesSpecifiques: [],
+  armes: []
+},
   equipement: [
     { nom: '', descriptif: '' }
   ],
