@@ -3,8 +3,14 @@
 // ==========================================
 import React from 'react';
 import { ArbreCard } from '../components/ArbreCard';
+import { Arbre } from '../types';
 
-export const HomePage = ({ arbres, onSelectArbre }) => {
+interface HomePageProps {
+  arbres: Arbre[];
+  onSelectArbre: (arbre: Arbre) => void;
+}
+
+export const HomePage: React.FC<HomePageProps> = ({ arbres, onSelectArbre }) => {
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Arbres de Compétences</h1>

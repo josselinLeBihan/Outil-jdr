@@ -1,5 +1,7 @@
 // constants/characterDefaults.js
 
+import { Character } from "../types";
+
 
 export const CARACTERISTIQUES = {
   physique:  ['Force', 'Constitution', 'Adresse' ,],
@@ -25,7 +27,7 @@ export const DEFAULT_CAPACITES = {
     mental: { artisanat: 0, artMagie: 0, erudition: 0, investigation: 0, medecine: 0, religion: 0 }
 }
 
-export const EMPTY_CHARACTER = {
+export const EMPTY_CHARACTER : Character = {
   nom: '',
   prenom: '',
   lignage: '',
@@ -49,7 +51,10 @@ combat: {
     { nom: '', descriptif: '' }
   ],
   competences: [
-    { nom: '', descriptif: '', niveau: 1 }
+    {
+      nom: '', description: '', niveau: 1,
+      fonctionnement: ''
+    }
   ]
 };
 

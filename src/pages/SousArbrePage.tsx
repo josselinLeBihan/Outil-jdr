@@ -4,10 +4,16 @@
 import React from 'react';
 import { Zap } from 'lucide-react';
 import { CompetenceCard } from '../components/CompetenceCard';
+import { SousArbre, Competence } from '../types';
 
-export const SousArbrePage = ({ sousArbre, onSelectCompetence }) => {
-  const ultimates = sousArbre.competences.filter(c => c.ultime);
-  const regulars = sousArbre.competences.filter(c => !c.ultime);
+interface SousArbrePageProps {
+  sousArbre: SousArbre;
+  onSelectCompetence: (competence: Competence) => void;
+}
+
+export const SousArbrePage: React.FC<SousArbrePageProps> = ({ sousArbre, onSelectCompetence }) => {
+  const ultimates = (sousArbre.competences || []).filter(c => !!c.ultime);
+  const regulars = (sousArbre.competences || []).filter(c => !c.ultime);
 
   return (
     <div>

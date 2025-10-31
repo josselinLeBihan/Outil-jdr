@@ -1,20 +1,50 @@
 // pages/CharacterDetailPage.jsx
-import React from 'react';
-import { Save, Download } from 'lucide-react';
-import PresentationSection from '../components/sections/PresentationSection';
-import CaracteristiquesSection from '../components/sections/CaracteristiquesSection';
-import CapacitesSection from '../components/sections/CapacitesSection';
-import CombatSection from '../components/sections/CombatSection';
-import EquipementSection from '../components/sections/EquipementSection';
-import CompetencesSection from '../components/sections/CompetencesSection';
-import { exportToMarkdown } from '../utils/characterUtils';
+import React from "react";
+import { Save, Download } from "lucide-react";
+import PresentationSection from "../components/Sections/PresentationSection";
+import CaracteristiquesSection from "../components/Sections/CaracteristiquesSection";
+import CapacitesSection from "../components/Sections/CapacitesSection";
+import CombatSection from "../components/Sections/CombatSection";
+import EquipementSection from "../components/Sections/EquipementSection";
+import CompetencesSection from "../components/Sections/CompetencesSection";
+import { exportToMarkdown } from "../utils/characterUtils";
+import { Arbre, Character, Lignage } from "../types";
 
-const CharacterDetailPage = ({
-  arbres, 
-  character, 
-  editMode, 
+type CharacterDetailPageProps = {
+  arbres: Arbre[];
+  lignages: Lignage[];
+  character: Character;
+  editMode: boolean;
+  onUpdate: (data: any) => void; // Adjust the parameter type as needed
+  onSave: () => void;
+  onBack: () => void;
+  onAddAttaque: () => void;
+  onRemoveAttaque: (id: number) => void;
+  onUpdateAttaque: (id: number, data: any) => void;
+  onAddEquipement: () => void;
+  onRemoveEquipement: (id: number) => void;
+  onUpdateEquipement: (id: number, data: any) => void;
+  onAddCompetence: () => void;
+  onRemoveCompetence: (id: number) => void;
+  onUpdateCompetence: (id: number, data: any) => void;
+  onAddMaitriseGenerale: () => void;
+  onRemoveMaitriseGenerale: (id: number) => void;
+  onUpdateMaitriseGenerale: (id: number, data: any) => void;
+  onAddMaitriseSpecifique: () => void;
+  onRemoveMaitriseSpecifique: (id: number) => void;
+  onUpdateMaitriseSpecifique: (id: number, data: any) => void;
+  onAddArme: () => void;
+  onRemoveArme: (id: number) => void;
+  onUpdateArme: (id: number, data: any) => void;
+};
+
+const CharacterDetailPage: React.FC<CharacterDetailPageProps> = ({
+  arbres,
+  lignages,
+  character,
+  editMode,
   onUpdate,
-  onSave, 
+  onSave,
   onBack,
   onAddAttaque,
   onRemoveAttaque,
@@ -33,14 +63,14 @@ const CharacterDetailPage = ({
   onUpdateMaitriseSpecifique,
   onAddArme,
   onRemoveArme,
-  onUpdateArme
+  onUpdateArme,
 }) => {
   return (
     <div className="min-h-screen  text-gray-100 p-6">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-bold text-red-500">
-            {editMode ? 'Créer un Personnage' : 'Fiche de Personnage'}
+            {editMode ? "Créer un Personnage" : "Fiche de Personnage"}
           </h1>
           <div className="flex gap-2">
             {!editMode && (
@@ -70,26 +100,27 @@ const CharacterDetailPage = ({
           </div>
         </div>
 
-        <PresentationSection 
+        <PresentationSection
           character={character}
           editMode={editMode}
           onUpdate={onUpdate}
           arbres={arbres}
+          lignages={lignages}
         />
 
-        <CaracteristiquesSection 
+        <CaracteristiquesSection
           character={character}
           editMode={editMode}
           onUpdate={onUpdate}
         />
 
-        <CapacitesSection 
+        <CapacitesSection
           character={character}
           editMode={editMode}
           onUpdate={onUpdate}
         />
 
-        <CombatSection 
+        <CombatSection
           character={character}
           editMode={editMode}
           onUpdate={onUpdate}
@@ -107,7 +138,7 @@ const CharacterDetailPage = ({
           onUpdateArme={onUpdateArme}
         />
 
-        <EquipementSection 
+        <EquipementSection
           character={character}
           editMode={editMode}
           onUpdate={onUpdateEquipement}
@@ -115,7 +146,7 @@ const CharacterDetailPage = ({
           onRemove={onRemoveEquipement}
         />
 
-        <CompetencesSection 
+        <CompetencesSection
           arbres={arbres}
           character={character}
           editMode={editMode}

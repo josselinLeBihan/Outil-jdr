@@ -1,30 +1,46 @@
 // components/sections/CompetencesSection.jsx
-import React from 'react' ;
-import { useState } from 'react';
-import CompetenceSearchModal from '../CompetenceSearchModal';
-import { Search } from 'lucide-react';
-import { Plus, Trash2 } from 'lucide-react';
+import React from "react";
+import { useState } from "react";
+import CompetenceSearchModal from "../CompetenceSearchModal";
+import { Search, Plus, Trash2 } from "lucide-react";
+import { Character, Arbre, Competence } from "../../types";
 
-const CompetencesSection = ({ character, editMode, onUpdate, onAdd, onRemove, arbres }) => {
+interface CompetencesSectionProps {
+  character: Character;
+  editMode: boolean;
+  onUpdate: (index: number, field: string, value: any) => void;
+  onAdd: (competence?: Competence) => void;
+  onRemove: (index: number) => void;
+  arbres: Arbre[];
+}
+
+const CompetencesSection: React.FC<CompetencesSectionProps> = ({
+  character,
+  editMode,
+  onUpdate,
+  onAdd,
+  onRemove,
+  arbres,
+}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleCompetenceSelect = (competence) => {
-    console.log('Selected competence from modal:', competence);
+  const handleCompetenceSelect = (competence: Competence) => {
+    console.log("Selected competence from modal:", competence);
 
-    let fonctionementComplet = competence.fonctionnement + '\n' ;
+    let fonctionementComplet = competence.fonctionnement + "\n";
 
-    if(competence.niveau === 2) {
-      fonctionementComplet += competence.niveau2
-    }else{
-      fonctionementComplet += competence.niveau1
+    if (competence.niveau === 2) {
+      fonctionementComplet += competence.niveau2;
+    } else {
+      fonctionementComplet += competence.niveau1;
     }
 
     onAdd({
       nom: competence.nom,
       description: competence.description,
-      modificationPhysique: competence.modificationPhysique || '',
+      modificationPhysique: competence.modificationPhysique || "",
       niveau: competence.niveau || 1,
-      fonctionnement: fonctionementComplet || '',
+      fonctionnement: fonctionementComplet || "",
     });
   };
   return (
@@ -41,7 +57,7 @@ const CompetencesSection = ({ character, editMode, onUpdate, onAdd, onRemove, ar
               Chercher
             </button>
             <button
-              onClick={onAdd}
+              onClick={() => onAdd()}
               className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm flex items-center gap-1"
             >
               <Plus size={16} />
@@ -50,28 +66,36 @@ const CompetencesSection = ({ character, editMode, onUpdate, onAdd, onRemove, ar
           </div>
         )}
       </div>
-      
+
       <div className="space-y-4">
         {character.competences.map((comp, idx) => (
-          
-          <div key={idx} className="bg-gray-700 p-4 rounded border border-gray-600">
+          <div
+            key={idx}
+            className="bg-gray-700 p-4 rounded border border-gray-600"
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
               <div>
-                <label className="block text-xs font-medium mb-1 text-gray-400">Nom</label>
+                <label className="block text-xs font-medium mb-1 text-gray-400">
+                  Nom
+                </label>
                 <input
                   type="text"
                   placeholder="Nom de la compétence"
                   value={comp.nom}
-                  onChange={(e) => onUpdate(idx, 'nom', e.target.value)}
+                  onChange={(e) => onUpdate(idx, "nom", e.target.value)}
                   disabled={!editMode}
                   className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium mb-1 text-gray-400">Niveau</label>
+                <label className="block text-xs font-medium mb-1 text-gray-400">
+                  Niveau
+                </label>
                 <select
                   value={comp.niveau}
-                  onChange={(e) => onUpdate(idx, 'niveau', parseInt(e.target.value))}
+                  onChange={(e) =>
+                    onUpdate(idx, "niveau", parseInt(e.target.value))
+                  }
                   disabled={!editMode}
                   className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
                 >
@@ -82,22 +106,28 @@ const CompetencesSection = ({ character, editMode, onUpdate, onAdd, onRemove, ar
             </div>
 
             <div className="mb-2">
-              <label className="block text-xs font-medium mb-1 text-gray-400">Description</label>
+              <label className="block text-xs font-medium mb-1 text-gray-400">
+                Description
+              </label>
               <textarea
                 placeholder="Description de la compétence"
                 value={comp.description}
-                onChange={(e) => onUpdate(idx, 'descriptif', e.target.value)}
+                onChange={(e) => onUpdate(idx, "descriptif", e.target.value)}
                 disabled={!editMode}
                 rows={3}
                 className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50 resize-none"
               />
             </div>
-              <div className="mb-2">
-              <label className="block text-xs font-medium mb-1 text-gray-400">Fonctionnement</label>
+            <div className="mb-2">
+              <label className="block text-xs font-medium mb-1 text-gray-400">
+                Fonctionnement
+              </label>
               <textarea
                 placeholder="Fonctionnement de la compétence"
                 value={comp.fonctionnement}
-                onChange={(e) => onUpdate(idx, 'fonctionnement', e.target.value)}
+                onChange={(e) =>
+                  onUpdate(idx, "fonctionnement", e.target.value)
+                }
                 disabled={!editMode}
                 rows={5}
                 className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50 resize-none"
@@ -115,7 +145,7 @@ const CompetencesSection = ({ character, editMode, onUpdate, onAdd, onRemove, ar
           </div>
         ))}
       </div>
-       <CompetenceSearchModal
+      <CompetenceSearchModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSelect={handleCompetenceSelect}

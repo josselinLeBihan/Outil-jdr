@@ -4,7 +4,13 @@
 import React from 'react';
 import { Upload } from 'lucide-react';
 
-export const UploadPage = ({ onFileUpload, loading, error }) => {
+interface UploadPageProps {
+  onFileUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  loading: boolean;
+  error?: string | null;
+}
+
+export const UploadPage: React.FC<UploadPageProps> = ({ onFileUpload, loading, error }) => {
   return (
     <div className="max-w-2xl mx-auto">
       <div className="bg-white rounded-lg shadow-lg p-8">

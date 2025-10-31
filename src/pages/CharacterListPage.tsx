@@ -3,9 +3,10 @@ import React from 'react';
 import { Plus } from 'lucide-react';
 import CharacterCard from '../components/CharacterCard';
 import { exportToMarkdown } from '../utils/characterUtils';
+import { Character } from '../types';
 
-const CharacterListPage = ({ characters, onNew, onView, onEdit, onDelete }) => {
-  const handleExport = (char) => {
+const CharacterListPage = ({ characters, onNew, onView, onEdit, onDelete }: { characters: Character[]; onNew: () => void; onView: (char: Character) => void; onEdit: (char: Character) => void; onDelete: (id: string) => void }) => {
+  const handleExport = (char: Character) => {
     exportToMarkdown(char);
   };
 
@@ -23,14 +24,14 @@ const CharacterListPage = ({ characters, onNew, onView, onEdit, onDelete }) => {
         </button>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {characters.map(char => (
+          {characters.map((char: Character) => (
             <CharacterCard
               key={char.id}
               character={char}
               onView={() => onView(char)}
               onEdit={() => onEdit(char)}
               onExport={() => handleExport(char)}
-              onDelete={() => onDelete(char.id)}
+              onDelete={() => char.id && onDelete(char.id)}
             />
           ))}
         </div>

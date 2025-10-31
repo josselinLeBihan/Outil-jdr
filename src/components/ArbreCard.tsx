@@ -1,10 +1,16 @@
 // ==========================================
 // src/components/ArbreCard.jsx
 // ==========================================
-import React from 'react';
-import { Book } from 'lucide-react';
+import React from "react";
+import { Book } from "lucide-react";
+import { Arbre } from "../types";
 
-export const ArbreCard = ({ arbre, onClick }) => {
+interface ArbreCardProps {
+  arbre: Arbre;
+  onClick: (arbre: Arbre) => void;
+}
+
+export const ArbreCard: React.FC<ArbreCardProps> = ({ arbre, onClick }) => {
   return (
     <button
       onClick={() => onClick(arbre)}
@@ -15,7 +21,8 @@ export const ArbreCard = ({ arbre, onClick }) => {
         <h2 className="text-xl font-semibold text-gray-800">{arbre.nom}</h2>
       </div>
       <p className="text-gray-600 text-sm">
-        {arbre.sousArbres.length} sous-arbre{arbre.sousArbres.length > 1 ? 's' : ''}
+        {arbre.sousArbres.length} sous-arbre
+        {arbre.sousArbres.length > 1 ? "s" : ""}
       </p>
     </button>
   );

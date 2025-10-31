@@ -1,15 +1,25 @@
 // src/components/Breadcrumb.jsx
 // ==========================================
-import React from 'react';
-import { ChevronRight, Home } from 'lucide-react';
+import React from "react";
+import { ChevronRight, Home } from "lucide-react";
+import { Arbre, SousArbre, Competence } from "../types";
 
-export const Breadcrumb = ({ 
-  selectedArbre, 
-  selectedSousArbre, 
+interface BreadcrumbProps {
+  selectedArbre: Arbre | null;
+  selectedSousArbre: SousArbre | null;
+  selectedCompetence: Competence | null;
+  onNavigateHome: () => void;
+  onNavigateToArbre: (arbre: Arbre) => void;
+  onNavigateToSousArbre: (sousArbre: SousArbre) => void;
+}
+
+export const Breadcrumb: React.FC<BreadcrumbProps> = ({
+  selectedArbre,
+  selectedSousArbre,
   selectedCompetence,
   onNavigateHome,
   onNavigateToArbre,
-  onNavigateToSousArbre
+  onNavigateToSousArbre,
 }) => {
   return (
     <div className="flex items-center gap-2 mb-6 text-sm">

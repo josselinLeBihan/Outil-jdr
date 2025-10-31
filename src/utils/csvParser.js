@@ -1,4 +1,4 @@
-import Papa from 'papaparse';
+import Papa from "papaparse";
 
 export const parseCSVFile = (file) => {
   return new Promise((resolve, reject) => {
@@ -11,7 +11,7 @@ export const parseCSVFile = (file) => {
       },
       error: (err) => {
         reject(err);
-      }
+      },
     });
   });
 };
@@ -58,56 +58,98 @@ export const parseCSVFile = (file) => {
 export const transformCSVToSkillsData = (csvData) => {
   const arbresMap = new Map();
 
-  csvData.forEach(row => {
+  csvData.forEach((row) => {
     const arbreNom = (row.Arbres || row.arbres || row.arbre)?.trim();
     const sousArbreNom = (row.sousArbre || row.SousArbre)?.trim();
-    
+
     if (!arbreNom || !sousArbreNom) return;
 
     if (!arbresMap.has(arbreNom)) {
       arbresMap.set(arbreNom, {
-        id: arbreNom.toLowerCase().replace(/\s+/g, '-'),
+        id: arbreNom.toLowerCase().replace(/\s+/g, "-"),
         nom: arbreNom,
-        sousArbres: []
+        sousArbres: [],
       });
     }
 
     const arbre = arbresMap.get(arbreNom);
-    
-    let sousArbre = arbre.sousArbres.find(sa => sa.nom === sousArbreNom);
+
+    let sousArbre = arbre.sousArbres.find((sa) => sa.nom === sousArbreNom);
     if (!sousArbre) {
       sousArbre = {
-        id: sousArbreNom.toLowerCase().replace(/\s+/g, '-'),
+        id: sousArbreNom.toLowerCase().replace(/\s+/g, "-"),
         nom: sousArbreNom,
-        competences: []
+        competences: [],
       };
       arbre.sousArbres.push(sousArbre);
     }
 
-    const ultimeValue = row.ultime || row.Ultime || '';
-    const isUltime = ultimeValue.toLowerCase() === 'true' || 
-                     ultimeValue === '1' || 
-                     ultimeValue.toLowerCase() === 'oui' ||
-                     ultimeValue.toLowerCase() === 'x';
+    const ultimeValue = row.ultime || row.Ultime || "";
+    const isUltime =
+      ultimeValue.toLowerCase() === "true" ||
+      ultimeValue === "1" ||
+      ultimeValue.toLowerCase() === "oui" ||
+      ultimeValue.toLowerCase() === "x";
 
-    const modifPhysique = row.modificationPhysique || row.ModificationPhysique || '';
-    const niveau2Value = row['Niveau 2'] || row.niveau2 || row.Niveau2 || '';
+    const modifPhysique =
+      row.modificationPhysique || row.ModificationPhysique || "";
+    const niveau2Value = row["Niveau 2"] || row.niveau2 || row.Niveau2 || "";
 
     const competence = {
-      id: row.nom?.toLowerCase().replace(/\s+/g, '-') || `comp-${Date.now()}`,
-      nom: row.nom || '',
+      id: row.nom?.toLowerCase().replace(/\s+/g, "-") || `comp-${Date.now()}`,
+      nom: row.nom || "",
       ultime: isUltime,
       modificationPhysique: modifPhysique.trim() || undefined,
-      description: (row.description || '').trim(),
-      fonctionnement: (row.fonctionnement || '').trim(),
-      niveau1: (row.niveau1 || '').trim(),
-      niveau2: niveau2Value.trim()
+      description: (row.description || "").trim(),
+      fonctionnement: (row.fonctionnement || "").trim(),
+      niveau1: (row.niveau1 || "").trim(),
+      niveau2: niveau2Value.trim(),
     };
 
     sousArbre.competences.push(competence);
   });
 
   return {
-    arbres: Array.from(arbresMap.values())
+    arbres: Array.from(arbresMap.values()),
   };
+};
+
+/**
+ * Transforme les lignes CSV en structure de lignages.
+ *
+ * Format de retour:
+ * {
+ *   lignages: [
+ *     {
+ *       nom: string,            // nom du lignage
+ *       ethnie: string,         // ethnie associée au lignage
+ *       description: string,    // description du lignage
+ *       bonus: string            // bonus associé au lignage
+ *     },
+ *     ...
+ *   ]
+ * }
+ *
+ * Remarques:
+ * - Tous les champs sont retournés tels quels (string).
+ * - Les champs du CSV tolèrent plusieurs variantes de nom de colonne (ex: 'Nom' ou 'nom').
+ */
+export const transformCSVToLignageData = (csvData) => {
+  const lignages = csvData
+    .map((row) => {
+      const lignage = {
+        nom: (row.lignage || "").trim(),
+        ethnie: (row.ethnie_Culture || "").trim(),
+      };
+      return lignage;
+    })
+    .filter((lignage) => {
+      const isValid = lignage.nom && lignage.ethnie;
+      if (!isValid) {
+      }
+      return isValid;
+    });
+
+  const result = { lignages };
+  return result;
 };

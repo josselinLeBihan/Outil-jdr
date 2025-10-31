@@ -1,29 +1,40 @@
-// ...existing code...
-import React, { use, useState, useEffect } from 'react';
-import { PAGES } from './constants/navigation';
-import { parseCSVFile, transformCSVToSkillsData } from './utils/csvParser';
-import { Breadcrumb } from './components/Breadcrumb';
-import { UploadPage } from './pages/UploadPage';
-import { HomePage } from './pages/HomePage';
-import { ArbrePage } from './pages/ArbrePage';
-import { SousArbrePage } from './pages/SousArbrePage';
-import { CompetencePage } from './pages/CompetencePage';
-import { NpcCreatorPage } from './pages/NpcCreatorPage';
+import React, { useState, useEffect } from "react";
+import { PAGES } from "./constants/navigation";
+import {
+  parseCSVFile,
+  transformCSVToSkillsData,
+  transformCSVToLignageData,
+} from "./utils/csvParser";
+import { Breadcrumb } from "./components/Breadcrumb";
+import { UploadPage } from "./pages/UploadPage";
+import { HomePage } from "./pages/HomePage";
+import { ArbrePage } from "./pages/ArbrePage";
+import { SousArbrePage } from "./pages/SousArbrePage";
+import { CompetencePage } from "./pages/CompetencePage";
+import { NpcCreatorPage } from "./pages/NpcCreatorPage";
+import { Arbre, SousArbre, Competence, Lignage } from "./types";
 
-
-const App = () => {
-  const [skillsData, setSkillsData] = useState(null);
+const App: React.FC = () => {
+  const [skillsData, setSkillsData] = useState<{ arbres: Arbre[] } | null>(
+    null,
+  );
+  const [lignageData, setLignageData] = useState<{ lignage: Lignage[] } | null>(
+    null,
+  );
   const [currentPage, setCurrentPage] = useState(PAGES.UPLOAD);
-  const [selectedArbre, setSelectedArbre] = useState(null);
-  const [selectedSousArbre, setSelectedSousArbre] = useState(null);
-  const [selectedCompetence, setSelectedCompetence] = useState(null);
+  const [selectedArbre, setSelectedArbre] = useState<Arbre | null>(null);
+  const [selectedSousArbre, setSelectedSousArbre] = useState<SousArbre | null>(
+    null,
+  );
+  const [selectedCompetence, setSelectedCompetence] =
+    useState<Competence | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
-
-
-  const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
+  const handleFileUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const file = event.target.files?.[0];
     if (!file) return;
 
     setLoading(true);
@@ -31,17 +42,19 @@ const App = () => {
 
     try {
       const csvData = await parseCSVFile(file);
-      console.log(csvData)
       const transformed = transformCSVToSkillsData(csvData);
-      
+
       if (transformed.arbres.length === 0) {
-        setError('Aucune donnée valide trouvée dans le fichier CSV');
+        setError("Aucune donnée valide trouvée dans le fichier CSV");
       } else {
         setSkillsData(transformed);
         setCurrentPage(PAGES.HOME);
       }
-    } catch (err) {
-      setError('Erreur lors du traitement du fichier : ' + err.message);
+    } catch (err: unknown) {
+      setError(
+        "Erreur lors du traitement du fichier : " +
+          ((err as Error)?.message ?? String(err)),
+      );
     } finally {
       setLoading(false);
     }
@@ -49,22 +62,22 @@ const App = () => {
 
   const navigateToNPCreator = () => {
     setCurrentPage(PAGES.NPC_CREATOR);
-  }
+  };
 
-  const navigateToArbre = (arbre) => {
+  const navigateToArbre = (arbre: Arbre) => {
     setSelectedArbre(arbre);
     setSelectedSousArbre(null);
     setSelectedCompetence(null);
     setCurrentPage(PAGES.ARBRE);
   };
 
-  const navigateToSousArbre = (sousArbre) => {
+  const navigateToSousArbre = (sousArbre: SousArbre) => {
     setSelectedSousArbre(sousArbre);
     setSelectedCompetence(null);
     setCurrentPage(PAGES.SOUS_ARBRE);
   };
 
-  const navigateToCompetence = (competence) => {
+  const navigateToCompetence = (competence: Competence) => {
     setSelectedCompetence(competence);
     setCurrentPage(PAGES.COMPETENCE);
   };
@@ -76,38 +89,60 @@ const App = () => {
     setSelectedCompetence(null);
   };
 
-
-useEffect(() => {
+  useEffect(() => {
     const loadDefaultData = async () => {
       try {
-        console.log('Début du chargement des données par défaut');
-        const response = await fetch('/assets/default_data.csv');
-        if (!response.ok) {
-          throw new Error('Fichier default_data.csv non trouvé');
+        // Chargement des compétences
+        const skillsResponse = await fetch("/assets/default_data.csv");
+        if (!skillsResponse.ok) {
+          throw new Error("Fichier default_data.csv non trouvé");
         }
-        
-        const blob = await response.blob();
-        const file = new File([blob], 'default_data.csv', { type: 'text/csv' });
-        
-        const csvData = await parseCSVFile(file);
-        const transformed = transformCSVToSkillsData(csvData);
-        
-        console.log('Données transformées:', transformed);
-        
-        if (transformed.arbres.length === 0) {
-          setError('Aucune donnée valide trouvée dans le fichier CSV');
+
+        // Chargement des lignages
+        const lignageResponse = await fetch("/assets/lignage_data.csv");
+        if (!lignageResponse.ok) {
+          throw new Error("Fichier lignage_data.csv non trouvé");
+        }
+
+        const skillsBlob = await skillsResponse.blob();
+        const lignageBlob = await lignageResponse.blob();
+
+        const skillsFile = new File([skillsBlob], "default_data.csv", {
+          type: "text/csv",
+        });
+        const lignageFile = new File([lignageBlob], "lignage_data.csv", {
+          type: "text/csv",
+        });
+
+        const [skillsCsvData, lignageCsvData] = await Promise.all([
+          parseCSVFile(skillsFile),
+          parseCSVFile(lignageFile),
+        ]);
+
+        const transformedSkills = transformCSVToSkillsData(skillsCsvData);
+        const transformedLignage = transformCSVToLignageData(lignageCsvData);
+
+        if (transformedSkills.arbres.length === 0) {
+          setError(
+            "Aucune donnée valide trouvée dans le fichier CSV des compétences",
+          );
         } else {
-          setSkillsData(transformed);
+          setSkillsData(transformedSkills);
+          setLignageData(transformedLignage);
           setCurrentPage(PAGES.HOME);
+          console.log("Lignage data loaded:", transformedLignage);
+          console.log("Skills data loaded:", transformedSkills);
         }
-      } catch (err) {
-        console.error('Erreur détaillée:', err);
-        setError('Erreur lors du chargement des données par défaut : ' + err.message);
+      } catch (err: unknown) {
+        console.error("Erreur détaillée:", err);
+        setError(
+          "Erreur lors du chargement des données : " +
+            ((err as Error)?.message ?? String(err)),
+        );
       }
     };
-    console.log('SkillsData:', skillsData)
     loadDefaultData();
-}, []);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 p-6">
@@ -120,20 +155,19 @@ useEffect(() => {
             <nav className="space-x-2">
               <button
                 onClick={navigateHome}
-                className={`px-3 py-1 rounded ${currentPage === PAGES.HOME ? 'bg-slate-800 text-white' : 'bg-white border'}`}
+                className={`px-3 py-1 rounded ${currentPage === PAGES.HOME ? "bg-slate-800 text-white" : "bg-white border"}`}
               >
-              Compétences
-            </button>
-            <button
-              onClick={navigateToNPCreator}
-              className={`px-3 py-1 rounded ${currentPage === PAGES.NPC_CREATOR ? 'bg-slate-800 text-white' : 'bg-white border'}`}
-            >
-              Créateur de PNJ
-            </button>
-          </nav>
-        </header>
+                Compétences
+              </button>
+              <button
+                onClick={navigateToNPCreator}
+                className={`px-3 py-1 rounded ${currentPage === PAGES.NPC_CREATOR ? "bg-slate-800 text-white" : "bg-white border"}`}
+              >
+                Créateur de PNJ
+              </button>
+            </nav>
+          </header>
         )}
-       
 
         {skillsData && (
           <Breadcrumb
@@ -145,24 +179,40 @@ useEffect(() => {
             onNavigateToSousArbre={navigateToSousArbre}
           />
         )}
-        
+
         {currentPage === PAGES.UPLOAD && (
-          <UploadPage onFileUpload={handleFileUpload} loading={loading} error={error} />
+          <UploadPage
+            onFileUpload={handleFileUpload}
+            loading={loading}
+            error={error}
+          />
         )}
         {currentPage === PAGES.HOME && skillsData && (
-          <HomePage arbres={skillsData.arbres} onSelectArbre={navigateToArbre} />
+          <HomePage
+            arbres={skillsData.arbres}
+            onSelectArbre={navigateToArbre}
+          />
         )}
         {currentPage === PAGES.ARBRE && selectedArbre && (
-          <ArbrePage arbre={selectedArbre} onSelectSousArbre={navigateToSousArbre} />
+          <ArbrePage
+            arbre={selectedArbre}
+            onSelectSousArbre={navigateToSousArbre}
+          />
         )}
         {currentPage === PAGES.SOUS_ARBRE && selectedSousArbre && (
-          <SousArbrePage sousArbre={selectedSousArbre} onSelectCompetence={navigateToCompetence} />
+          <SousArbrePage
+            sousArbre={selectedSousArbre}
+            onSelectCompetence={navigateToCompetence}
+          />
         )}
         {currentPage === PAGES.COMPETENCE && selectedCompetence && (
           <CompetencePage competence={selectedCompetence} />
         )}
-        {currentPage === PAGES.NPC_CREATOR  && skillsData &&(
-          <NpcCreatorPage arbres={skillsData.arbres}/>
+        {currentPage === PAGES.NPC_CREATOR && skillsData && lignageData && (
+          <NpcCreatorPage
+            arbres={skillsData.arbres}
+            lignages={lignageData.lignages}
+          />
         )}
       </div>
     </div>
@@ -170,4 +220,3 @@ useEffect(() => {
 };
 
 export default App;
-// ...existing code...
