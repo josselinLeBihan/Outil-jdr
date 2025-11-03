@@ -4,23 +4,35 @@ import {
   parseCSVFile,
   transformCSVToSkillsData,
   transformCSVToLignageData,
+  transformCSVToReligionData,
+  transformCSVToEquipementsData,
 } from "./utils/csvParser";
 import { Breadcrumb } from "./components/Breadcrumb";
 import { UploadPage } from "./pages/UploadPage";
 import { HomePage } from "./pages/HomePage";
 import { ArbrePage } from "./pages/ArbrePage";
+import { EquipementsPage } from "./pages/EquipementsPage";
 import { SousArbrePage } from "./pages/SousArbrePage";
 import { CompetencePage } from "./pages/CompetencePage";
 import { NpcCreatorPage } from "./pages/NpcCreatorPage";
-import { Arbre, SousArbre, Competence, Lignage } from "./types";
+import {
+  Arbre,
+  SousArbre,
+  Competence,
+  Lignage,
+  Religion,
+  Equipement,
+} from "./types";
 
 const App: React.FC = () => {
   const [skillsData, setSkillsData] = useState<{ arbres: Arbre[] } | null>(
     null,
   );
-  const [lignageData, setLignageData] = useState<{ lignage: Lignage[] } | null>(
+  const [equipementsData, setEquipementsData] = useState<Equipement[] | null>(
     null,
   );
+  const [lignageData, setLignageData] = useState<Lignage[] | null>(null);
+  const [religionData, setReligionData] = useState<Religion[] | null>(null);
   const [currentPage, setCurrentPage] = useState(PAGES.UPLOAD);
   const [selectedArbre, setSelectedArbre] = useState<Arbre | null>(null);
   const [selectedSousArbre, setSelectedSousArbre] = useState<SousArbre | null>(
@@ -64,6 +76,10 @@ const App: React.FC = () => {
     setCurrentPage(PAGES.NPC_CREATOR);
   };
 
+  const navigateToEquipements = () => {
+    setCurrentPage(PAGES.EQUIPEMENTS);
+  };
+
   const navigateToArbre = (arbre: Arbre) => {
     setSelectedArbre(arbre);
     setSelectedSousArbre(null);
@@ -92,6 +108,12 @@ const App: React.FC = () => {
   useEffect(() => {
     const loadDefaultData = async () => {
       try {
+        // Chargement des equipements
+        const equipementsResponse = await fetch("/assets/equipement_data.csv");
+        if (!equipementsResponse.ok) {
+          throw new Error("Fichier equipement_data.csv non trouvé");
+        }
+
         // Chargement des compétences
         const skillsResponse = await fetch("/assets/default_data.csv");
         if (!skillsResponse.ok) {
@@ -103,32 +125,62 @@ const App: React.FC = () => {
         if (!lignageResponse.ok) {
           throw new Error("Fichier lignage_data.csv non trouvé");
         }
+        // Chargement des religions
+        const religionsResponse = await fetch("/assets/religions_data.csv");
+        if (!lignageResponse.ok) {
+          throw new Error("Fichier religions_data.csv non trouvé");
+        }
 
         const skillsBlob = await skillsResponse.blob();
+        const equipementsBlob = await equipementsResponse.blob();
         const lignageBlob = await lignageResponse.blob();
+        const religionsBlob = await religionsResponse.blob();
 
+        const equipementsFile = new File(
+          [equipementsBlob],
+          "equipement_data.csv",
+          {
+            type: "text/csv",
+          },
+        );
         const skillsFile = new File([skillsBlob], "default_data.csv", {
           type: "text/csv",
         });
         const lignageFile = new File([lignageBlob], "lignage_data.csv", {
           type: "text/csv",
         });
+        const religionsFile = new File([religionsBlob], "religions_data.csv", {
+          type: "text/csv",
+        });
 
-        const [skillsCsvData, lignageCsvData] = await Promise.all([
+        const [
+          equipementCsvData,
+          skillsCsvData,
+          lignageCsvData,
+          religionsCsvData,
+        ] = await Promise.all([
+          parseCSVFile(equipementsFile),
           parseCSVFile(skillsFile),
           parseCSVFile(lignageFile),
+          parseCSVFile(religionsFile),
         ]);
 
+        const transformedEquipements =
+          transformCSVToEquipementsData(equipementCsvData);
         const transformedSkills = transformCSVToSkillsData(skillsCsvData);
         const transformedLignage = transformCSVToLignageData(lignageCsvData);
+        const transformedReligions =
+          transformCSVToReligionData(religionsCsvData);
 
         if (transformedSkills.arbres.length === 0) {
           setError(
             "Aucune donnée valide trouvée dans le fichier CSV des compétences",
           );
         } else {
+          setEquipementsData(transformedEquipements);
           setSkillsData(transformedSkills);
           setLignageData(transformedLignage);
+          setReligionData(transformedReligions);
           setCurrentPage(PAGES.HOME);
           console.log("Lignage data loaded:", transformedLignage);
           console.log("Skills data loaded:", transformedSkills);
@@ -164,6 +216,12 @@ const App: React.FC = () => {
                 className={`px-3 py-1 rounded ${currentPage === PAGES.NPC_CREATOR ? "bg-slate-800 text-white" : "bg-white border"}`}
               >
                 Créateur de PNJ
+              </button>
+              <button
+                onClick={navigateToEquipements}
+                className={`px-3 py-1 rounded ${currentPage === PAGES.EQUIPEMENTS ? "bg-slate-800 text-white" : "bg-white border"}`}
+              >
+                Equipements
               </button>
             </nav>
           </header>
@@ -210,9 +268,14 @@ const App: React.FC = () => {
         )}
         {currentPage === PAGES.NPC_CREATOR && skillsData && lignageData && (
           <NpcCreatorPage
+            equipements={equipementsData}
             arbres={skillsData.arbres}
-            lignages={lignageData.lignages}
+            lignages={lignageData}
+            religions={religionData}
           />
+        )}
+        {currentPage === PAGES.EQUIPEMENTS && equipementsData && (
+          <EquipementsPage equipements={equipementsData} />
         )}
       </div>
     </div>

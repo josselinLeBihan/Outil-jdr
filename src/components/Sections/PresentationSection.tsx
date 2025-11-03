@@ -1,6 +1,6 @@
 // components/sections/PresentationSection.jsx
 import React, { useState, useEffect } from "react";
-import { Character, Arbre, SousArbre, Lignage } from "../../types";
+import { Character, Arbre, SousArbre, Lignage, Religion } from "../../types";
 
 interface PresentationSectionProps {
   character: Character;
@@ -8,6 +8,7 @@ interface PresentationSectionProps {
   onUpdate: (field: string, value: string) => void;
   arbres: Arbre[];
   lignages?: Lignage[];
+  religions?: Religion[];
 }
 
 const PresentationSection: React.FC<PresentationSectionProps> = ({
@@ -16,25 +17,18 @@ const PresentationSection: React.FC<PresentationSectionProps> = ({
   onUpdate,
   arbres = [],
   lignages = [],
+  religions = [],
 }) => {
-  const [lignageOptions, setlignageOptions] = useState<SousArbre[]>([]);
-  const [classeOptions, setclasseOptions] = useState<SousArbre[]>([]);
-  const [magieOptions, setmagieOptions] = useState<SousArbre[]>([]);
-  const [lignagesList, setLignagesList] = useState<Lignage[]>([]);
-
-  useEffect(() => {
-    setmagieOptions(
-      arbres.find((arbre) => arbre.id === "magie")?.sousArbres || [],
-    );
-    setlignageOptions(
-      arbres.find((arbre) => arbre.id === "lignage")?.sousArbres || [],
-    );
-    setclasseOptions(
-      arbres.find((arbre) => arbre.id === "classe")?.sousArbres || [],
-    );
-    setLignagesList(lignages || []);
-    console.log("Lignages list updated:", lignages);
-  }, [arbres, lignages]);
+  const [classeOptions, setclasseOptions] = useState<SousArbre[]>(
+    arbres.find((arbre) => arbre.id === "classe")?.sousArbres || [],
+  );
+  const [magieOptions, setmagieOptions] = useState<SousArbre[]>(
+    arbres.find((arbre) => arbre.id === "magie")?.sousArbres || [],
+  );
+  const [lignagesList, setLignagesList] = useState<Lignage[]>(lignages || []);
+  const [religionsList, setReligionList] = useState<Religion[]>(
+    religions || [],
+  );
 
   return (
     <div className="bg-gray-800 p-6 rounded-lg mb-6 border border-gray-700">
@@ -61,15 +55,41 @@ const PresentationSection: React.FC<PresentationSectionProps> = ({
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2">Lignage</label>
+          <label className="block text-sm font-medium mb-2">Religion</label>
           <select
-            value={character.lignage || ""}
-            onChange={(e) => onUpdate("lignage", e.target.value)}
+            value={character.religion?.nom || ""}
+            onChange={(e) =>
+              onUpdate(
+                "religion",
+                religionsList.find((l) => l.nom === e.target.value) || "",
+              )
+            }
             disabled={!editMode}
             className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 disabled:opacity-50"
           >
             <option value="">--</option>
-            {lignageOptions.map((option) => (
+            {religionsList.map((option) => (
+              <option key={option.nom} value={option.nom}>
+                {option.nom}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium mb-2">Lignage</label>
+          <select
+            value={character.lignage?.nom || ""}
+            onChange={(e) =>
+              onUpdate(
+                "lignage",
+                lignagesList.find((l) => l.nom === e.target.value) || "",
+              )
+            }
+            disabled={!editMode}
+            className="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 disabled:opacity-50"
+          >
+            <option value="">--</option>
+            {lignagesList.map((option) => (
               <option key={option.nom} value={option.nom}>
                 {option.nom}
               </option>
@@ -128,26 +148,65 @@ const PresentationSection: React.FC<PresentationSectionProps> = ({
         </div>
       </div>
       {/* Description and Concept*/}
-      <div className="flex flex-wrap gap-2 mb-4 mt-4">
-        {Array.from(
-          new Map(
-            character.competences
-              .filter((comp) => comp.modificationPhysique)
-              .map((comp) => [comp.nom, comp]),
-          ).values(),
-        ).map((comp) => (
-          <div
-            key={comp.nom}
-            className="bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-sm"
-          >
-            {comp.modificationPhysique}
-          </div>
-        ))}
-        {character.lignage && lignagesList && Array.isArray(lignagesList) && (
-          <div className="bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-sm">
-            {lignagesList.find((l) => l.nom === character.lignage)?.ethnie}
-          </div>
-        )}
+      <div className="flex flex-col gap-2 mb-4 mt-4">
+        <div className="flex flex-wrap gap-2 mb-2 ">
+          Modifications physiques :
+          {Array.from(
+            new Map(
+              character.competences
+                .filter((comp) => comp.modificationPhysique)
+                .map((comp) => [comp.nom, comp]),
+            ).values(),
+          ).map((comp) => (
+            <div
+              key={comp.nom}
+              className="bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-sm"
+            >
+              {comp.modificationPhysique}
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-2 mb-2 ">
+          Aspect physique commun :
+          {character.lignage &&
+            Array.isArray(lignagesList) &&
+            (
+              lignagesList.find((l) => l.nom === character.lignage?.nom)
+                ?.aspect_physique_commun || []
+            ).map((aspect, index) => (
+              <div
+                className="bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-sm"
+                key={index}
+              >
+                {aspect}
+              </div>
+            ))}
+        </div>
+        <div className="flex flex-wrap gap-2 mb-2">
+          Vêtements typiques :
+          {character.lignage &&
+            Array.isArray(lignagesList) &&
+            (
+              lignagesList.find((l) => l.nom === character.lignage?.nom)
+                ?.vetements || []
+            ).map((aspect, index) => (
+              <div
+                className="bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-sm"
+                key={index}
+              >
+                {aspect}
+              </div>
+            ))}
+          {character.religion &&
+            (character.religion?.vetements || []).map((aspect, index) => (
+              <div
+                className="bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-sm"
+                key={index}
+              >
+                {aspect}
+              </div>
+            ))}
+        </div>
       </div>
       <div className="mb-2">
         <label className="block text-xs font-medium mb-1 text-gray-400">

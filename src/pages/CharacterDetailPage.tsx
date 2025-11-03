@@ -8,11 +8,13 @@ import CombatSection from "../components/Sections/CombatSection";
 import EquipementSection from "../components/Sections/EquipementSection";
 import CompetencesSection from "../components/Sections/CompetencesSection";
 import { exportToMarkdown } from "../utils/characterUtils";
-import { Arbre, Character, Lignage } from "../types";
+import { Arbre, Character, Equipement, Lignage, Religion } from "../types";
 
 type CharacterDetailPageProps = {
   arbres: Arbre[];
+  equipements: Equipement[];
   lignages: Lignage[];
+  religions: Religion[];
   character: Character;
   editMode: boolean;
   onUpdate: (data: any) => void; // Adjust the parameter type as needed
@@ -40,7 +42,9 @@ type CharacterDetailPageProps = {
 
 const CharacterDetailPage: React.FC<CharacterDetailPageProps> = ({
   arbres,
+  equipements,
   lignages,
+  religions,
   character,
   editMode,
   onUpdate,
@@ -106,6 +110,7 @@ const CharacterDetailPage: React.FC<CharacterDetailPageProps> = ({
           onUpdate={onUpdate}
           arbres={arbres}
           lignages={lignages}
+          religions={religions}
         />
 
         <CaracteristiquesSection
@@ -139,6 +144,7 @@ const CharacterDetailPage: React.FC<CharacterDetailPageProps> = ({
         />
 
         <EquipementSection
+          equipements={equipements}
           character={character}
           editMode={editMode}
           onUpdate={onUpdateEquipement}

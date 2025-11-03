@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import CharacterListPage from "./CharacterListPage";
 import CharacterDetailPage from "./CharacterDetailPage";
 import { EMPTY_CHARACTER } from "../constants/characterDefaults";
-import { Arbre, Character, Lignage } from "../types";
+import { Arbre, Character, Equipement, Lignage, Religion } from "../types";
 
 interface NpcCreatorPageProps {
   arbres: Arbre[];
   lignages: Lignage[];
+  religions: Religion[];
+  equipements: Equipement[];
 }
 
 export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
   arbres,
   lignages,
+  religions,
+  equipements,
 }) => {
   const [characters, setCharacters] = useState<Character[]>([]);
   const [currentChar, setCurrentChar] = useState<Character | null>(null);
@@ -62,6 +66,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
   };
 
   const updateField = (path: string, value: any) => {
+    console.log("Mise à jour du champ :", path, value);
     if (!currentChar) return;
     const newChar: any = { ...currentChar };
     const keys = path.split(".");
@@ -111,14 +116,6 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     setCurrentChar(newChar);
   };
 
-  const addEquipement = () => {
-    if (!currentChar) return;
-    const newChar: any = { ...currentChar };
-    newChar.equipement = newChar.equipement || [];
-    newChar.equipement.push({ nom: "", descriptif: "" });
-    setCurrentChar(newChar);
-  };
-
   const removeEquipement = (index: number) => {
     if (!currentChar) return;
     const newChar: any = { ...currentChar };
@@ -132,6 +129,27 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     const newChar: any = { ...currentChar };
     newChar.equipement = newChar.equipement || [];
     if (newChar.equipement[index]) newChar.equipement[index][field] = value;
+    setCurrentChar(newChar);
+  };
+
+  const addEquipement = (equipement: any = null) => {
+    if (!currentChar) return;
+    const newChar: any = { ...currentChar };
+    newChar.equipement = newChar.equipement || [];
+
+    newChar.equipement = Array.isArray(newChar.equipements)
+      ? [...newChar.equipements]
+      : [];
+    const toAdd: Equipement = equipement
+      ? {
+          nom: equipement.nom ?? "",
+          usage: equipement.usage ?? "",
+          type: equipement.type ?? "",
+          disponibilite: equipement.disponibilite ?? "",
+          encombrement: equipement.encombrement ?? "",
+        }
+      : { nom: "", usage: "", type: "", disponibilite: "", encombrement: "" };
+    newChar.equipements = [...newChar.equipements, toAdd];
     setCurrentChar(newChar);
   };
 
@@ -293,7 +311,9 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
   return (
     <CharacterDetailPage
       arbres={arbres}
+      equipements={equipements}
       lignages={lignages}
+      religions={religions}
       character={currentChar}
       editMode={editMode}
       onUpdate={updateField}

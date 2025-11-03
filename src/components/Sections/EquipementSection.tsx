@@ -1,35 +1,58 @@
 // components/sections/EquipementSection.jsx
-import React from "react";
-import { Plus, Trash2 } from "lucide-react";
-import { Character } from "../../types";
+import React, { useState } from "react";
+import { Plus, Search, Trash2 } from "lucide-react";
+import { Character, Equipement } from "../../types";
+import EquipementSearchModal from "../EquipementsSearchModal";
 
 interface EquipementSectionProps {
   character: Character;
   editMode: boolean;
   onUpdate: (index: number, field: string, value: string) => void;
-  onAdd: () => void;
+  onAdd: (equipement?: Equipement) => void;
   onRemove: (index: number) => void;
+  equipements: Equipement[];
 }
 
 const EquipementSection: React.FC<EquipementSectionProps> = ({
+  equipements,
   character,
   editMode,
   onUpdate,
   onAdd,
   onRemove,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleEquipementsSelect = (equipement: Equipement) => {
+    console.log("Selected equipement from modal:", equipement);
+    onAdd({
+      nom: equipement.nom,
+      usage: equipement.usage,
+      type: equipement.type,
+      disponibilite: equipement.disponibilite,
+      encombrement: equipement.encombrement,
+    });
+  };
   return (
     <div className="bg-gray-800 p-6 rounded-lg mb-6 border border-gray-700">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl font-bold text-red-400">Équipement</h2>
         {editMode && (
-          <button
-            onClick={onAdd}
-            className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm flex items-center gap-1"
-          >
-            <Plus size={16} />
-            Ajouter
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm flex items-center gap-1"
+            >
+              <Search size={16} />
+              Chercher
+            </button>
+            <button
+              onClick={onAdd}
+              className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm flex items-center gap-1"
+            >
+              <Plus size={16} />
+              Ajouter
+            </button>
+          </div>
         )}
       </div>
 
@@ -77,6 +100,12 @@ const EquipementSection: React.FC<EquipementSectionProps> = ({
           </div>
         ))}
       </div>
+      <EquipementSearchModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAdd={() => handleEquipementsSelect}
+        equipements={equipements}
+      />
     </div>
   );
 };

@@ -1,7 +1,27 @@
+//Types pour les équipements
+export interface Equipement {
+  nom: string;
+  type: "Divers" | "Combat" | "Voyage" | "Soins" | "Compagnon";
+  usage: string;
+  disponibilite: 1 | 2 | 3 | 4;
+  encombrement: 1 | 2 | 3;
+}
+
+// Types pour les religions
+export interface Religion {
+  nom: string;
+  equipement_religieux: string[];
+  vetements: string[];
+}
+
 // Types pour les lignages
 export interface Lignage {
   nom: string;
-  ethnie: string;
+  aspect_physique_commun: string[];
+  vetements: string[];
+  coutume_tradition: string[];
+  rites: string[];
+  metiers: string[];
 }
 
 // Types pour les compétences
@@ -78,7 +98,8 @@ export interface Character {
   id?: string;
   nom: string;
   prenom: string;
-  lignage?: string;
+  religion?: Religion;
+  lignage?: Lignage;
   classe?: string;
   classe2?: string;
   magie?: string;
@@ -91,9 +112,6 @@ export interface Character {
     mental: Record<string, number>;
   };
   combat: Combat;
-  equipement: Array<{
-    nom: string;
-    descriptif: string;
-  }>;
+  equipement: Equipement[];
   competences: Competence[];
 }
