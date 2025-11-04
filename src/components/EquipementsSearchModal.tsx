@@ -26,19 +26,6 @@ const EquipementSearchModal: React.FC<EquipementsSearchModalProps> = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-gray-800 p-6 rounded-lg w-full max-w-4xl max-h-[80vh] overflow-y-auto">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h2 className="text-2xl font-bold text-red-400">
-              Choisir vos équipements
-            </h2>
-            <EquipementTable
-              onUpdate={onAdd}
-              equipements={equipements}
-              isCreationMode={true}
-            />
-          </div>
-        </div>
-
         <div className="mt-4 flex justify-end">
           <button
             onClick={onClose}
@@ -46,6 +33,19 @@ const EquipementSearchModal: React.FC<EquipementsSearchModalProps> = ({
           >
             Fermer
           </button>
+        </div>
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h2 className="text-2xl font-bold text-red-400">
+              Choisir vos équipements
+            </h2>
+
+            <EquipementTable
+              onAdd={onAdd}
+              equipements={equipements}
+              isCreationMode={true}
+            />
+          </div>
         </div>
       </div>
     </div>

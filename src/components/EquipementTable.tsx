@@ -6,7 +6,7 @@ import { Equipement } from "../types";
 interface EquipementTableProps {
   equipements: Equipement[];
   isCreationMode?: boolean;
-  onUpdate?: (equipement: Equipement) => void;
+  onAdd?: (equipement: Equipement) => void;
 }
 
 type TypeFilter = "Tous" | Equipement["type"];
@@ -14,7 +14,7 @@ type TypeFilter = "Tous" | Equipement["type"];
 const EquipementTable: React.FC<EquipementTableProps> = ({
   equipements = [],
   isCreationMode = false,
-  onUpdate,
+  onAdd,
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filterType, setFilterType] = useState<TypeFilter>("Tous");
@@ -167,7 +167,7 @@ const EquipementTable: React.FC<EquipementTableProps> = ({
                   {isCreationMode && (
                     <td className="p-3 text-center">
                       <button
-                        onClick={() => onUpdate && onUpdate(eq)}
+                        onClick={() => onAdd && onAdd(eq)}
                         className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm flex items-center gap-1 mx-auto transition-colors"
                       >
                         <Plus size={16} />
@@ -205,7 +205,7 @@ const EquipementTable: React.FC<EquipementTableProps> = ({
                 </div>
                 {isCreationMode && (
                   <button
-                    onClick={() => onSelect && onSelect(eq)}
+                    onClick={() => onAdd && onAdd(eq)}
                     className="bg-red-600 hover:bg-red-700 text-white p-2 rounded transition-colors ml-2"
                   >
                     <Plus size={20} />

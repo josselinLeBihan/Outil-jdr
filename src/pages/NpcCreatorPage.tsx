@@ -68,7 +68,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
   const updateField = (path: string, value: any) => {
     console.log("Mise à jour du champ :", path, value);
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     const keys = path.split(".");
     let obj: any = newChar;
     for (let i = 0; i < keys.length - 1; i++) {
@@ -82,7 +82,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
 
   const addAttaque = () => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || {
       armure: "Aucune",
       maitrisesGenerales: [],
@@ -97,7 +97,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
 
   const removeAttaque = (index: number) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || { attaques: [] };
     newChar.combat.attaques = newChar.combat.attaques || [];
     if (newChar.combat.attaques.length > 1) {
@@ -108,7 +108,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
 
   const updateAttaque = (index: number, field: string, value: any) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || { attaques: [] };
     newChar.combat.attaques = newChar.combat.attaques || [];
     if (newChar.combat.attaques[index])
@@ -118,26 +118,26 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
 
   const removeEquipement = (index: number) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
-    newChar.equipement = newChar.equipement || [];
-    newChar.equipement.splice(index, 1);
+    const newChar: Character = { ...currentChar };
+    newChar.equipements = newChar.equipements || [];
+    newChar.equipements.splice(index, 1);
     setCurrentChar(newChar);
   };
 
   const updateEquipement = (index: number, field: string, value: any) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
-    newChar.equipement = newChar.equipement || [];
-    if (newChar.equipement[index]) newChar.equipement[index][field] = value;
+    const newChar: Character = { ...currentChar };
+    newChar.equipements = newChar.equipements || [];
+    if (newChar.equipements[index]) newChar.equipements[index][field] = value;
     setCurrentChar(newChar);
   };
 
   const addEquipement = (equipement: any = null) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
-    newChar.equipement = newChar.equipement || [];
+    const newChar: Character = { ...currentChar };
+    newChar.equipements = newChar.equipements || [];
 
-    newChar.equipement = Array.isArray(newChar.equipements)
+    newChar.equipements = Array.isArray(newChar.equipements)
       ? [...newChar.equipements]
       : [];
     const toAdd: Equipement = equipement
@@ -151,11 +151,12 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
       : { nom: "", usage: "", type: "", disponibilite: "", encombrement: "" };
     newChar.equipements = [...newChar.equipements, toAdd];
     setCurrentChar(newChar);
+    console.log("new char :", newChar);
   };
 
   const addCompetence = (competence: any = null) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.competences = Array.isArray(newChar.competences)
       ? [...newChar.competences]
       : [];
@@ -176,7 +177,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
 
   const removeCompetence = (index: number) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.competences = Array.isArray(newChar.competences)
       ? [...newChar.competences]
       : [];
@@ -186,7 +187,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
 
   const updateCompetence = (index: number, field: string, value: any) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.competences = Array.isArray(newChar.competences)
       ? [...newChar.competences]
       : [];
@@ -197,7 +198,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
   // Maîtrises générales
   const addMaitriseGenerale = () => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || {
       maitrisesGenerales: [],
       maitrisesSpecifiques: [],
@@ -212,7 +213,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
 
   const removeMaitriseGenerale = (index: number) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || { maitrisesGenerales: [] };
     newChar.combat.maitrisesGenerales = newChar.combat.maitrisesGenerales || [];
     newChar.combat.maitrisesGenerales.splice(index, 1);
@@ -221,7 +222,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
 
   const updateMaitriseGenerale = (index: number, field: string, value: any) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || { maitrisesGenerales: [] };
     newChar.combat.maitrisesGenerales = newChar.combat.maitrisesGenerales || [];
     if (newChar.combat.maitrisesGenerales[index])
@@ -232,7 +233,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
   // Maîtrises spécifiques
   const addMaitriseSpecifique = () => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || { maitrisesSpecifiques: [] };
     newChar.combat.maitrisesSpecifiques =
       newChar.combat.maitrisesSpecifiques || [];
@@ -242,7 +243,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
 
   const removeMaitriseSpecifique = (index: number) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || { maitrisesSpecifiques: [] };
     newChar.combat.maitrisesSpecifiques =
       newChar.combat.maitrisesSpecifiques || [];
@@ -256,7 +257,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     value: any,
   ) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || { maitrisesSpecifiques: [] };
     newChar.combat.maitrisesSpecifiques =
       newChar.combat.maitrisesSpecifiques || [];
@@ -268,7 +269,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
   // Armes
   const addArme = () => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || { armes: [] };
     newChar.combat.armes = newChar.combat.armes || [];
     newChar.combat.armes.push({
@@ -281,7 +282,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
 
   const removeArme = (index: number) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || { armes: [] };
     newChar.combat.armes = newChar.combat.armes || [];
     newChar.combat.armes.splice(index, 1);
@@ -290,7 +291,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
 
   const updateArme = (index: number, field: string, value: any) => {
     if (!currentChar) return;
-    const newChar: any = { ...currentChar };
+    const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || { armes: [] };
     newChar.combat.armes = newChar.combat.armes || [];
     if (newChar.combat.armes[index]) newChar.combat.armes[index][field] = value;

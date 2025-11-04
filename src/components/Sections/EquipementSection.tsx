@@ -57,34 +57,85 @@ const EquipementSection: React.FC<EquipementSectionProps> = ({
       </div>
 
       <div className="space-y-4">
-        {character.equipement.map((item, idx) => (
+        {character.equipements?.map((item, idx) => (
           <div
             key={idx}
             className="bg-gray-700 p-4 rounded border border-gray-600"
           >
-            <div className="mb-3">
+            <div className="flex flex-wrap gap-4">
+              <div className="mb-3 max-w-1/2 w-full">
+                <label className="block text-xs font-medium mb-1 text-gray-400">
+                  Nom
+                </label>
+                <input
+                  type="text"
+                  placeholder="Nom de l'équipement"
+                  value={item.nom}
+                  onChange={(e) => onUpdate(idx, "nom", e.target.value)}
+                  disabled={!editMode}
+                  className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
+                />
+              </div>
+              <div className="mb-3">
+                <label className="block text-xs font-medium mb-1 text-gray-400">
+                  Valeur de disponibilité
+                </label>
+                <select
+                  value={item.disponibilite}
+                  onChange={(e) =>
+                    onUpdate(idx, "disponibilite", e.target.value)
+                  }
+                  disabled={!editMode}
+                  className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
+                >
+                  <option value={1}>1 - Commun</option>
+                  <option value={2}>2 - Peu commun</option>
+                  <option value={2}>3 - Rare</option>
+                  <option value={2}>4 - Très rare</option>
+                </select>
+              </div>
+              <div className="mb-3">
+                <label className="block text-xs font-medium mb-1 text-gray-400">
+                  Encombrement
+                </label>
+                <select
+                  value={item.encombrement}
+                  onChange={(e) =>
+                    onUpdate(idx, "encombrement", e.target.value)
+                  }
+                  disabled={!editMode}
+                  className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
+                >
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={2}>3</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="mb-2">
               <label className="block text-xs font-medium mb-1 text-gray-400">
-                Nom
+                Usage
               </label>
-              <input
-                type="text"
-                placeholder="Nom de l'équipement"
-                value={item.nom}
-                onChange={(e) => onUpdate(idx, "nom", e.target.value)}
+              <textarea
+                placeholder="Usage de l'équipement"
+                value={item.usage}
+                onChange={(e) => onUpdate(idx, "usage", e.target.value)}
                 disabled={!editMode}
-                className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
+                rows={2}
+                className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50 resize-none"
               />
             </div>
             <div className="mb-2">
               <label className="block text-xs font-medium mb-1 text-gray-400">
-                Descriptif
+                Description
               </label>
               <textarea
                 placeholder="Description de l'équipement"
                 value={item.descriptif}
                 onChange={(e) => onUpdate(idx, "descriptif", e.target.value)}
                 disabled={!editMode}
-                rows={3}
+                rows={2}
                 className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50 resize-none"
               />
             </div>
@@ -103,7 +154,7 @@ const EquipementSection: React.FC<EquipementSectionProps> = ({
       <EquipementSearchModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onAdd={() => handleEquipementsSelect}
+        onAdd={handleEquipementsSelect}
         equipements={equipements}
       />
     </div>

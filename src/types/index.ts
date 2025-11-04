@@ -3,6 +3,7 @@ export interface Equipement {
   nom: string;
   type: "Divers" | "Combat" | "Voyage" | "Soins" | "Compagnon";
   usage: string;
+  descriptif?: string;
   disponibilite: 1 | 2 | 3 | 4;
   encombrement: 1 | 2 | 3;
 }
@@ -112,6 +113,6 @@ export interface Character {
     mental: Record<string, number>;
   };
   combat: Combat;
-  equipement: Equipement[];
+  equipements: Equipement[];
   competences: Competence[];
 }
