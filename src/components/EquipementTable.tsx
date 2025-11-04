@@ -32,6 +32,7 @@ const EquipementTable: React.FC<EquipementTableProps> = ({
     niveau: Equipement["disponibilite"],
   ): string => {
     const labels: Record<Equipement["disponibilite"], string> = {
+      0: "0 - Ordinaire",
       1: "1 - Commun",
       2: "2 - Peu commun",
       3: "3 - Rare",
@@ -48,6 +49,7 @@ const EquipementTable: React.FC<EquipementTableProps> = ({
     niveau: Equipement["disponibilite"],
   ): string => {
     const colors: Record<Equipement["disponibilite"], string> = {
+      0: "bg-gray-600",
       1: "bg-green-600",
       2: "bg-blue-600",
       3: "bg-orange-600",

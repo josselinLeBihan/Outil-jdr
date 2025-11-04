@@ -35,7 +35,28 @@ const EquipementSection: React.FC<EquipementSectionProps> = ({
   return (
     <div className="bg-gray-800 p-6 rounded-lg mb-6 border border-gray-700">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold text-red-400">Équipement</h2>
+        <div className="flex flex-wrap gap-4 items-center">
+          <h2 className="text-2xl font-bold text-red-400">Équipement</h2>
+          <div>
+            {"Encombrement : "}
+            {character.equipements
+              ? character.equipements.reduce(
+                  (total, eq) => total + Number(eq.encombrement || 0),
+                  0,
+                )
+              : 0}
+          </div>
+          <div>
+            {"Valeurs totales des equipements : "}
+            {character.equipements
+              ? character.equipements.reduce(
+                  (total, eq) => total + Number(eq.disponibilite || 0),
+                  0,
+                )
+              : 0}
+          </div>
+        </div>
+
         {editMode && (
           <div className="flex gap-2">
             <button
@@ -88,10 +109,11 @@ const EquipementSection: React.FC<EquipementSectionProps> = ({
                   disabled={!editMode}
                   className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
                 >
+                  <option value={0}>0 - Ordinaire</option>
                   <option value={1}>1 - Commun</option>
                   <option value={2}>2 - Peu commun</option>
-                  <option value={2}>3 - Rare</option>
-                  <option value={2}>4 - Très rare</option>
+                  <option value={3}>3 - Rare</option>
+                  <option value={4}>4 - Très rare</option>
                 </select>
               </div>
               <div className="mb-3">
@@ -106,9 +128,10 @@ const EquipementSection: React.FC<EquipementSectionProps> = ({
                   disabled={!editMode}
                   className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
                 >
+                  <option value={0}>0</option>
                   <option value={1}>1</option>
                   <option value={2}>2</option>
-                  <option value={2}>3</option>
+                  <option value={3}>3</option>
                 </select>
               </div>
             </div>

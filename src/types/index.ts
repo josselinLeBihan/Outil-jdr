@@ -4,8 +4,8 @@ export interface Equipement {
   type: "Divers" | "Combat" | "Voyage" | "Soins" | "Compagnon";
   usage: string;
   descriptif?: string;
-  disponibilite: 1 | 2 | 3 | 4;
-  encombrement: 1 | 2 | 3;
+  disponibilite: 0 | 1 | 2 | 3 | 4;
+  encombrement: 0 | 1 | 2 | 3;
 }
 
 // Types pour les religions
