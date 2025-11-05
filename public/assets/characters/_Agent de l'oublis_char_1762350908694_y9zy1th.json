@@ -72,7 +72,9 @@
       {
         "nom": "Dague simple",
         "maitriseGenerale": "Armes courantes",
-        "maitriseSpecifique": "Dague"
+        "maitriseSpecifique": "Dague",
+        "degats": "2",
+        "attaque": "6"
       }
     ]
   },

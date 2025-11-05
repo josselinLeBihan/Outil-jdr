@@ -66,7 +66,9 @@ Les agents de l'oubli sont des experts de la dissimulation et savent se fondre d
 
 ### Armes
 
-- **Dague simple undefined** 
+- **Dague simple** 
+  - Attaque : 6
+  - Dégats : 2
 
 ## Équipement
 

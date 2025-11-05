@@ -267,7 +267,7 @@ export const exportToMarkdown = (character: Character) => {
         markdown += `\n\n`;
 
         if (comp.description) {
-          markdown += `**Description : ** ${comp.description}\n\n`;
+          markdown += `**Description :** ${comp.description}\n\n`;
         }
 
         if (comp.fonctionnement) {
