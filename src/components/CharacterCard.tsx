@@ -7,7 +7,8 @@ interface CharacterCardProps {
   character: Character;
   onView: (character: Character) => void;
   onEdit: (character: Character) => void;
-  onExport: (character: Character) => void;
+  onExportMD: (character: Character) => void;
+  onExportJSON: (character: Character) => void;
   onDelete: (id: string) => void;
 }
 
@@ -15,21 +16,22 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
   character,
   onView,
   onEdit,
-  onExport,
+  onExportMD,
+  onExportJSON,
   onDelete,
 }) => {
   return (
-    <div className="bg-gray-800 p-4 rounded-lg border border-gray-700">
+    <div className="bg-gray-800 p-4 rounded-lg border border-gray-700 flex flex-col w-fit">
       <h3 className="text-xl font-bold text-red-400 mb-2">
         {character.prenom} {character.nom}
       </h3>
       <p className="text-gray-400 mb-4">
         Lignage: {character.lignage || "Non défini"}
       </p>
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-row">
         <button
           onClick={() => onView(character)}
-          className="flex-1 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-sm"
+          className="flex-1 bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-sm flex items-center justify-center"
         >
           <FileText size={16} className="inline mr-1" />
           Voir
@@ -41,10 +43,18 @@ const CharacterCard: React.FC<CharacterCardProps> = ({
           Éditer
         </button>
         <button
-          onClick={() => onExport(character)}
-          className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded"
+          onClick={() => onExportMD(character)}
+          className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded flex items-center gap-1"
         >
           <Download size={16} />
+          MD
+        </button>
+        <button
+          onClick={() => onExportJSON(character)}
+          className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded flex items-center gap-1"
+        >
+          <Download size={16} />
+          JSON
         </button>
         <button
           onClick={() => character.id && onDelete(character.id)}

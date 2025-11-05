@@ -1,7 +1,11 @@
 // components/sections/CombatSection.jsx
 import React from "react";
 import { Plus, Trash2 } from "lucide-react";
-import { calculateVie, calculateInitiative } from "../../utils/characterUtils";
+import {
+  calculateVie,
+  calculateInitiative,
+  calculateValeurJet,
+} from "../../utils/characterUtils";
 import { Character } from "../../types";
 
 interface CombatSectionProps {
@@ -62,29 +66,6 @@ const CombatSection: React.FC<CombatSectionProps> = ({
     nom: string;
     niveau: number;
   }
-
-  const calculateValeurJet = (arme: Arme): number => {
-    const physTotal =
-      (character.caracteristiques.physique.force || 0) +
-      (character.caracteristiques.physique.constitution || 0) +
-      (character.caracteristiques.physique.adresse || 0);
-    console.log("Character:", character);
-    const basePhys = physTotal < 7 ? 1 : 2;
-
-    const maitriseGen: MaitriseGenerale | undefined =
-      character.combat.maitrisesGenerales?.find(
-        (m: MaitriseGenerale) => m.type === arme.maitriseGenerale,
-      );
-    const maitriseGenNiveau: number = maitriseGen?.niveau || 0;
-
-    const maitriseSpec: MaitriseSpecifique | undefined =
-      character.combat.maitrisesSpecifiques?.find(
-        (m: MaitriseSpecifique) => m.nom === arme.maitriseSpecifique,
-      );
-    const maitriseSpecNiveau: number = maitriseSpec?.niveau || 0;
-
-    return basePhys + maitriseGenNiveau + maitriseSpecNiveau * 2;
-  };
 
   return (
     <div className="bg-gray-800 p-6 rounded-lg mb-6 border border-gray-700">
@@ -296,7 +277,7 @@ const CombatSection: React.FC<CombatSectionProps> = ({
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-2">
-                <div>
+                <div className="">
                   <label className="block text-xs font-medium mb-1 text-gray-400">
                     Maîtrise Spécifique
                   </label>
@@ -316,13 +297,33 @@ const CombatSection: React.FC<CombatSectionProps> = ({
                     ))}
                   </select>
                 </div>
+
                 <div>
                   <label className="block text-xs font-medium mb-1 text-gray-400">
-                    Valeur de Jet
+                    Jet d'attaque
                   </label>
                   <div className="bg-gray-600 border border-gray-500 rounded px-3 py-2 text-center font-bold text-yellow-400">
-                    +{calculateValeurJet(arme)}
+                    {calculateValeurJet(character, arme)}
                   </div>
+                </div>
+                <div className="w-fit">
+                  <label className="block text-xs font-medium mb-1 text-gray-400">
+                    Dégats
+                  </label>
+                  <select
+                    value={arme.degats}
+                    onChange={(e) =>
+                      onUpdateArme(idx, "degats", e.target.value)
+                    }
+                    disabled={!editMode}
+                    className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
                 </div>
               </div>
               {editMode && (

@@ -17,6 +17,19 @@ const DotRating: React.FC<DotRatingProps> = ({
   disabled,
   label,
 }) => {
+  const handleClick = (index: number) => {
+    if (disabled) return;
+
+    // Si on clique sur le premier point et que la valeur est 1, on passe à 0
+    if (index === 0 && value === 1) {
+      onChange(0);
+      return;
+    }
+
+    // Comportement normal: définir la valeur au nombre de points cliqué + 1
+    onChange(index + 1);
+  };
+
   return (
     <div className="flex items-center justify-between mb-3">
       <span className="text-sm w-32">{label}</span>
@@ -24,7 +37,7 @@ const DotRating: React.FC<DotRatingProps> = ({
         {[...Array(maxValue)].map((_, i) => (
           <button
             key={i}
-            onClick={() => !disabled && onChange(i + 1)}
+            onClick={() => handleClick(i)}
             disabled={disabled}
             className="focus:outline-none disabled:cursor-default"
           >

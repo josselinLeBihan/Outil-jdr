@@ -1,0 +1,81 @@
+{
+  "nom": "Tes",
+  "prenom": "Pignouf",
+  "lignage": "Shatten",
+  "classe": "Chevalier",
+  "magie": "Vent",
+  "concept": "",
+  "caracteristiques": {
+    "physique": {
+      "force": 4,
+      "constitution": 3,
+      "adresse": 0
+    },
+    "social": {
+      "charisme": 0,
+      "manipulation": 4,
+      "sangFroid": 0
+    },
+    "mental": {
+      "perception": 0,
+      "intelligence": 2,
+      "astuce": 0
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 0,
+      "discretion": 0,
+      "escalade": 0,
+      "equitation": 0,
+      "natation": 0,
+      "survie": 0
+    },
+    "social": {
+      "animaux": 0,
+      "bluff": 0,
+      "commandement": 0,
+      "empathie": 0,
+      "expRue": 0,
+      "representation": 0
+    },
+    "mental": {
+      "artisanat": 0,
+      "artMagie": 0,
+      "erudition": 0,
+      "investigation": 0,
+      "medecine": 0,
+      "religion": 0
+    }
+  },
+  "combat": {
+    "armure": "Aucune",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [],
+    "maitrisesSpecifiques": [],
+    "armes": []
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [
+    {
+      "id": "1762339437729",
+      "nom": "Explosion/Implosion",
+      "description": "Attire ou rejette les éléments présent autour d'un point.",
+      "fonctionnement": "Rayon explosion : 3m\nExplosion : 0 dégâts\n\n[si nv2]\nAmplification de dégâts : 4 dégâts coûte 1PE\nDistance : 10m\nAmplification de dégats",
+      "niveau": 2,
+      "modificationPhysique": ""
+    }
+  ],
+  "id": "char_1762334027806_9y2aid7",
+  "religion": "Oublis"
+}

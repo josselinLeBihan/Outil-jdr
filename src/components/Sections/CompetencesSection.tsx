@@ -112,7 +112,7 @@ const CompetencesSection: React.FC<CompetencesSectionProps> = ({
               <textarea
                 placeholder="Description de la compétence"
                 value={comp.description}
-                onChange={(e) => onUpdate(idx, "descriptif", e.target.value)}
+                onChange={(e) => onUpdate(idx, "description", e.target.value)}
                 disabled={!editMode}
                 rows={3}
                 className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50 resize-none"

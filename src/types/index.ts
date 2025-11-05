@@ -87,10 +87,8 @@ export interface Combat {
     nom: string;
     maitriseGenerale: string;
     maitriseSpecifique: string;
-  }>;
-  attaques: Array<{
-    titre: string;
-    valeur: string;
+    attaque: string;
+    degats: string;
   }>;
 }
 

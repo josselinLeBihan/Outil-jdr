@@ -3,6 +3,14 @@ import CharacterListPage from "./CharacterListPage";
 import CharacterDetailPage from "./CharacterDetailPage";
 import { EMPTY_CHARACTER } from "../constants/characterDefaults";
 import { Arbre, Character, Equipement, Lignage, Religion } from "../types";
+import {
+  exportCharacterToFile,
+  exportToMarkdown,
+  generateCharacterId,
+  openImportDialog,
+  openImportMultipleDialog,
+  calculateValeurJet,
+} from "../utils/characterUtils";
 
 interface NpcCreatorPageProps {
   arbres: Arbre[];
@@ -21,6 +29,129 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
   const [currentChar, setCurrentChar] = useState<Character | null>(null);
   const [editMode, setEditMode] = useState<boolean>(false);
 
+  /**
+   * Exporte un personnage vers un fichier JSON
+   */
+  const handleExportCharacterJSON = async (char: Character) => {
+    try {
+      await exportCharacterToFile(char);
+      alert(`Personnage ${char.prenom} ${char.nom} exporté avec succès !`);
+    } catch (error) {
+      alert(`Erreur lors de l'export : ${error}`);
+    }
+  };
+  /**
+   * Exporte un personnage vers un fichier JSON
+   */
+  const handleExportCharacterMD = async (char: Character) => {
+    try {
+      await exportToMarkdown(char);
+      alert(`Personnage ${char.prenom} ${char.nom} exporté avec succès !`);
+    } catch (error) {
+      alert(`Erreur lors de l'export : ${error}`);
+    }
+  };
+
+  /**
+   * Importe un personnage depuis un fichier
+   */
+  const handleImportCharacter = async () => {
+    try {
+      const character = await openImportDialog();
+
+      // Vérifier si le personnage existe déjà
+      const existingIndex = characters.findIndex((c) => c.id === character.id);
+
+      if (existingIndex >= 0) {
+        // Demander confirmation pour écraser
+        const confirm = window.confirm(
+          `Un personnage avec l'ID ${character.id} existe déjà. Voulez-vous le remplacer ?`,
+        );
+
+        if (confirm) {
+          // Remplacer le personnage existant
+          const newCharacters = [...characters];
+          newCharacters[existingIndex] = character;
+          setCharacters(newCharacters);
+          alert(`Personnage ${character.prenom} ${character.nom} mis à jour !`);
+        }
+      } else {
+        // Ajouter le nouveau personnage
+        setCharacters([...characters, character]);
+        alert(
+          `Personnage ${character.prenom} ${character.nom} importé avec succès !`,
+        );
+      }
+    } catch (error) {
+      if (error.message !== "Import annulé par l'utilisateur") {
+        alert(`Erreur lors de l'import : ${error}`);
+      }
+    }
+  };
+
+  /**
+   * Importe plusieurs personnages depuis des fichiers
+   */
+  const handleImportMultipleCharacters = async () => {
+    try {
+      const importedCharacters = await openImportMultipleDialog();
+
+      // Fusionner avec les personnages existants
+      const existingIds = new Set(characters.map((c) => c.id));
+      const newCharacters: Character[] = [];
+      const updatedCharacters: Character[] = [];
+
+      importedCharacters.forEach((char) => {
+        if (existingIds.has(char.id)) {
+          updatedCharacters.push(char);
+        } else {
+          newCharacters.push(char);
+        }
+      });
+
+      // Construire le message de confirmation
+      let message = "";
+      if (newCharacters.length > 0) {
+        message += `${newCharacters.length} nouveau(x) personnage(s) importé(s).\n`;
+      }
+      if (updatedCharacters.length > 0) {
+        message += `${updatedCharacters.length} personnage(s) existant(s) détecté(s).\n`;
+        message += `Voulez-vous les remplacer ?`;
+
+        if (!window.confirm(message)) {
+          // Ne garder que les nouveaux
+          setCharacters([...characters, ...newCharacters]);
+          alert(
+            `${newCharacters.length} personnage(s) importé(s) (${updatedCharacters.length} ignoré(s))`,
+          );
+          return;
+        }
+      }
+
+      // Mettre à jour tous les personnages
+      const characterMap = new Map(characters.map((c) => [c.id, c]));
+
+      // Remplacer les personnages existants
+      updatedCharacters.forEach((char) => {
+        characterMap.set(char.id!, char);
+      });
+
+      // Ajouter les nouveaux
+      newCharacters.forEach((char) => {
+        characterMap.set(char.id!, char);
+      });
+
+      setCharacters(Array.from(characterMap.values()));
+      alert(
+        `${importedCharacters.length} personnage(s) importé(s) avec succès !`,
+      );
+    } catch (error) {
+      if (error.message !== "Import annulé par l'utilisateur") {
+        alert(`Erreur lors de l'import multiple : ${error}`);
+      }
+    }
+  };
+
   const startNewCharacter = () => {
     setCurrentChar({ ...(EMPTY_CHARACTER as Character) });
     setEditMode(true);
@@ -36,20 +167,40 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     setEditMode(true);
   };
 
+  // Helper: convert top-level object fields to primitive (prefer id, fallback to nom)
+  const sanitizeCharacterForSave = (char: Character): Character => {
+    const copy: any = { ...char };
+
+    const topLevelFields = ["arbre", "lignage", "religion"];
+    topLevelFields.forEach((key) => {
+      const val = copy[key];
+      if (val && typeof val === "object") {
+        copy[key] = val.id ?? val.nom ?? val;
+      }
+    });
+
+    // If some UI expects simple strings for nested lists items, ensure arrays of objects are mapped too.
+    // Example: if a list like 'competences' contains full objects but UI expects names, map here as needed.
+    // Keep default behavior for other nested structures to avoid unwanted data loss.
+
+    return copy as Character;
+  };
+
   const saveCharacter = () => {
     if (!currentChar) return;
     if (currentChar.nom || currentChar.prenom) {
-      if (currentChar.id) {
+      const sanitized = sanitizeCharacterForSave(currentChar);
+
+      if (sanitized.id) {
         setCharacters(
-          characters.map((c) =>
-            c.id === currentChar.id ? { ...currentChar } : c,
-          ),
+          characters.map((c) => (c.id === sanitized.id ? { ...sanitized } : c)),
         );
       } else {
-        setCharacters([
-          ...characters,
-          { ...currentChar, id: Date.now().toString() },
-        ]);
+        const newCharWithId = {
+          ...sanitized,
+          id: generateCharacterId(sanitized),
+        };
+        setCharacters([...characters, newCharWithId]);
       }
       setCurrentChar(null);
       setEditMode(false);
@@ -77,42 +228,6 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
       obj = obj[k];
     }
     obj[keys[keys.length - 1]] = value;
-    setCurrentChar(newChar);
-  };
-
-  const addAttaque = () => {
-    if (!currentChar) return;
-    const newChar: Character = { ...currentChar };
-    newChar.combat = newChar.combat || {
-      armure: "Aucune",
-      maitrisesGenerales: [],
-      maitrisesSpecifiques: [],
-      armes: [],
-      attaques: [],
-    };
-    newChar.combat.attaques = newChar.combat.attaques || [];
-    newChar.combat.attaques.push({ titre: "", valeur: "" });
-    setCurrentChar(newChar);
-  };
-
-  const removeAttaque = (index: number) => {
-    if (!currentChar) return;
-    const newChar: Character = { ...currentChar };
-    newChar.combat = newChar.combat || { attaques: [] };
-    newChar.combat.attaques = newChar.combat.attaques || [];
-    if (newChar.combat.attaques.length > 1) {
-      newChar.combat.attaques.splice(index, 1);
-    }
-    setCurrentChar(newChar);
-  };
-
-  const updateAttaque = (index: number, field: string, value: any) => {
-    if (!currentChar) return;
-    const newChar: Character = { ...currentChar };
-    newChar.combat = newChar.combat || { attaques: [] };
-    newChar.combat.attaques = newChar.combat.attaques || [];
-    if (newChar.combat.attaques[index])
-      newChar.combat.attaques[index][field] = value;
     setCurrentChar(newChar);
   };
 
@@ -294,9 +409,21 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     const newChar: Character = { ...currentChar };
     newChar.combat = newChar.combat || { armes: [] };
     newChar.combat.armes = newChar.combat.armes || [];
-    if (newChar.combat.armes[index]) newChar.combat.armes[index][field] = value;
+    if (newChar.combat.armes[index]) {
+      newChar.combat.armes[index][field] = value;
+
+      // Calculer et affecter attaque si possible en utilisant la fonction utilitaire
+      try {
+        const armeObj = newChar.combat.armes[index];
+        const attaqueVal = calculateValeurJet(newChar, armeObj);
+        newChar.combat.armes[index].attaque = attaqueVal.toString();
+      } catch {
+        // si calcul impossible, on ne bloque pas (garder valeur courante)
+      }
+    }
     setCurrentChar(newChar);
   };
+
   if (!currentChar) {
     return (
       <CharacterListPage
@@ -305,6 +432,10 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
         onView={viewCharacter}
         onEdit={editCharacter}
         onDelete={deleteCharacter}
+        onExportMD={handleExportCharacterMD}
+        onExportJSON={handleExportCharacterJSON}
+        onImport={handleImportCharacter}
+        onImportMultiple={handleImportMultipleCharacters}
       />
     );
   }
@@ -320,9 +451,6 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
       onUpdate={updateField}
       onSave={saveCharacter}
       onBack={goBack}
-      onAddAttaque={addAttaque}
-      onRemoveAttaque={removeAttaque}
-      onUpdateAttaque={updateAttaque}
       onAddEquipement={addEquipement}
       onRemoveEquipement={removeEquipement}
       onUpdateEquipement={updateEquipement}
