@@ -1,30 +1,31 @@
 Arbres,sousArbre,nom,ultime,modificationPhysique,description,fonctionnement,niveau1,Niveau 2
-Classe,Rodeur,Pisteur,false,,"Le rôdeur poursuit discrètement les traces d'une personne, acquérant ainsi des informations","Tests : [Survie] + [Investigation]
+Classe,Rodeur,Pisteur,false,,"Le rodeur poursuit discrètement les traces d'une personne, acquérant ainsi des informations","Tests : [Survie] + [Investigation]
 
 Types d’infos : ses habitudes, sa taille, ses capacités, et bien plus encore.
 
-Gagne spécialité en survie/investigation",1 info simple par réussite supplémentaire.,+1 sur toutes les interactions liées à une cible pistée
-Classe,Rodeur,Pièges,false,,"Le rôdeur est habile à poser des pièges variés, lui offrant ainsi la possibilité de chasser une gamme étendue de proies.","Test : [Artisanat + Astuce]
+Gagne spécialité en survie/investigation",1 info simple par réussite supplémentaires,+1 sur toute les interactions lié a une cible pistée
+Classe,Rodeur,Pièges,false,,"Le rodeur est habile à poser des pièges variés, lui offrant ainsi la possibilité de chasser une gamme étendue de proies.","Test : [Artisanat + Astuce]
 Gagne spécialisé artisanat
 Chaque repos : gagne 1 ration
 
 Piège simple : prend quelques minutes à poser
-Piège complexe : prend 1h scène à poser",Pièges simples : tuent les animaux et gênent les humains.,"Piège simple → Une cible : 3 dégâts  
-Piège complexe → Une cible : 5 dégâts 
+Piège complexe : prend 1h scène a poser",Pièges simple : tuent les animaux et gênent les humains.,"Piège simple -> 
+Une cible : 3 dégâts  
+Piège complexe ->
+Une cible : 5 dégâts 
 Groupe : 3 dégâts"
-Classe,Rodeur,Dressage,false,,Le rôdeur est accompagné d’un animal de compagnie avec qui il lie un lien très fort.,"L’animal connaît 3 d’ordre.
+Classe,Rodeur,Dressage,false,,Le rodeur est accompagné d’un animal de compagnie avec qui il lie un lien très fort.,"L’animal connait 3 d’ordre.
 Ordre : Bonus à un test égal au niveau de dressage",Ordre simple seulement.,"Ordre complexe.
 Peut combiner leur action et remplacer une partie de son jet."
-Classe,Rodeur,Survivaliste,false,,"Le rôdeur, habitué à évoluer en plein air, se sent parfaitement adapté à la nature, ce qui accroît considérablement son efficacité dans cet environnement.","Peut effectuer 2 tâches au campement.
-Le facteur confort est rempli de base.",,Dans la nature +1 aux jets de capacité physique.
-Classe,Rodeur,"Campement ",true,,"Expert des campements, le rôdeur aide son équipe a gagné en efficacité pour effectuer plus de tâches.",Améliore l’efficacité du campement,,"Au campement, chaque personnage peut effectuer 1 activité supplémentaire."
+Classe,Rodeur,Survivaliste,false,,"Le rodeur, habitué à évoluer en plein air, se sent parfaitement adapté à la nature, ce qui accroît considérablement son efficacité dans cet environnement.","Peut effectuer 2 tâches aux campement.
+Le facteur confort est remplie de base.",,Dans la nature +1 aux jets de capacité physique.
+Classe,Rodeur,"Campement ",true,,Expert des campement le rodeurs aide sont équipe a gagné en efficacité pour effectuer plus de tâches.,Améliore l’efficacité du campement,,Au campement chaque personnage peut éffectuer 1 activité supplémentaire.
 Classe,Chevalier,Formation,false,,"Le chevalier excelle dans l'art de la coopération, lui permettant de mettre en place des formations aussi efficaces pour les combats que pour les actions de groupe.","Test : [travail en équipe + commandement] 
 Gagne 1pt de réserve pour chaque dés réussi.
 
 Bonus : Améliore la posture d'un personnage (+2 dégats/-2 dégats subit/-2 cout PE, +2 aux tests)","Max 1 bonus par action
-Gagne une spécialité en commandement
-Prend une action à lancer","Par défaut : 2 pt de commandement
-Se fait en une action rapide."
+Gagne une spécialité en commandement","Par défaut : 2pt de commandement
+Action rapide"
 Classe,Chevalier,Porte étendard,false,,"Le chevalier joue le rôle de pilier au sein de son équipe, apportant un soutien essentiel en aidant ses coéquipiers à maintenir leur calme et leurs forces, même dans les situations les plus complexes.","Activité de repos -> Discours motivant
 Regain d’1pt de sanité à tout les compagnons.
 
@@ -32,21 +33,19 @@ Actions -> Cris de ralliement
  -1 au cout d’endurance des alliés 
 dure 1 tour | coûte 3PE",,"Discours motivant : +1 pt d’endurance aux compagnons
 Crie de ralliement : Une fois par séance bloque toute baisse de la sanité de ses alliés pour la durée d’une scène"
-Classe,Chevalier,Maitre des armures,false,,"La maîtrise exceptionnelle de l'armure par le chevalier lui confère une efficacité accrue, tant dans son port que dans son entretien.",Gagne une spécialité en artisanat,Réduit l’encombrement de 1.,"Augmente l'efficacité de son armure de 1 pt.
+Classe,Chevalier,Maitre des armures,false,,"La maîtrise exceptionnelle de l'armure par le chevalier lui confère une efficacité accrue, tant dans son port que dans son entretien.",Gagne une spécialité en artisanat,Permet d’équiper une armure lourde,"Réduit l’encombrement de 1.
 Double la réparation d’équipement."
-Classe,Chevalier,Sauvetage héroïque,false,,"Toujours prompte à porter secours à ses équipier, le chevalier peut au besoin sauter au secours de l’un des membres du groupe.","Sauvetage : rediriger vers soit une attaque ou un danger destiné à un allié proche.
-1 fois par tour.",,"Permet de prendre la place complètement d'un allié. (En combat de combat, inflige les dégâts à sa place)
-Prend la moitié des dégâts du danger si je lancé échoue."
-Classe,Chevalier,"Groupe héroïque ",true,,Permet au chevalier d'organiser le groupe afin qu'il effectue une tâche impossible,,,L’action de groupe cumule les capacités de chaque participant (passant ainsi les plus grosses difficultés) Un seule action de groupe par scène.
-Classe,Chasseur de prime,Duel,false,,Le mercenaire lance un duel implicite ou explicite contre un ennemi. Il gagne des bonus dans le cas d'une réussite du duel. Les duels peuvent être autant verbaux que martiaux.,"Duel : le mercenaire ne peut attaquer et se défendre que contre son adversaire.
+Classe,Chevalier,Sauvetage héroïque,false,,Toujours prompte a porter secours a ses équipier le chevalier peut au besoin sauter au secours de l’un des membres du groupe.,"Sauvetage : rediriger vers soit une attaque ou un danger destinée à un allié proche.
+1 fois par tour.",,Prend la moitié des dégâts de l’attaque.
+Classe,Chevalier,"Groupe héroïque ",true,,Permet au chevalier d'organiser le groupe afin qu'il effectue une tâche impossible,,,L’action de groupe cumule les capacités de chaque participant (passant ainsi les plus grosse difficultés) Un seul action de groupe par scène.
+Classe,Chasseur de prime,Duel,false,,Le mercenaire lance un duel implicite ou explicite contre un ennemi. Il gagne des bonus dans le cas d'une réussite du duel. Les duels peuvent être autant verbaux que martiaux.,"Duel : Lors d’un duel le mercenaire ne peut attaquer et se défendre que contre son adversaire.
 
 Bonus : 
-+1 attaque 
--1 dés de sanité durant le duel",,"Fait relancer 1 jet à l'adversaire.
++1 attaque ou def
+-1 dés de sanité durant le duel",,"2pt d’endurance pour faire relancer son jet à son adversaire
 
 +1 dégâts en duel"
-Classe,Chasseur de prime,Frappe handicapante,false,,Le mercenaire mise sur ses capacités à gêner et handicapé son adversaire avec ses armes.,Les dés supplémentaires de réussite permettent d'utiliser son arme en seconde main pour gêner l'adversaire.,"Utiliser une arme gênante dans sa seconde main donne un bonus d'attaque égal au niveau de maitrise des armes gênante.
-","Utiliser une arme gênante prend une action rapide. "
+Classe,Chasseur de prime,Frappe handicapante,false,,"Frappe contre son adversaire de façon à l'handicaper, limitant ainsi ses actions. Améliore aussi son aisance avec les armes gênantes.",Tout dés supplémentaires réussi lors d’un jet d’attaque applique une blessure,Blessure légère 1d10 temporaire (dure 1 scène),Blessure grave temporaire (dure 1 scène)
 Classe,Chasseur de prime,Enquêteur,false,,Permet au mercenaire d'enquêter et d'analyser les preuves et les personnes. Ils détectent les mensonges et les tromperies comme nul autre.,"+2 au jet d’investigation
 Peut relancer un jet d’investigation (1 fois par séance)",,1 fois par session : peut demander au MJ le lien entre 2 indices
 Classe,Chasseur de prime,Posture de combat,false,,Plus que n’importe qui le guerrier maitrise les différentes postures de combat lui permettant d’améliorer leur efficacités.,Amélioration de posture : +1 au bonus,Améliore une posture 1 fois par scène,"Permet de changer de postures a tout moment.
@@ -67,61 +66,61 @@ Bonus à tout ceux qui respect le mensonge
 -> Préparation de mensonge : Bonus tant que le menteur respect le mensonge","Mensonge commun : +1 a tout le monde
 Préparation de mensonge : +2 au jet de social","Mensonge commun : remplace les jets par les siens
 Préparation de mensonge : pas de jet nécessaire"
-Classe,Voleur,Voleur agile,false,,,"+1 en adresse 
-Relance un jet d'adresse (une fois par scène)",,Peut toujours relancer adresse
+Classe,Voleur,Voleur agile,false,,,"+1 capacité physique
+Relance: Accobatie/Larcin/Evasion/Furtivité (une fois par scène)",Coute 3pt d’endurance,Peut toujours relancer Acrobatie/Larcin/Evasion/Furtivité
 Classe,Voleur,Organisateur,true,,"Le voleur excelle dans l'élaboration de plans complexes, améliorant ainsi son aisance et celle de son groupe lors de leur mise en œuvre.",,,"Au repos ajoute l’activité : préparation de plan 
 Tant que les joueurs suivent le plan ils obtiennent +1 a tout leur jets"
-Classe,Technicien,Explosif,false,,L'érudit maîtrise l'art de manipuler la poudre noire pour fabriquer une variété d'explosifs.,"Chaque effet augmente du temps de création de 1. On peut passer ce temps en faisant un jet de difficulté égal au nombre d’améliorations.
+Classe,Technicien,Explosif,false,,L'érudit maîtrise l'art de manipuler la poudre noire pour fabriquer une variété d'explosifs.,"Chaque effet augmente de le temps de création de 1. On peut passer ce temps en faisant un jet de difficulté égal au nombre d’améliorations.
 
 [nv2 seulement]
-ajouter un effet double le temps de création",,"Peut ajouter des effets supplémentaires. 
-Effets : 
+ajouter un effet double le temps de création",Accède à liste des créations explosive,"Peut ajouter des effets supplémentaire. 
+Effets: 
  +1 puissance
  +1 zone
 +1 effet"
-Classe,Technicien,Concoctions,false,,"L'érudit excelle dans l'art des concoctions, lui permettant de fabriquer des poisons, des cataplasmes régénérants et des mixtures gênantes.","Chaque effet augmente du temps de création de 1. 
+Classe,Technicien,Concoctions,false,,"L'érudit excelle dans l'art des concoctions, lui permettant de fabriquer des poisons, des cataplasmes régénérants et des mixtures gênantes.","Chaque effet augmente de le temps de création de 1. 
 On peut passer ce temps en faisant un jet de difficulté égal au nombre d’améliorations.
 
 [nv2 seulement]
-ajouter un effet double le temps de création",,"Peut ajouter des effets supplémentaires. 
-Effet : 
+ajouter un effet double le temps de création",Accède à liste des concoctions,"Peut ajouter des effets supplémentaire. 
+Effet: 
  +1 puissance
  +1 zone
  +1 effets"
-Classe,Technicien,Improvisation,false,,"Même dans les situations les plus tendues, l'érudit sait utiliser ses compétences pour les mettre à contribution",Peut remplacer la moitié de son jet par sa valeur de sang froid.,1 fois par jour,1 fois par scène
-Classe,Technicien,Analyse,false,,Permet d'analyser les émotions ou les objets pour en sortir le plus d'informations possibles.,"1 fois par scène peut relancer n’importe quel jet de mentale avec un bonus du niveau de la compétence. 
+Classe,Technicien,Improvisation,false,,"Même dans les situations les plus tendues, l'érudit sait utiliser ses compétences pour les mettre à contribution",peut remplacer la moitié de son jet par sa valeur de sang froid.,1 fois par jour,1 fois par scène
+Classe,Technicien,Analyse,false,,Permet d'analyser les émotions ou les objets pour en sortir le plus d'informations possibles.,"1 fois par scène permet de relancer n’importe quel jet de mentale avec un bonus du niveau de la compétence. 
 L’analyse prend 1h à être effectuée.",,"Octroi l’activité Recherche. 
-Permet de passer n’importe quel jet de mental. Le nombre d’heures a effectué dépend de la difficulté."
+Permet de passer n’importe quel jet de mental. Le nombre d’heure a effectué dépend de la difficulté."
 Classe,Technicien,Artisanat spécialisé,true,,,,,"Fabrique un consommable permettant d’améliorer une compétences d’un allié :
 Intensité améliorée 
 Modification de propriété 
 Ajout d’une propriété"
-Lignage,Las,Liens avec les animaux,false,Cornes,Un Las crée un lien avec un animal qui devient son familier. Une connexion se crée alors dans les deux sens. Il ne peut cependant pas forcer son animal à faire ce qu’il ne voudrait pas faire.,Crée un lien avec un animal,Les esprits peuvent fusionner (parler + voir à travers).,Gagne une amélioration physique tandis que son animal devient plus intelligent
-Lignage,Las,Peau d’écorce,false,Peau marron,Un Las recouvre la peau de son corps par une couche solide ressemblant à de l’écorce.,Augmente son armure pendant une scène.,Augmentation de 1.,Augmentation de 2.
-Lignage,Las,Murmures sauvages,false,Oreille fines,Le las communique avec les bêtes des villes et des champs. Les discussions restent bornées au centre d’intérêt des animaux et ceux-ci n’effectueront rien qui les mettent en danger ou vont contre leur nature.,Bonus égal au niveau de murmure sauvage en jet de social avec les animaux.,Permet de discuter avec un type d’animal,Permet de discuter avec les plantes et les animaux
-Lignage,Las,Esprit résolu,false,Craquelures apparentes,"Le Las acquiert une capacité mystique lui permettant de résister à toute influence, que ce soit par le biais de charme naturel, de coercition ou de la ruse. Cela peut se manifester sous la forme d’une parfaite sérénité ou d’un entêtement hors du commun.",,Reçoit un bonus de +1 en sang froid,"+2 résistances psy (détecte les invasions psy)
-Une condition psy disparait à la fin d’une mission"
-Lignage,Woda,Affinité aquatique,false,Branchies dans le cou,La Woda est capable au contact de l’eau d’améliorer ses prouesses physiques.,"+2 à la nage.
+Lignage,Las,Liens avec les animaux,false,Cornes,Un Las crée un lien avec un animal qui devient son familier. Une connexion se crée alors dans les deux sens. Il ne peut cependant pas forcer son animal a faire ce qu’il ne voudrait pas faire.,Crée un lien avec un animal,Les esprits peuvent fusionner (parler + voir à travers),Gagne une amélioration physique tandis que son animal devient plus intelligent
+Lignage,Las,Peau d’écorce,false,Peau marron,Un Las recouvre la peau de son corps par une couche solide ressemblant a de l’écorce.,Augmente son armure pendant une scène.,+1 armure sans encombrement (1 fois par jour),+2 armure sans encombrement (1 fois par jour)
+Lignage,Las,Murmures sauvages,false,Oreille fines,Le las communique avec les bêtes des villes et des champs. Les discussions restent bornées au centre d’intérêt des animaux et ceux-ci n’effectueront rien qui les mettent en danger ou vont contre leur nature.,Bonus égal au niveau de murmure sauvage en jet de social avec les animaux.,Permet de discuter avec un type d’annimal,Permet de discuter avec les plantes et les annimaux
+Lignage,Las,Esprit résolu,false,Craquelures apparentes,"Le Las acquiert une capacité mystique lui permettant de résister à toute influence, que ce soit par le biais de charme naturel, de coercition ou de la ruse. Cela peut se manifester sous la forme d’une parfaite sérénité ou d’un entêtement hors du commun.",,Reçoit un bonus de +1 en sang froid,"+2 résistance psy (détecte les invasion psy)
+Une condition psy disparait a la fin d’une mission"
+Lignage,Woda,Affinité aquatique,false,Branchies dans le cou,La Woda est capable au contact de l’eau d’améliorer ses prouesse physique. HHAHAHAHA,"+2 à la nage.
 
 Au contact de l’eau : 
 Bonus au jet
 Bonus de régénération de vie et d’endurance","+1 cap physique/Attaque/Défense 
-Regagne 1 d’endurance chaque tour","+1 a tous ses jets.
-Fait disparaitre les dégâts légers à la fin du tour"
+Regagne 1 d’endurance chaque tour","+1 a tout ses jets.
+Fait disparaitre les dégâts léger a la fin du tour"
 Lignage,Woda,Altération mémoriel,false,Cheveux bleu-vert,La Woda est capable d’altérer des pans de l’histoire d’une victime s’il soutient son attention pleine et entière.,"Doit être au calme. 
 
-Il décrit les nouveaux souvenirs de sa cible, qui les acceptent comme les siens. Ce pouvoir ne permet pas d’explorer la véritable mémoire d’un individu.",Les souvenirs s’effacent ou reviennent vite comme s’ils étaient oubliés.,"Les souvenirs altèrent de manière permanente. 
+Il décrit les nouveaux souvenirs de sa cible, qui les acceptent comme les siens. Ce pouvoir ne permet pas d’explorer la véritable mémoire d’un individu.",Les souvenirs s’effacent ou revienne vite comme s’il était oubliés.,"Les souvenirs altèrent de manière permanente. 
 (Chaque information contradictoire ajoute +1 au jet de résistance)"
-Lignage,Woda,Chance,false,Coquillage sur le corps,La Woda possède une chance surnaturelle.,Passif : Relance 2 jets par jour,,Permet de relancer ou de faire relancer 3 dés à soit ou à un adversaire
-Lignage,Woda,Poison de la veuve,false,Main palmé,La Woda transmute une partie de son sang en poison paralysant. Elle peut enduire une arme tranchante de cet ichor.,"[poison + lignage] contre [constitution + Sang-froid]
+Lignage,Woda,Chance,false,Coquillage sur le corps,La Woda possède une chance surnaturelle qu’elle est capable de consommer.,Passif : Relance 2 jets par jour,,Permet de relancer ou de faire relancer 3 dés à soit ou à un adversaire
+Lignage,Woda,Poison de la veuve,false,Main palmé,La Woda transmute une partie de son sang en poison paralysant. Elle peut enduire une arme tranchante de cet ichor.,"[poison + lignage] contre [constitution + Sang froid]
 
 Poison : 
-Paralysant : rapide → paralyse 1 tour
-Blessant : long à faire → 3 dégâts","Au calme : poison paralysant & blessant
-En tension : poison paralysant","Les poisons peuvent être faits en tension.
+Paralysant : rapide -> paralyse 1 tour
+Blessant : long à faire -> 3 dégâts","Au calme : poison paralysant & blessant
+En tension : poison paralysant","Les poisons peuvent être fait en tension.
 Coût paralysant -1
-Ajoute un effet à long terme au blessant."
-Lignage,Shatten,Silence de la mort,false,Androgine,"Le Shatten est capable de réduire le son de son corps et de son environnement. ","Le Shatten réduit au silence tous les sons qu’il produit. Ce pouvoir ne fonctionne que sur l’ouïe. 
+Ajoute un effet a long terme au blessant."
+Lignage,Shatten,Silence de la mort,false,Androgine,,"Le Shatten réduit au silence tous les sons qu’il produit. Ce pouvoir ne fonctionne que sur l’ouïe. 
 
 Dure 1 tour.",Supprime les bruits qu’il émet,Crée une zone de silence. (5m autour de lui )
 Lignage,Shatten,Sens accru,false,Peau grise,"Les sens du Shatten acquière une une acuité hors du commun. Il est capable de voir dans l’obscurité totale, d’entendre les bruits les plus imperceptible et de sentir la peur que dégage les personnes.","Ajoute autant dés que son niveau de lignage.

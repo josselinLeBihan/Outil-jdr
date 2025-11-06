@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { PAGES } from "./constants/navigation";
 import {
   parseCSVFile,
@@ -6,6 +6,8 @@ import {
   transformCSVToLignageData,
   transformCSVToReligionData,
   transformCSVToEquipementsData,
+  transformSkillsDataToCSV,
+  saveCSVFile,
 } from "./utils/csvParser";
 import { Breadcrumb } from "./components/Breadcrumb";
 import { UploadPage } from "./pages/UploadPage";
@@ -28,6 +30,7 @@ const App: React.FC = () => {
   const [skillsData, setSkillsData] = useState<{ arbres: Arbre[] } | null>(
     null,
   );
+
   const [equipementsData, setEquipementsData] = useState<Equipement[] | null>(
     null,
   );
@@ -70,6 +73,10 @@ const App: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const navigateToUpload = () => {
+    setCurrentPage(PAGES.UPLOAD);
   };
 
   const navigateToNPCreator = () => {
@@ -196,12 +203,43 @@ const App: React.FC = () => {
     loadDefaultData();
   }, []);
 
+  const handleEditCompetence = useCallback((updatedCompetence: Competence) => {
+    setSkillsData((prevData) => {
+      if (!prevData) return prevData;
+
+      const updatedArbres = prevData.arbres.map((arbre) => ({
+        ...arbre,
+        sousArbres: arbre.sousArbres.map((sousArbre) => ({
+          ...sousArbre,
+          competences: sousArbre.competences.map((comp) =>
+            comp.id === updatedCompetence.id ? updatedCompetence : comp,
+          ),
+        })),
+      }));
+
+      console.log("Updated Arbres:", updatedArbres);
+      return { arbres: updatedArbres };
+    });
+
+    // Mettre à jour la compétence sélectionnée
+    setSelectedCompetence(updatedCompetence);
+  }, []);
+
+  const exportData = async () => {
+    if (!skillsData) return;
+    const csvRows = transformSkillsDataToCSV(skillsData);
+    const success = await saveCSVFile(csvRows, "competences.csv");
+
+    if (success) {
+      console.log("Exportation réussie !");
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 p-6">
       <div className="max-w-6xl mx-auto">
         {/* Menu de navigation */}
 
-        {currentPage !== PAGES.UPLOAD && (
+        {currentPage && (
           <header className="flex items-center justify-between mb-4">
             <h1 className="text-xl font-semibold">Créateur de personnage</h1>
             <nav className="space-x-2">
@@ -222,6 +260,12 @@ const App: React.FC = () => {
                 className={`px-3 py-1 rounded ${currentPage === PAGES.EQUIPEMENTS ? "bg-slate-800 text-white" : "bg-white border"}`}
               >
                 Equipements
+              </button>
+              <button
+                onClick={navigateToUpload}
+                className={`px-3 py-1 rounded ${currentPage === PAGES.UPLOAD ? "bg-slate-800 text-white" : "bg-white border"}`}
+              >
+                Nouvelles données
               </button>
             </nav>
           </header>
@@ -246,16 +290,26 @@ const App: React.FC = () => {
           />
         )}
         {currentPage === PAGES.HOME && skillsData && (
-          <HomePage
-            arbres={skillsData.arbres}
-            onSelectArbre={navigateToArbre}
-          />
+          <>
+            <HomePage
+              arbres={skillsData.arbres}
+              onSelectArbre={navigateToArbre}
+            />
+          </>
         )}
         {currentPage === PAGES.ARBRE && selectedArbre && (
-          <ArbrePage
-            arbre={selectedArbre}
-            onSelectSousArbre={navigateToSousArbre}
-          />
+          <>
+            <button
+              className="px-3 py-1 rounded mb-4 bg-green-600 text-white hover:bg-green-700"
+              onClick={exportData}
+            >
+              Exporter les changements
+            </button>
+            <ArbrePage
+              arbre={selectedArbre}
+              onSelectSousArbre={navigateToSousArbre}
+            />
+          </>
         )}
         {currentPage === PAGES.SOUS_ARBRE && selectedSousArbre && (
           <SousArbrePage
@@ -264,7 +318,10 @@ const App: React.FC = () => {
           />
         )}
         {currentPage === PAGES.COMPETENCE && selectedCompetence && (
-          <CompetencePage competence={selectedCompetence} />
+          <CompetencePage
+            competence={selectedCompetence}
+            onEditCompetence={handleEditCompetence}
+          />
         )}
         {currentPage === PAGES.NPC_CREATOR && skillsData && lignageData && (
           <NpcCreatorPage

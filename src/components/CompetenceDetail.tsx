@@ -4,12 +4,17 @@
 import React from "react";
 import { Zap } from "lucide-react";
 import { Competence } from "../types";
+// Ajoutez ces imports en haut du fichier
+import { Edit } from "lucide-react";
+import { useState } from "react";
+import { EditCompetenceModal } from "./EditCompetenceModal";
 
 interface CompetenceDetailProps {
   competence: Competence;
   isCreationMode?: boolean;
   onSelect?: (competence: Competence) => void;
   onBack?: () => void;
+  onEditCompetence?: (updatedCompetence: Competence) => void;
 }
 
 export const CompetenceDetail: React.FC<CompetenceDetailProps> = ({
@@ -17,17 +22,46 @@ export const CompetenceDetail: React.FC<CompetenceDetailProps> = ({
   isCreationMode = false,
   onSelect,
   onBack,
+  onEditCompetence,
 }) => {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const handleSaveEdit = (updatedFields: {
+    description: string;
+    fonctionnement: string;
+    niveau1: string;
+    niveau2: string;
+  }) => {
+    if (onEditCompetence) {
+      onEditCompetence({
+        ...competence,
+        ...updatedFields,
+      });
+    }
+  };
   return (
     <div className="max-w-3xl">
       <div className="bg-white rounded-lg shadow-lg p-8">
-        <div className="flex items-start gap-3 mb-4">
-          <h1 className="text-3xl font-bold text-gray-800">{competence.nom}</h1>
-          {competence.ultime && (
-            <span className="px-3 py-1 bg-amber-500 text-white text-sm font-semibold rounded-full flex items-center gap-1">
-              <Zap size={14} />
-              Ultime
-            </span>
+        <div className="flex items-start justify-between mb-4">
+          <div className="flex items-start gap-3">
+            <h1 className="text-3xl font-bold text-gray-800">
+              {competence.nom}
+            </h1>
+            {competence.ultime && (
+              <span className="px-3 py-1 bg-amber-500 text-white text-sm font-semibold rounded-full flex items-center gap-1">
+                <Zap size={14} />
+                Ultime
+              </span>
+            )}
+          </div>
+          {!isCreationMode && onEditCompetence && (
+            <button
+              onClick={() => setIsEditModalOpen(true)}
+              className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 transition-colors flex items-center gap-2"
+            >
+              <Edit size={18} />
+              Éditer
+            </button>
           )}
         </div>
 
@@ -93,6 +127,12 @@ export const CompetenceDetail: React.FC<CompetenceDetailProps> = ({
           </div>
         </div>
       </div>
+      <EditCompetenceModal
+        competence={competence}
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        onSave={handleSaveEdit}
+      />
     </div>
   );
 };

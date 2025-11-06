@@ -262,7 +262,7 @@ export const exportToMarkdown = (character: Character) => {
           markdown += ` (Niveau ${comp.niveau})`;
         }
         if (comp.ultime) {
-          markdown += ` ⭐ ULTIME`;
+          markdown += `ULTIME`;
         }
         markdown += `\n\n`;
 

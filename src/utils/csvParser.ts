@@ -1,5 +1,5 @@
 import Papa from "papaparse";
-import { Equipement, Lignage, Religion } from "../types";
+import { Competence, Equipement, Lignage, Religion, SousArbre } from "../types";
 
 export const parseCSVFile = (file) => {
   return new Promise((resolve, reject) => {
@@ -113,6 +113,73 @@ export const transformCSVToSkillsData = (csvData) => {
   return {
     arbres: Array.from(arbresMap.values()),
   };
+};
+
+/**
+ * Transforme la structure d'arbres/sous-arbres/compétences en données CSV
+ * C'est l'inverse de transformCSVToSkillsData
+ *
+ * @param skillsData - La structure de données retournée par transformCSVToSkillsData
+ * @returns Un tableau d'objets prêt à être converti en CSV par PapaParse
+ */
+export const transformSkillsDataToCSV = (skillsData: { arbres: any[] }) => {
+  console.log("Transformation des données de compétences en CSV");
+  const csvRows: any[] = [];
+
+  skillsData.arbres.forEach((arbre) => {
+    arbre.sousArbres.forEach((sousArbre: SousArbre) => {
+      sousArbre.competences.forEach((competence: Competence) => {
+        const row = {
+          Arbres: arbre.nom,
+          sousArbre: sousArbre.nom,
+          nom: competence.nom,
+          ultime: competence.ultime ? "true" : "false",
+          modificationPhysique: competence.modificationPhysique || "",
+          description: competence.description || "",
+          fonctionnement: competence.fonctionnement || "",
+          niveau1: competence.niveau1 || "",
+          "Niveau 2": competence.niveau2 || "",
+        };
+        csvRows.push(row);
+      });
+    });
+  });
+
+  return csvRows;
+};
+
+/**
+ * Exporte les données de compétences en fichier CSV et déclenche le téléchargement
+ *
+ * @param skillsData - La structure de données retournée par transformCSVToSkillsData
+ * @param filename - Le nom du fichier à télécharger (par défaut: "competences.csv")
+ */
+export const exportSkillsDataToCSV = (
+  skillsData: { arbres: any[] },
+  filename: string = "competences.csv",
+) => {
+  // Transformer les données en format CSV
+  const csvRows = transformSkillsDataToCSV(skillsData);
+
+  // Convertir en CSV avec PapaParse
+  const csv = Papa.unparse(csvRows, {
+    header: true,
+    delimiter: ",",
+    newline: "\n",
+  });
+
+  // Créer un blob et déclencher le téléchargement
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+
+  link.setAttribute("href", url);
+  link.setAttribute("download", filename);
+  link.style.visibility = "hidden";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 };
 
 /**
@@ -276,3 +343,123 @@ function splitAndClean(value: any): string[] {
     .map((s) => s.trim())
     .filter((s) => s.length > 0);
 }
+
+/**
+ * Sauvegarde un contenu dans un fichier avec dialogue de sélection d'emplacement
+ *
+ * @param content - Le contenu à sauvegarder (string ou Blob)
+ * @param options - Options de sauvegarde
+ * @param options.suggestedName - Nom de fichier suggéré (par défaut: "fichier.txt")
+ * @param options.description - Description du type de fichier (par défaut: "Fichier texte")
+ * @param options.mimeType - Type MIME du fichier (par défaut: "text/plain")
+ * @param options.extensions - Extensions acceptées (par défaut: [".txt"])
+ * @returns Promise<boolean> - true si sauvegarde réussie, false sinon
+ */
+export const saveFile = async (
+  content: string | Blob,
+  options: {
+    suggestedName?: string;
+    description?: string;
+    mimeType?: string;
+    extensions?: string[];
+  } = {},
+): Promise<boolean> => {
+  const {
+    suggestedName = "fichier.txt",
+    description = "Fichier texte",
+    mimeType = "text/plain",
+    extensions = [".txt"],
+  } = options;
+
+  try {
+    // Convertir le contenu en Blob si nécessaire
+    const blob =
+      content instanceof Blob
+        ? content
+        : new Blob([content], { type: mimeType });
+
+    // Utiliser l'API File System Access si disponible
+    if ("showSaveFilePicker" in window) {
+      const fileOptions = {
+        types: [
+          {
+            description,
+            accept: {
+              [mimeType]: extensions,
+            },
+          },
+        ],
+        suggestedName,
+      };
+
+      const handle = await (window as any).showSaveFilePicker(fileOptions);
+      const writable = await handle.createWritable();
+      await writable.write(blob);
+      await writable.close();
+
+      return true;
+    } else {
+      // Fallback pour les navigateurs qui ne supportent pas l'API
+      const link = document.createElement("a");
+      const url = URL.createObjectURL(blob);
+
+      link.setAttribute("href", url);
+      link.setAttribute("download", suggestedName);
+      link.style.visibility = "hidden";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      return true;
+    }
+  } catch (err: any) {
+    // L'utilisateur a annulé
+    if (err.name === "AbortError") {
+      console.log("Sauvegarde annulée par l'utilisateur");
+      return false;
+    }
+
+    // Autre erreur
+    console.error("Erreur lors de la sauvegarde:", err);
+    return false;
+  }
+};
+
+/**
+ * Sauvegarde des données au format CSV
+ */
+export const saveCSVFile = async (
+  csvData: any[],
+  suggestedName: string = "export.csv",
+): Promise<boolean> => {
+  const csv = Papa.unparse(csvData, {
+    header: true,
+    delimiter: ",",
+    newline: "\n",
+  });
+
+  return saveFile(csv, {
+    suggestedName,
+    description: "Fichier CSV",
+    mimeType: "text/csv",
+    extensions: [".csv"],
+  });
+};
+
+/**
+ * Sauvegarde des données au format JSON
+ */
+export const saveJSONFile = async (
+  data: any,
+  suggestedName: string = "export.json",
+): Promise<boolean> => {
+  const json = JSON.stringify(data, null, 2);
+
+  return saveFile(json, {
+    suggestedName,
+    description: "Fichier JSON",
+    mimeType: "application/json",
+    extensions: [".json"],
+  });
+};

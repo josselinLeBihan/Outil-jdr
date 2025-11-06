@@ -1,0 +1,139 @@
+{
+  "nom": "Sœur de l'épée",
+  "prenom": "",
+  "lignage": "",
+  "classe": "Chevalier",
+  "magie": "",
+  "concept": " Guerrière connue pour leur très grande capacité martiale et leur talent pour tuer les mages.",
+  "caracteristiques": {
+    "physique": {
+      "force": 4,
+      "constitution": 3,
+      "adresse": 3
+    },
+    "social": {
+      "charisme": 2,
+      "manipulation": 1,
+      "sangFroid": 3
+    },
+    "mental": {
+      "perception": 3,
+      "intelligence": 2,
+      "astuce": 2
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 0,
+      "discretion": 0,
+      "escalade": 0,
+      "equitation": 0,
+      "natation": 0,
+      "survie": 1
+    },
+    "social": {
+      "animaux": 0,
+      "bluff": 0,
+      "commandement": 3,
+      "empathie": 2,
+      "expRue": 0,
+      "representation": 0
+    },
+    "mental": {
+      "artisanat": 0,
+      "artMagie": 3,
+      "erudition": 2,
+      "investigation": 3,
+      "medecine": 1,
+      "religion": 4
+    }
+  },
+  "combat": {
+    "armure": "Légère",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [
+      {
+        "type": "Armes de guerre",
+        "niveau": 2
+      }
+    ],
+    "maitrisesSpecifiques": [
+      {
+        "nom": "Epée longue",
+        "niveau": 2
+      }
+    ],
+    "armes": [
+      {
+        "nom": "Epée longue des dieux absents",
+        "maitriseGenerale": "Armes de guerre",
+        "maitriseSpecifique": "Epée longue",
+        "attaque": "8",
+        "degats": "4"
+      }
+    ]
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [
+    {
+      "nom": "Détection de la magie",
+      "description": "",
+      "niveau": 2,
+      "fonctionnement": "Détecte la magie dans un rayon de 10m  [6/DD3]"
+    },
+    {
+      "id": "1762355778080",
+      "nom": "Enquêteur",
+      "description": "Permet au mercenaire d'enquêter et d'analyser les preuves et les personnes. Ils détectent les mensonges et les tromperies comme nul autre.",
+      "fonctionnement": "+2 au jet d’investigation\nPeut relancer un jet d’investigation (1 fois par séance)\n",
+      "niveau": 1,
+      "modificationPhysique": ""
+    },
+    {
+      "id": "1762355900569",
+      "nom": "Posture de combat",
+      "description": "Plus que n’importe qui le guerrier maitrise les différentes postures de combat lui permettant d’améliorer leur efficacités.",
+      "fonctionnement": "Amélioration de posture : +1 au bonus\nAméliore une posture 1 fois par scène",
+      "niveau": 1,
+      "modificationPhysique": ""
+    }
+  ],
+  "religion": "Dieux absents",
+  "equipements": [
+    {
+      "nom": "Tenue d'antimagie ",
+      "usage": "Armure +1 contre les dégâts magiques.",
+      "type": "click",
+      "disponibilite": "3",
+      "encombrement": "1",
+      "descriptif": "Robe noire dans laquelle est cousue des glyphes protégeant de la magie.  "
+    },
+    {
+      "nom": "Epée à 2 mains ",
+      "usage": "Elle protège et découpe la magie. (4 dégâts +1 dégâts contre mage niveau 3 -1 dégâts contre non mage)",
+      "type": "click",
+      "disponibilite": "4",
+      "encombrement": "2",
+      "descriptif": "Grande épée à 2 mains faite dans un métal pure, l'épée est gravée de glyphes qui scintillent d'une lumière blanche. "
+    },
+    {
+      "nom": "Livre de prière vide",
+      "usage": "",
+      "type": "click",
+      "disponibilite": "",
+      "encombrement": "",
+      "descriptif": "Livre de prière dont toutes les pages sont vides."
+    }
+  ],
+  "id": "char_1762355907353_2um5dnr"
+}
