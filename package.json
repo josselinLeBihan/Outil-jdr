@@ -1,6 +1,7 @@
 {
   "name": "createnpc",
   "private": true,
+  "homepage": "https://josselinlebihan.github.io/Outil-jdr/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -12,6 +13,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.16",
     "lucide-react": "^0.548.0",
+    "papaparse": "^5.5.3",
     "react": "^19.1.1",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.1.1",
@@ -26,6 +28,7 @@
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.22",
+    "ghpages": "^0.0.10",
     "globals": "^16.4.0",
     "prettier": "3.6.2",
     "vite": "^7.1.7"
