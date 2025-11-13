@@ -1,0 +1,139 @@
+{
+  "nom": "Combattant Oeil de l'orateur ",
+  "prenom": "",
+  "lignage": "",
+  "classe": "Chasseur de prime",
+  "magie": "",
+  "concept": "Mage combattant, les yeux de l'Orateur sont une force d'intervention ciblée et efficace. ",
+  "caracteristiques": {
+    "physique": {
+      "force": 4,
+      "constitution": 2,
+      "adresse": 3
+    },
+    "social": {
+      "charisme": 1,
+      "manipulation": 2,
+      "sangFroid": 3
+    },
+    "mental": {
+      "perception": 2,
+      "intelligence": 3,
+      "astuce": 4
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 0,
+      "discretion": 3,
+      "escalade": 0,
+      "equitation": 2,
+      "natation": 0,
+      "survie": 0
+    },
+    "social": {
+      "animaux": 0,
+      "bluff": 0,
+      "commandement": 4,
+      "empathie": 0,
+      "expRue": 3,
+      "representation": 0
+    },
+    "mental": {
+      "artisanat": 0,
+      "artMagie": 1,
+      "erudition": 3,
+      "investigation": 2,
+      "medecine": 0,
+      "religion": 1
+    }
+  },
+  "combat": {
+    "armure": "Moyenne",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [
+      {
+        "type": "Armes de guerre",
+        "niveau": 2
+      }
+    ],
+    "maitrisesSpecifiques": [
+      {
+        "nom": "Rapière ",
+        "niveau": 1
+      }
+    ],
+    "armes": [
+      {
+        "nom": "Rapière ",
+        "maitriseGenerale": "Armes de guerre",
+        "maitriseSpecifique": "Rapière ",
+        "attaque": "6",
+        "degats": "3"
+      }
+    ]
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [
+    {
+      "id": "1762424802574",
+      "nom": "Posture de combat",
+      "description": "Plus que n’importe qui le guerrier maitrise les différentes postures de combat lui permettant d’améliorer leur efficacités.",
+      "fonctionnement": "Amélioration de posture : +1 au bonus\nAméliore une posture 1 fois par scène",
+      "niveau": 1,
+      "modificationPhysique": ""
+    },
+    {
+      "id": "1762424819927",
+      "nom": "Brume",
+      "description": "Fait apparaitre une brume dans la zone. Bonus de déplacement et de furtivité.  Peut se combiner avec les autres style de magie d'eau",
+      "fonctionnement": "Brume : -3 perception, +1 défense et cap combat pour le lanceur \nDurée : 1 tour + coute 1 par tour suplémentaire\nAmplification : ajoute l’aspect chaud ou froid à la brume pour 1PE supplémentaire\nEau brulante : 2 dégâts aux personne dans la zone ou qui y rentre\nEau glacée : -1 capacité physique, attaque & défense\nRayon : 5m\nDistance manipulation : 5m\nDistance création & amplification : autour de soit",
+      "niveau": 1,
+      "modificationPhysique": ""
+    },
+    {
+      "id": "1762424833416",
+      "nom": "Magie niveau 2 Défaut : Contrôle de l’eau",
+      "description": "Manipule une grand quantité d’eau et peut la projeter a haute vitesse.",
+      "fonctionnement": "Projection contre un mur : 2 dégâts\nAmplification eau brulante : + 2 dégâts\nDistance manipulation, amplification, création : 10m",
+      "niveau": 2,
+      "modificationPhysique": ""
+    }
+  ],
+  "equipements": [
+    {
+      "nom": "Rapière noire",
+      "usage": "(Lame de vent → 2 Distance : 15m 2 dégâts Traverse une cible)  ",
+      "type": "Combat",
+      "disponibilite": 2,
+      "encombrement": 1,
+      "descriptif": "De très belle épée noire sertie d'un œil sur le pommeau."
+    },
+    {
+      "nom": "Armure moyenne",
+      "usage": "",
+      "type": "Combat",
+      "disponibilite": 3,
+      "encombrement": 2,
+      "descriptif": "Armure officielle cachée par un ensemble de vêtements "
+    },
+    {
+      "nom": "Menottes renforcée",
+      "usage": "Difficulté 5 pour s'enfuir",
+      "type": "Divers",
+      "disponibilite": 2,
+      "encombrement": null
+    }
+  ],
+  "id": "char_1762424880073_xd3f9zj"
+}
