@@ -118,7 +118,10 @@ const App: React.FC = () => {
         // Chargement des equipements
         const equipementsResponse = await fetch("/assets/equipement_data.csv");
         if (!equipementsResponse.ok) {
-          throw new Error("Fichier equipement_data.csv non trouvé");
+          throw new Error(
+            "Fichier equipement_data.csv non trouvé",
+            equipementsResponse.status,
+          );
         }
 
         // Chargement des compétences
