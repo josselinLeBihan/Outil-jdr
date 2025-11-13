@@ -4,14 +4,12 @@
   "homepage": "https://josselinlebihan.github.io/Outil-jdr/",
   "version": "0.0.0",
   "type": "module",
-{
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
-  }
-},
+  },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.16",
     "lucide-react": "^0.548.0",
