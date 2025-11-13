@@ -115,28 +115,35 @@ const App: React.FC = () => {
   useEffect(() => {
     const loadDefaultData = async () => {
       try {
+        const basePath = import.meta.env.BASE_URL;
+
         // Chargement des equipements
-        const equipementsResponse = await fetch("/assets/equipement_data.csv");
+        const equipementsResponse = await fetch(
+          `${basePath}assets/equipement_data.csv`,
+        );
         if (!equipementsResponse.ok) {
-          throw new Error(
-            "Fichier equipement_data.csv non trouvé",
-            equipementsResponse.status,
-          );
+          throw new Error("Fichier equipement_data.csv non trouvé");
         }
 
         // Chargement des compétences
-        const skillsResponse = await fetch("/assets/default_data.csv");
+        const skillsResponse = await fetch(
+          `${basePath}assets/default_data.csv`,
+        );
         if (!skillsResponse.ok) {
           throw new Error("Fichier default_data.csv non trouvé");
         }
 
         // Chargement des lignages
-        const lignageResponse = await fetch("/assets/lignage_data.csv");
+        const lignageResponse = await fetch(
+          `${basePath}assets/lignage_data.csv`,
+        );
         if (!lignageResponse.ok) {
           throw new Error("Fichier lignage_data.csv non trouvé");
         }
         // Chargement des religions
-        const religionsResponse = await fetch("/assets/religions_data.csv");
+        const religionsResponse = await fetch(
+          `${basePath}assets/religions_data.csv`,
+        );
         if (!lignageResponse.ok) {
           throw new Error("Fichier religions_data.csv non trouvé");
         }
