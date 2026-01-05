@@ -1,0 +1,98 @@
+{
+  "nom": "Artisan",
+  "prenom": "",
+  "lignage": "",
+  "classe": "",
+  "magie": "",
+  "concept": "",
+  "caracteristiques": {
+    "physique": {
+      "force": 2,
+      "constitution": 2,
+      "adresse": 2
+    },
+    "social": {
+      "charisme": 2,
+      "manipulation": 1,
+      "sangFroid": 3
+    },
+    "mental": {
+      "perception": 3,
+      "intelligence": 4,
+      "astuce": 3
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 0,
+      "discretion": 0,
+      "escalade": 0,
+      "equitation": 0,
+      "natation": 0,
+      "survie": 0
+    },
+    "social": {
+      "animaux": 0,
+      "bluff": 2,
+      "commandement": 0,
+      "empathie": 1,
+      "expRue": 0,
+      "representation": 3
+    },
+    "mental": {
+      "artisanat": 4,
+      "artMagie": 0,
+      "erudition": 3,
+      "investigation": 3,
+      "medecine": 2,
+      "religion": 1
+    }
+  },
+  "combat": {
+    "armure": "Aucune",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [
+      {
+        "type": "Armes courantes",
+        "niveau": 1
+      },
+      {
+        "type": "Armes de guerre",
+        "niveau": 0
+      },
+      {
+        "type": "Armes de jet",
+        "niveau": 0
+      },
+      {
+        "type": "Armes gênantes",
+        "niveau": 0
+      },
+      {
+        "type": "Mains nu",
+        "niveau": 0
+      }
+    ],
+    "armes": []
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [
+    {
+      "nom": "",
+      "description": "",
+      "niveau": 1,
+      "fonctionnement": ""
+    }
+  ],
+  "id": "char_1766415378367_m6qxmbp"
+}

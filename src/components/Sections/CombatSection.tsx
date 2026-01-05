@@ -7,14 +7,12 @@ import {
   calculateValeurJet,
 } from "../../utils/characterUtils";
 import { Character } from "../../types";
+import DotRating from "../DotRating";
 
 interface CombatSectionProps {
   character: Character;
   editMode: boolean;
   onUpdate: (path: string, value: any) => void;
-  onAddAttaque: () => void;
-  onRemoveAttaque: (index: number) => void;
-  onUpdateAttaque: (index: number, field: string, value: string) => void;
   onAddMaitriseGenerale: () => void;
   onRemoveMaitriseGenerale: (index: number) => void;
   onUpdateMaitriseGenerale: (
@@ -38,9 +36,6 @@ const CombatSection: React.FC<CombatSectionProps> = ({
   character,
   editMode,
   onUpdate,
-  onAddAttaque,
-  onRemoveAttaque,
-  onUpdateAttaque,
   onAddMaitriseGenerale,
   onRemoveMaitriseGenerale,
   onUpdateMaitriseGenerale,
@@ -101,128 +96,25 @@ const CombatSection: React.FC<CombatSectionProps> = ({
         </select>
       </div>
 
-      {/* Maîtrises Générales */}
+      {/* Maitrises générales */}
       <div className="mb-6">
-        <div className="flex items-center justify-between mb-3">
-          <label className="block text-sm font-medium">
-            Maîtrises Générales
-          </label>
-          {editMode && (
-            <button
-              onClick={onAddMaitriseGenerale}
-              className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm flex items-center gap-1"
-            >
-              <Plus size={16} />
-              Ajouter
-            </button>
-          )}
-        </div>
-        <div className="space-y-3">
-          {character.combat.maitrisesGenerales?.map((maitrise, idx) => (
-            <div
-              key={idx}
-              className="bg-gray-700 p-3 rounded border border-gray-600 flex items-center gap-3"
-            >
-              <select
-                value={maitrise.type}
-                onChange={(e) =>
-                  onUpdateMaitriseGenerale(idx, "type", e.target.value)
-                }
-                disabled={!editMode}
-                className="flex-1 bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
-              >
-                <option value="">Sélectionner...</option>
-                <option value="Armes courantes">Armes courantes</option>
-                <option value="Armes gênantes">Armes gênantes</option>
-                <option value="Armes de guerre">Armes de guerre</option>
-              </select>
-              <select
-                value={maitrise.niveau}
-                onChange={(e) =>
-                  onUpdateMaitriseGenerale(
-                    idx,
-                    "niveau",
-                    parseInt(e.target.value),
-                  )
-                }
-                disabled={!editMode}
-                className="w-20 bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
-              >
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-              </select>
-              {editMode && (
-                <button
-                  onClick={() => onRemoveMaitriseGenerale(idx)}
-                  className="text-red-400 hover:text-red-300"
-                >
-                  <Trash2 size={18} />
-                </button>
-              )}
-            </div>
+        <label className="block text-sm font-medium mb-4">
+          Maitrises générales
+        </label>
+        <div className="mb-4 w-fit">
+          {character.combat.maitrisesGenerales?.map((m, i) => (
+            <DotRating
+              key={i}
+              label={m.type}
+              value={m.niveau ?? 0}
+              maxValue={8}
+              onChange={(v) => onUpdateMaitriseGenerale(i, "niveau", v)}
+              disabled={!editMode}
+            />
           ))}
         </div>
       </div>
 
-      {/* Maîtrises Spécifiques */}
-      <div className="mb-6">
-        <div className="flex items-center justify-between mb-3">
-          <label className="block text-sm font-medium">
-            Maîtrises Spécifiques
-          </label>
-          {editMode && (
-            <button
-              onClick={onAddMaitriseSpecifique}
-              className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm flex items-center gap-1"
-            >
-              <Plus size={16} />
-              Ajouter
-            </button>
-          )}
-        </div>
-        <div className="space-y-3">
-          {character.combat.maitrisesSpecifiques?.map((maitrise, idx) => (
-            <div
-              key={idx}
-              className="bg-gray-700 p-3 rounded border border-gray-600 flex items-center gap-3"
-            >
-              <input
-                type="text"
-                placeholder="Nom de l'arme"
-                value={maitrise.nom}
-                onChange={(e) =>
-                  onUpdateMaitriseSpecifique(idx, "nom", e.target.value)
-                }
-                disabled={!editMode}
-                className="flex-1 bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
-              />
-              <select
-                value={maitrise.niveau}
-                onChange={(e) =>
-                  onUpdateMaitriseSpecifique(
-                    idx,
-                    "niveau",
-                    parseInt(e.target.value),
-                  )
-                }
-                disabled={!editMode}
-                className="w-20 bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
-              >
-                <option value={1}>1</option>
-                <option value={2}>2</option>
-              </select>
-              {editMode && (
-                <button
-                  onClick={() => onRemoveMaitriseSpecifique(idx)}
-                  className="text-red-400 hover:text-red-300"
-                >
-                  <Trash2 size={18} />
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
       {/* Armes */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
@@ -271,33 +163,14 @@ const CombatSection: React.FC<CombatSectionProps> = ({
                   >
                     <option value="">Aucune</option>
                     <option value="Armes courantes">Armes courantes</option>
-                    <option value="Armes gênantes">Armes gênantes</option>
                     <option value="Armes de guerre">Armes de guerre</option>
+                    <option value="Armes de jet">Armes de jet</option>
+                    <option value="Armes gênantes">Armes gênantes</option>
+                    <option value="Mains nu">Mains nu</option>
                   </select>
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-2">
-                <div className="">
-                  <label className="block text-xs font-medium mb-1 text-gray-400">
-                    Maîtrise Spécifique
-                  </label>
-                  <select
-                    value={arme.maitriseSpecifique}
-                    onChange={(e) =>
-                      onUpdateArme(idx, "maitriseSpecifique", e.target.value)
-                    }
-                    disabled={!editMode}
-                    className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
-                  >
-                    <option value="">Aucune</option>
-                    {character.combat.maitrisesSpecifiques?.map((m, i) => (
-                      <option key={i} value={m.nom}>
-                        {m.nom}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
                 <div>
                   <label className="block text-xs font-medium mb-1 text-gray-400">
                     Jet d'attaque

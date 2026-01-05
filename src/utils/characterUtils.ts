@@ -207,20 +207,6 @@ export const exportToMarkdown = (character: Character) => {
     markdown += `\n`;
   }
 
-  // Maîtrises spécifiques
-  if (
-    character.combat?.maitrisesSpecifiques &&
-    character.combat.maitrisesSpecifiques.length > 0
-  ) {
-    markdown += `### Maîtrises Spécifiques\n\n`;
-    character.combat.maitrisesSpecifiques.forEach((maitrise) => {
-      if (maitrise.nom) {
-        markdown += `- **${maitrise.nom} :** Niveau ${maitrise.niveau}\n`;
-      }
-    });
-    markdown += `\n`;
-  }
-
   // Armes
   if (character.combat?.armes && character.combat.armes.length > 0) {
     markdown += `### Armes\n\n`;
@@ -496,26 +482,12 @@ export function openImportMultipleDialog(): Promise<Character[]> {
  */
 export const calculateValeurJet = (
   character: Character,
-  arme: { maitriseGenerale?: string; maitriseSpecifique?: string } = {},
+  arme: { maitriseGenerale?: string } = {},
 ): number => {
-  const phys = character?.caracteristiques?.physique || {
-    force: 0,
-    constitution: 0,
-    adresse: 0,
-  };
-  const physTotal =
-    (phys.force || 0) + (phys.constitution || 0) + (phys.adresse || 0);
-  const basePhys = physTotal < 7 ? 1 : 2;
-
   const maitriseGenNiveau =
     character?.combat?.maitrisesGenerales?.find(
       (m: any) => m.type === arme.maitriseGenerale,
     )?.niveau || 0;
 
-  const maitriseSpecNiveau =
-    character?.combat?.maitrisesSpecifiques?.find(
-      (m: any) => m.nom === arme.maitriseSpecifique,
-    )?.niveau || 0;
-
-  return basePhys + maitriseGenNiveau + maitriseSpecNiveau * 2;
+  return maitriseGenNiveau;
 };

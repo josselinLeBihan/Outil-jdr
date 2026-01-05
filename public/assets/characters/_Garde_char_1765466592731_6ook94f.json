@@ -1,0 +1,127 @@
+{
+  "nom": "Garde",
+  "prenom": "",
+  "lignage": "",
+  "classe": "",
+  "magie": "",
+  "concept": "Garde de ville, de caravane ou autre. Bien équipé mais pas de compétence.",
+  "caracteristiques": {
+    "physique": {
+      "force": 3,
+      "constitution": 4,
+      "adresse": 2
+    },
+    "social": {
+      "charisme": 2,
+      "manipulation": 2,
+      "sangFroid": 3
+    },
+    "mental": {
+      "perception": 3,
+      "intelligence": 2,
+      "astuce": 1
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 0,
+      "discretion": 0,
+      "escalade": 0,
+      "equitation": 0,
+      "natation": 0,
+      "survie": 0
+    },
+    "social": {
+      "animaux": 0,
+      "bluff": 2,
+      "commandement": 4,
+      "empathie": 2,
+      "expRue": 3,
+      "representation": 0
+    },
+    "mental": {
+      "artisanat": 0,
+      "artMagie": 0,
+      "erudition": 0,
+      "investigation": 3,
+      "medecine": 0,
+      "religion": 0
+    }
+  },
+  "combat": {
+    "armure": "Aucune",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [
+      {
+        "type": "Armes courantes",
+        "niveau": 3
+      },
+      {
+        "type": "Armes de guerre",
+        "niveau": 5
+      },
+      {
+        "type": "Armes de jet",
+        "niveau": 0
+      },
+      {
+        "type": "Armes gênantes",
+        "niveau": 0
+      },
+      {
+        "type": "Mains nu",
+        "niveau": 0
+      }
+    ],
+    "armes": [
+      {
+        "nom": "Halbarde",
+        "maitriseGenerale": "Armes de guerre",
+        "attaque": "5",
+        "degats": "4"
+      },
+      {
+        "nom": "Epée courte",
+        "maitriseGenerale": "Armes courantes",
+        "attaque": "0",
+        "degats": "2"
+      }
+    ]
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [],
+  "equipements": [
+    {
+      "nom": "Armure moyenne",
+      "usage": "Protection 2",
+      "type": "Combat",
+      "disponibilite": 3,
+      "encombrement": 2
+    },
+    {
+      "nom": "Arme de guerre 2 main",
+      "usage": "4 dégats",
+      "type": "Combat",
+      "disponibilite": 3,
+      "encombrement": 2
+    },
+    {
+      "nom": "Arme courante",
+      "usage": "2 dégats",
+      "type": "Combat",
+      "disponibilite": 1,
+      "encombrement": null
+    }
+  ],
+  "id": "char_1765466592731_6ook94f"
+}

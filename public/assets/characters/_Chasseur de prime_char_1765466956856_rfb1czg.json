@@ -1,0 +1,138 @@
+{
+  "nom": "Chasseur de prime",
+  "prenom": "",
+  "lignage": "",
+  "classe": "",
+  "magie": "",
+  "concept": "Mercenaire chassant les mercenaires.",
+  "caracteristiques": {
+    "physique": {
+      "force": 3,
+      "constitution": 3,
+      "adresse": 2
+    },
+    "social": {
+      "charisme": 2,
+      "manipulation": 2,
+      "sangFroid": 3
+    },
+    "mental": {
+      "perception": 4,
+      "intelligence": 1,
+      "astuce": 2
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 1,
+      "discretion": 1,
+      "escalade": 0,
+      "equitation": 0,
+      "natation": 0,
+      "survie": 3
+    },
+    "social": {
+      "animaux": 0,
+      "bluff": 3,
+      "commandement": 3,
+      "empathie": 0,
+      "expRue": 2,
+      "representation": 0
+    },
+    "mental": {
+      "artisanat": 2,
+      "artMagie": 0,
+      "erudition": 0,
+      "investigation": 4,
+      "medecine": 0,
+      "religion": 0
+    }
+  },
+  "combat": {
+    "armure": "Aucune",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [
+      {
+        "type": "Armes courantes",
+        "niveau": 0
+      },
+      {
+        "type": "Armes de guerre",
+        "niveau": 6
+      },
+      {
+        "type": "Armes de jet",
+        "niveau": 0
+      },
+      {
+        "type": "Armes gênantes",
+        "niveau": 0
+      },
+      {
+        "type": "Mains nu",
+        "niveau": 0
+      }
+    ],
+    "armes": [
+      {
+        "nom": "Rapière",
+        "maitriseGenerale": "Armes de guerre",
+        "attaque": "6",
+        "degats": "3"
+      }
+    ]
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [
+    {
+      "id": "1765466861964",
+      "nom": "Duel",
+      "description": "Le mercenaire lance un duel implicite ou explicite contre un ennemi. Il gagne des bonus dans le cas d'une réussite du duel. Les duels peuvent être autant verbaux que martiaux.",
+      "fonctionnement": "Duel : le mercenaire ne peut attaquer et se défendre que contre son adversaire.\r\n\r\nBonus : \r\n+1 attaque \r\n-1 dés de sanité durant le duel\nFait relancer 1 jet à l'adversaire.\r\n\r\n+1 dégâts en duel",
+      "niveau": 2,
+      "modificationPhysique": ""
+    },
+    {
+      "id": "1765466881628",
+      "nom": "Manteaux de vent",
+      "description": "Permet au lanceur de se mouvoir aisément grâce au courant d'air qu'il crée.",
+      "fonctionnement": "Le sort se lance une fois et peut être maintenu pour 2 PE par tour.\n+2 en accrobatie\nLes sauts sont plus haut et annulent les dégâts de chute.\n\nRelance tous ses jets d’acrobatie et esquive\n",
+      "niveau": 1,
+      "modificationPhysique": ""
+    }
+  ],
+  "equipements": [
+    {
+      "nom": "Armure légère",
+      "usage": "Protection 1",
+      "type": "Combat",
+      "disponibilite": 2,
+      "encombrement": 1
+    },
+    {
+      "nom": "Menottes renforcée",
+      "usage": "Difficulté 5 pour s'enfuir",
+      "type": "Divers",
+      "disponibilite": 2,
+      "encombrement": null
+    },
+    {
+      "nom": "Bocle",
+      "usage": "+1 Attaque",
+      "type": "Combat",
+      "disponibilite": 1,
+      "encombrement": null
+    }
+  ],
+  "id": "char_1765466956856_rfb1czg"
+}

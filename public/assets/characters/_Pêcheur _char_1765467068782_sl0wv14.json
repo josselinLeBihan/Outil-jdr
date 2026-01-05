@@ -1,0 +1,91 @@
+{
+  "nom": "Pêcheur ",
+  "prenom": "",
+  "lignage": "",
+  "classe": "",
+  "magie": "",
+  "concept": "",
+  "caracteristiques": {
+    "physique": {
+      "force": 3,
+      "constitution": 4,
+      "adresse": 2
+    },
+    "social": {
+      "charisme": 1,
+      "manipulation": 2,
+      "sangFroid": 3
+    },
+    "mental": {
+      "perception": 3,
+      "intelligence": 2,
+      "astuce": 2
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 0,
+      "discretion": 0,
+      "escalade": 0,
+      "equitation": 0,
+      "natation": 4,
+      "survie": 3
+    },
+    "social": {
+      "animaux": 3,
+      "bluff": 0,
+      "commandement": 3,
+      "empathie": 2,
+      "expRue": 1,
+      "representation": 0
+    },
+    "mental": {
+      "artisanat": 2,
+      "artMagie": 0,
+      "erudition": 0,
+      "investigation": 0,
+      "medecine": 1,
+      "religion": 0
+    }
+  },
+  "combat": {
+    "armure": "Aucune",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [
+      {
+        "type": "Armes courantes",
+        "niveau": 0
+      },
+      {
+        "type": "Armes de guerre",
+        "niveau": 0
+      },
+      {
+        "type": "Armes de jet",
+        "niveau": 0
+      },
+      {
+        "type": "Armes gênantes",
+        "niveau": 0
+      },
+      {
+        "type": "Mains nu",
+        "niveau": 2
+      }
+    ],
+    "armes": []
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [],
+  "id": "char_1765467068782_sl0wv14"
+}

@@ -1,0 +1,136 @@
+{
+  "nom": "Voleur",
+  "prenom": "",
+  "lignage": "",
+  "classe": "",
+  "magie": "",
+  "concept": "Voleur en générales",
+  "caracteristiques": {
+    "physique": {
+      "force": 3,
+      "constitution": 4,
+      "adresse": 2
+    },
+    "social": {
+      "charisme": 2,
+      "manipulation": 2,
+      "sangFroid": 3
+    },
+    "mental": {
+      "perception": 3,
+      "intelligence": 2,
+      "astuce": 1
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 0,
+      "discretion": 0,
+      "escalade": 0,
+      "equitation": 0,
+      "natation": 0,
+      "survie": 0
+    },
+    "social": {
+      "animaux": 0,
+      "bluff": 2,
+      "commandement": 4,
+      "empathie": 2,
+      "expRue": 3,
+      "representation": 0
+    },
+    "mental": {
+      "artisanat": 0,
+      "artMagie": 0,
+      "erudition": 0,
+      "investigation": 3,
+      "medecine": 0,
+      "religion": 0
+    }
+  },
+  "combat": {
+    "armure": "Aucune",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [
+      {
+        "type": "Armes courantes",
+        "niveau": 3
+      },
+      {
+        "type": "Armes de guerre",
+        "niveau": 5
+      },
+      {
+        "type": "Armes de jet",
+        "niveau": 0
+      },
+      {
+        "type": "Armes gênantes",
+        "niveau": 0
+      },
+      {
+        "type": "Mains nu",
+        "niveau": 0
+      }
+    ],
+    "armes": [
+      {
+        "nom": "Halbarde",
+        "maitriseGenerale": "Armes de guerre",
+        "attaque": "5",
+        "degats": "4"
+      },
+      {
+        "nom": "Epée courte",
+        "maitriseGenerale": "Armes courantes",
+        "attaque": "0",
+        "degats": "2"
+      }
+    ]
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [
+    {
+      "id": "1765466384917",
+      "nom": "Voleur agile",
+      "description": "",
+      "fonctionnement": "+1 en adresse \r\nRelance un jet d'adresse (une fois par scène)\nPeut toujours relancer adresse",
+      "niveau": 2,
+      "modificationPhysique": ""
+    }
+  ],
+  "equipements": [
+    {
+      "nom": "Maquillage",
+      "usage": "+2 Charisme",
+      "type": "Divers",
+      "disponibilite": 1,
+      "encombrement": null
+    },
+    {
+      "nom": "Nécessaire de crochetage",
+      "usage": "+2 en crochetage",
+      "type": "Divers",
+      "disponibilite": 1,
+      "encombrement": null
+    },
+    {
+      "nom": "Arme courante",
+      "usage": "2 dégats",
+      "type": "Combat",
+      "disponibilite": 1,
+      "encombrement": null
+    }
+  ],
+  "id": "char_1765466401478_hcpm9p4"
+}

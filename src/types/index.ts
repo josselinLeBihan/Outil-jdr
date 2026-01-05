@@ -73,20 +73,29 @@ export interface Caracteristiques {
 }
 
 // Types pour le combat
+
+interface Maitrise {
+  type:
+    | "Armes courantes"
+    | "Armes de guerre"
+    | "Armes de jet"
+    | "Armes gênantes"
+    | "Mains nu";
+  niveau: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+}
+
 export interface Combat {
   armure: string;
-  maitrisesGenerales: Array<{
-    type: string;
-    niveau: number;
-  }>;
-  maitrisesSpecifiques: Array<{
-    nom: string;
-    niveau: number;
-  }>;
+  maitrisesGenerales: [
+    armesCourantes: Maitrise,
+    armesDeGuerre: Maitrise,
+    armesDeJet: Maitrise,
+    armesGenantes: Maitrise,
+    mainsNu: Maitrise,
+  ];
   armes: Array<{
     nom: string;
     maitriseGenerale: string;
-    maitriseSpecifique: string;
     attaque: string;
     degats: string;
   }>;

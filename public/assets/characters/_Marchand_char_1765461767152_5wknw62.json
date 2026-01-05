@@ -1,0 +1,71 @@
+{
+  "nom": "Marchand",
+  "prenom": "",
+  "lignage": "",
+  "classe": "",
+  "magie": "",
+  "concept": "Fiche pour un marchand, tavernier, ou autre...",
+  "caracteristiques": {
+    "physique": {
+      "force": 1,
+      "constitution": 2,
+      "adresse": 2
+    },
+    "social": {
+      "charisme": 4,
+      "manipulation": 3,
+      "sangFroid": 3
+    },
+    "mental": {
+      "perception": 2,
+      "intelligence": 2,
+      "astuce": 3
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 1,
+      "discretion": 0,
+      "escalade": 0,
+      "equitation": 2,
+      "natation": 0,
+      "survie": 1
+    },
+    "social": {
+      "animaux": 0,
+      "bluff": 4,
+      "commandement": 0,
+      "empathie": 3,
+      "expRue": 2,
+      "representation": 0
+    },
+    "mental": {
+      "artisanat": 3,
+      "artMagie": 0,
+      "erudition": 3,
+      "investigation": 0,
+      "medecine": 0,
+      "religion": 0
+    }
+  },
+  "combat": {
+    "armure": "Aucune",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [],
+    "maitrisesSpecifiques": [],
+    "armes": []
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [],
+  "id": "char_1765461767152_5wknw62"
+}

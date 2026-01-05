@@ -345,42 +345,6 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     setCurrentChar(newChar);
   };
 
-  // Maîtrises spécifiques
-  const addMaitriseSpecifique = () => {
-    if (!currentChar) return;
-    const newChar: Character = { ...currentChar };
-    newChar.combat = newChar.combat || { maitrisesSpecifiques: [] };
-    newChar.combat.maitrisesSpecifiques =
-      newChar.combat.maitrisesSpecifiques || [];
-    newChar.combat.maitrisesSpecifiques.push({ nom: "", niveau: 1 });
-    setCurrentChar(newChar);
-  };
-
-  const removeMaitriseSpecifique = (index: number) => {
-    if (!currentChar) return;
-    const newChar: Character = { ...currentChar };
-    newChar.combat = newChar.combat || { maitrisesSpecifiques: [] };
-    newChar.combat.maitrisesSpecifiques =
-      newChar.combat.maitrisesSpecifiques || [];
-    newChar.combat.maitrisesSpecifiques.splice(index, 1);
-    setCurrentChar(newChar);
-  };
-
-  const updateMaitriseSpecifique = (
-    index: number,
-    field: string,
-    value: any,
-  ) => {
-    if (!currentChar) return;
-    const newChar: Character = { ...currentChar };
-    newChar.combat = newChar.combat || { maitrisesSpecifiques: [] };
-    newChar.combat.maitrisesSpecifiques =
-      newChar.combat.maitrisesSpecifiques || [];
-    if (newChar.combat.maitrisesSpecifiques[index])
-      newChar.combat.maitrisesSpecifiques[index][field] = value;
-    setCurrentChar(newChar);
-  };
-
   // Armes
   const addArme = () => {
     if (!currentChar) return;
@@ -390,7 +354,6 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     newChar.combat.armes.push({
       nom: "",
       maitriseGenerale: "",
-      maitriseSpecifique: "",
     });
     setCurrentChar(newChar);
   };
@@ -460,9 +423,6 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
       onAddMaitriseGenerale={addMaitriseGenerale}
       onRemoveMaitriseGenerale={removeMaitriseGenerale}
       onUpdateMaitriseGenerale={updateMaitriseGenerale}
-      onAddMaitriseSpecifique={addMaitriseSpecifique}
-      onRemoveMaitriseSpecifique={removeMaitriseSpecifique}
-      onUpdateMaitriseSpecifique={updateMaitriseSpecifique}
       onAddArme={addArme}
       onRemoveArme={removeArme}
       onUpdateArme={updateArme}
