@@ -1,0 +1,136 @@
+{
+  "nom": "Mercenaire",
+  "prenom": "",
+  "lignage": "",
+  "classe": "",
+  "magie": "",
+  "concept": "",
+  "caracteristiques": {
+    "physique": {
+      "force": 3,
+      "constitution": 3,
+      "adresse": 4
+    },
+    "social": {
+      "charisme": 2,
+      "manipulation": 2,
+      "sangFroid": 2
+    },
+    "mental": {
+      "perception": 3,
+      "intelligence": 1,
+      "astuce": 2
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 3,
+      "discretion": 0,
+      "escalade": 0,
+      "equitation": 0,
+      "natation": 0,
+      "survie": 4
+    },
+    "social": {
+      "animaux": 0,
+      "bluff": 3,
+      "commandement": 2,
+      "empathie": 1,
+      "expRue": 3,
+      "representation": 0
+    },
+    "mental": {
+      "artisanat": 1,
+      "artMagie": 0,
+      "erudition": 0,
+      "investigation": 2,
+      "medecine": 0,
+      "religion": 0
+    }
+  },
+  "combat": {
+    "armure": "Aucune",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [
+      {
+        "type": "Armes courantes",
+        "niveau": 0
+      },
+      {
+        "type": "Armes de guerre",
+        "niveau": 5
+      },
+      {
+        "type": "Armes de jet",
+        "niveau": 4
+      },
+      {
+        "type": "Armes gênantes",
+        "niveau": 0
+      },
+      {
+        "type": "Mains nu",
+        "niveau": 0
+      }
+    ],
+    "armes": [
+      {
+        "nom": "Epée longue, masse, lance",
+        "maitriseGenerale": "Armes de guerre",
+        "attaque": "6",
+        "degats": "3"
+      }
+    ]
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [
+    {
+      "id": "1767969208553",
+      "nom": "Duel",
+      "description": "Le mercenaire lance un duel implicite ou explicite contre un ennemi. Il gagne des bonus dans le cas d'une réussite du duel. Les duels peuvent être autant verbaux que martiaux.",
+      "fonctionnement": "Duel : le mercenaire ne peut attaquer et se défendre que contre son adversaire.\n\nBonus : \n+1 attaque \n",
+      "niveau": 1,
+      "modificationPhysique": ""
+    },
+    {
+      "nom": "Attaque rapide",
+      "description": "Bonus\n+1 dé au premier jet de combat",
+      "niveau": 1,
+      "id": "1767969302070"
+    }
+  ],
+  "equipements": [
+    {
+      "nom": "Armure légère",
+      "usage": "Protection 1",
+      "type": "Combat",
+      "disponibilite": 2,
+      "encombrement": 1
+    },
+    {
+      "nom": "Arme de guerre 1 main",
+      "usage": "3 dégats",
+      "type": "Combat",
+      "disponibilite": 2,
+      "encombrement": 1
+    },
+    {
+      "nom": "",
+      "usage": "Équipement\nContrat scellé, cape épaisse\n\nTable (1d6)\n1 Flasque\n2 Trophée\n3 Faux papiers\n4 Arme cachée\n5 Dette de sang\n6 Réputation sinistre",
+      "type": "click",
+      "disponibilite": "",
+      "encombrement": ""
+    }
+  ],
+  "id": "char_1767969312533_y0cp1p9"
+}

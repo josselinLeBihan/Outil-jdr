@@ -19,6 +19,10 @@ export const calculateInitiative = (character: Character) => {
 
 export const calculateDistribution = (values) => {
   return {
+    at8: values.filter((v) => v === 8).length,
+    at7: values.filter((v) => v === 7).length,
+    at6: values.filter((v) => v === 6).length,
+    at5: values.filter((v) => v === 5).length,
     at4: values.filter((v) => v === 4).length,
     at3: values.filter((v) => v === 3).length,
     at2: values.filter((v) => v === 2).length,
@@ -39,12 +43,14 @@ export const calculateCaracteristiquesDistribution = (character: Character) => {
 };
 
 export const calculateCapacitesDistribution = (character: Character) => {
-  if (!character) return { at4: 0, at3: 0, at2: 0, at1: 0 };
+  if (!character)
+    return { at8: 0, at7: 0, at6: 0, at5: 0, at4: 0, at3: 0, at2: 0, at1: 0 };
 
   const values = [
     ...Object.values(character.capacites.physique),
     ...Object.values(character.capacites.social),
     ...Object.values(character.capacites.mental),
+    ...Object.values(character.capacites.maitrisesGenerales),
   ];
 
   return calculateDistribution(values);
@@ -52,6 +58,26 @@ export const calculateCapacitesDistribution = (character: Character) => {
 
 export const getStatus = (distribution, target) => {
   return {
+    at8: {
+      current: distribution.at8,
+      target: target.at8,
+      diff: distribution.at8 - target.at8,
+    },
+    at7: {
+      current: distribution.at7,
+      target: target.at7,
+      diff: distribution.at7 - target.at7,
+    },
+    at6: {
+      current: distribution.at6,
+      target: target.at6,
+      diff: distribution.at6 - target.at6,
+    },
+    at5: {
+      current: distribution.at5,
+      target: target.at5,
+      diff: distribution.at5 - target.at5,
+    },
     at4: {
       current: distribution.at4,
       target: target.at4,
@@ -83,6 +109,64 @@ export const getCaracteristiquesStatus = (character: Character) => {
 export const getCapacitesStatus = (character: Character) => {
   const dist = calculateCapacitesDistribution(character);
   return getStatus(dist, CAPACITES_TARGET);
+};
+
+/**
+ * Calcule le coût en avantages si la répartition dévie du standard.
+ * Logique: chaque niveau au-dessus du standard coûte ce niveau en avantages.
+ * Exemple: 2×4 coûte 4 points (1 niveau de 4 au-dessus du standard)
+ */
+export const calculateCaracteristiquesAvantagesCost = (
+  character: Character,
+) => {
+  const dist = calculateCaracteristiquesDistribution(character);
+  const standard = CARACTERISTIQUES_TARGET;
+  let cost = 0;
+
+  // Calculer le coût : pour chaque niveau au-dessus du standard, on paye ce niveau
+  const excess4 = Math.max(0, dist.at4 - standard.at4);
+  const excess3 = Math.max(0, dist.at3 - standard.at3);
+  const excess2 = Math.max(0, dist.at2 - standard.at2);
+  const excess1 = Math.max(0, dist.at1 - standard.at1);
+
+  cost += excess4 * 4;
+  cost += excess3 * 3;
+  cost += excess2 * 2;
+  cost += excess1 * 1;
+
+  return cost;
+};
+
+/**
+ * Calcule le coût en avantages si la répartition des capacités dévie du standard.
+ * Logique: chaque niveau au-dessus du standard coûte ce niveau en avantages.
+ * Exemple: 2×4 coûte 4 points (1 niveau de 4 au-dessus du standard)
+ */
+export const calculateCapacitesAvantagesCost = (character: Character) => {
+  const dist = calculateCapacitesDistribution(character);
+  const standard = CAPACITES_TARGET;
+  let cost = 0;
+
+  // Calculer le coût : pour chaque niveau au-dessus du standard, on paye ce niveau
+  const excess8 = Math.max(0, dist.at8 - standard.at8);
+  const excess7 = Math.max(0, dist.at7 - standard.at7);
+  const excess6 = Math.max(0, dist.at6 - standard.at6);
+  const excess5 = Math.max(0, dist.at5 - standard.at5);
+  const excess4 = Math.max(0, dist.at4 - standard.at4);
+  const excess3 = Math.max(0, dist.at3 - standard.at3);
+  const excess2 = Math.max(0, dist.at2 - standard.at2);
+  const excess1 = Math.max(0, dist.at1 - standard.at1);
+
+  cost += excess8 * 8;
+  cost += excess7 * 7;
+  cost += excess6 * 6;
+  cost += excess5 * 5;
+  cost += excess4 * 4;
+  cost += excess3 * 3;
+  cost += excess2 * 2;
+  cost += excess1 * 1;
+
+  return cost;
 };
 
 export const formatCapacityName = (key) => {
@@ -485,9 +569,7 @@ export const calculateValeurJet = (
   arme: { maitriseGenerale?: string } = {},
 ): number => {
   const maitriseGenNiveau =
-    character?.combat?.maitrisesGenerales?.find(
-      (m: any) => m.type === arme.maitriseGenerale,
-    )?.niveau || 0;
+    character.capacites.maitrisesGenerales[arme.maitriseGenerale || ""] || 0;
 
   return maitriseGenNiveau;
 };

@@ -12,12 +12,14 @@ interface CapacitesSectionProps {
   character: Character;
   editMode: boolean;
   onUpdate: (path: string, value: number) => void;
+  updateAvantagesConsome?: (value: number) => void;
 }
 
 const CapacitesSection: React.FC<CapacitesSectionProps> = ({
   character,
   editMode,
   onUpdate,
+  updateAvantagesConsome,
 }) => {
   const status = getCapacitesStatus(character);
 
@@ -74,6 +76,24 @@ const CapacitesSection: React.FC<CapacitesSectionProps> = ({
               value={character.capacites.mental[cap]}
               maxValue={5}
               onChange={(v) => onUpdate(`capacites.mental.${cap}`, v)}
+              disabled={!editMode}
+            />
+          ))}
+        </div>
+      </div>
+      {/* Maitrises générales */}
+      <div className="mb-6">
+        <h3 className="font-bold text-lg mb-4 text-yellow-400">
+          Maitrises générales
+        </h3>
+        <div className="mb-4 w-fit">
+          {Object.keys(character.capacites.maitrisesGenerales).map((m) => (
+            <DotRating
+              key={m}
+              label={formatCapacityName(m)}
+              value={character.capacites.maitrisesGenerales[m] ?? 0}
+              maxValue={8}
+              onChange={(v) => onUpdate(`capacites.maitrisesGenerales.${m}`, v)}
               disabled={!editMode}
             />
           ))}

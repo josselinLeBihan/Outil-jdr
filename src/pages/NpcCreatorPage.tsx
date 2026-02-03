@@ -10,6 +10,8 @@ import {
   openImportDialog,
   openImportMultipleDialog,
   calculateValeurJet,
+  calculateCaracteristiquesAvantagesCost,
+  calculateCapacitesAvantagesCost,
 } from "../utils/characterUtils";
 
 interface NpcCreatorPageProps {
@@ -220,6 +222,37 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     console.log("Mise à jour du champ :", path, value);
     if (!currentChar) return;
     const newChar: Character = { ...currentChar };
+
+    // Créer une copie profonde des objets imbriqués
+    if (path.startsWith("arbres") || path === "arbres") {
+      newChar.arbres = {
+        ...(currentChar.arbres || {}),
+      };
+    }
+    if (path.startsWith("caracteristiques")) {
+      newChar.caracteristiques = {
+        ...currentChar.caracteristiques,
+        physique: { ...currentChar.caracteristiques.physique },
+        social: { ...currentChar.caracteristiques.social },
+        mental: { ...currentChar.caracteristiques.mental },
+      };
+    }
+    if (path.startsWith("capacites")) {
+      newChar.capacites = {
+        ...currentChar.capacites,
+        physique: { ...currentChar.capacites.physique },
+        social: { ...currentChar.capacites.social },
+        mental: { ...currentChar.capacites.mental },
+        maitrisesGenerales: { ...currentChar.capacites.maitrisesGenerales },
+      };
+    }
+    if (path.startsWith("combat")) {
+      newChar.combat = {
+        ...currentChar.combat,
+        armes: currentChar.combat?.armes ? [...currentChar.combat.armes] : [],
+      };
+    }
+
     const keys = path.split(".");
     let obj: any = newChar;
     for (let i = 0; i < keys.length - 1; i++) {
@@ -228,6 +261,27 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
       obj = obj[k];
     }
     obj[keys[keys.length - 1]] = value;
+
+    // Si les caractéristiques ont changé, recalculer le coût en avantages
+    if (path.startsWith("caracteristiques")) {
+      const cost = calculateCaracteristiquesAvantagesCost(newChar);
+      newChar.avantagesConsome =
+        (newChar.avantagesConsome || 0) -
+        (currentChar.caracteristiquesAvantagesCost || 0) +
+        cost;
+      newChar.caracteristiquesAvantagesCost = cost;
+    }
+
+    // Si les capacités ont changé, recalculer le coût en avantages
+    if (path.startsWith("capacites")) {
+      const cost = calculateCapacitesAvantagesCost(newChar);
+      newChar.avantagesConsome =
+        (newChar.avantagesConsome || 0) -
+        (currentChar.capacitesAvantagesCost || 0) +
+        cost;
+      newChar.capacitesAvantagesCost = cost;
+    }
+
     setCurrentChar(newChar);
   };
 
@@ -235,7 +289,12 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     if (!currentChar) return;
     const newChar: Character = { ...currentChar };
     newChar.equipements = newChar.equipements || [];
+    // subtract disponibilite of removed equipment from avantagesConsome
+    const removed = newChar.equipements[index];
+    const removedDisp = Number((removed as any)?.disponibilite || 0);
     newChar.equipements.splice(index, 1);
+    newChar.avantagesConsome = (newChar.avantagesConsome || 0) - removedDisp;
+    if (newChar.avantagesConsome < 0) newChar.avantagesConsome = 0;
     setCurrentChar(newChar);
   };
 
@@ -243,7 +302,18 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     if (!currentChar) return;
     const newChar: Character = { ...currentChar };
     newChar.equipements = newChar.equipements || [];
-    if (newChar.equipements[index]) newChar.equipements[index][field] = value;
+    const item = newChar.equipements[index];
+    if (!item) return;
+    if (field === "disponibilite") {
+      const oldVal = Number((item as any).disponibilite || 0);
+      const newVal = Number(value || 0);
+      (item as any)[field] = newVal;
+      newChar.avantagesConsome =
+        (newChar.avantagesConsome || 0) + (newVal - oldVal);
+      if (newChar.avantagesConsome < 0) newChar.avantagesConsome = 0;
+    } else {
+      item[field] = value;
+    }
     setCurrentChar(newChar);
   };
 
@@ -260,11 +330,15 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
           nom: equipement.nom ?? "",
           usage: equipement.usage ?? "",
           type: equipement.type ?? "",
-          disponibilite: equipement.disponibilite ?? "",
+          disponibilite: (equipement.disponibilite ?? 0) as any,
           encombrement: equipement.encombrement ?? "",
         }
       : { nom: "", usage: "", type: "", disponibilite: "", encombrement: "" };
     newChar.equipements = [...newChar.equipements, toAdd];
+
+    // add disponibilite of added equipment to avantagesConsome
+    const addDisp = Number((toAdd as any).disponibilite || 0);
+    newChar.avantagesConsome = (newChar.avantagesConsome || 0) + addDisp;
     setCurrentChar(newChar);
     console.log("new char :", newChar);
   };
@@ -335,16 +409,6 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     setCurrentChar(newChar);
   };
 
-  const updateMaitriseGenerale = (index: number, field: string, value: any) => {
-    if (!currentChar) return;
-    const newChar: Character = { ...currentChar };
-    newChar.combat = newChar.combat || { maitrisesGenerales: [] };
-    newChar.combat.maitrisesGenerales = newChar.combat.maitrisesGenerales || [];
-    if (newChar.combat.maitrisesGenerales[index])
-      newChar.combat.maitrisesGenerales[index][field] = value;
-    setCurrentChar(newChar);
-  };
-
   // Armes
   const addArme = () => {
     if (!currentChar) return;
@@ -354,6 +418,7 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
     newChar.combat.armes.push({
       nom: "",
       maitriseGenerale: "",
+      attaque: "",
     });
     setCurrentChar(newChar);
   };
@@ -384,6 +449,13 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
         // si calcul impossible, on ne bloque pas (garder valeur courante)
       }
     }
+    setCurrentChar(newChar);
+  };
+
+  const updateAvantagesConsome = (value: number) => {
+    if (!currentChar) return;
+    const newChar: Character = { ...currentChar };
+    newChar.avantagesConsome = value;
     setCurrentChar(newChar);
   };
 
@@ -422,10 +494,10 @@ export const NpcCreatorPage: React.FC<NpcCreatorPageProps> = ({
       onUpdateCompetence={updateCompetence}
       onAddMaitriseGenerale={addMaitriseGenerale}
       onRemoveMaitriseGenerale={removeMaitriseGenerale}
-      onUpdateMaitriseGenerale={updateMaitriseGenerale}
       onAddArme={addArme}
       onRemoveArme={removeArme}
       onUpdateArme={updateArme}
+      updateAvantagesConsome={updateAvantagesConsome}
     />
   );
 };

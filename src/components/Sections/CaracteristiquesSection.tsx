@@ -9,12 +9,24 @@ interface CaracteristiquesSectionProps {
   character: Character;
   editMode: boolean;
   onUpdate: (path: string, value: number) => void;
+  updateAvantagesConsome?: (value: number) => void;
 }
+
+const reapartitionStandard = {
+  controle: {
+    4: 1,
+    3: 3,
+    2: 4,
+    1: 1,
+  },
+  indication: "1×4, 3×3, 4×2, 1×1",
+};
 
 const CaracteristiquesSection: React.FC<CaracteristiquesSectionProps> = ({
   character,
   editMode,
   onUpdate,
+  updateAvantagesConsome,
 }) => {
   const status = getCaracteristiquesStatus(character);
 
@@ -25,7 +37,7 @@ const CaracteristiquesSection: React.FC<CaracteristiquesSectionProps> = ({
       {editMode && (
         <DistributionIndicator
           title="Répartition des caractéristiques"
-          standard="1×4, 3×3, 4×2, 1×1"
+          standard={reapartitionStandard.indication}
           status={status}
         />
       )}

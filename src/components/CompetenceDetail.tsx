@@ -88,28 +88,9 @@ export const CompetenceDetail: React.FC<CompetenceDetailProps> = ({
         </div>
 
         <div className="space-y-4">
-          <div className="p-4 bg-green-50 border-l-4 border-green-500 rounded">
-            <h3 className="text-lg font-semibold text-green-900 mb-2">
-              Niveau 1
-            </h3>
-            {isCreationMode && (
-              <button
-                onClick={() =>
-                  onSelect && onSelect({ ...competence, niveau: 1 })
-                }
-                className="px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700"
-              >
-                Sélectionner Niveau 1
-              </button>
-            )}
-            <p className="text-gray-700 whitespace-pre-line">
-              {competence.niveau1}
-            </p>
-          </div>
-
           <div className="p-4 bg-emerald-50 border-l-4 border-emerald-600 rounded">
             <h3 className="text-lg font-semibold text-emerald-900 mb-2">
-              Niveau 2
+              Amélioration
             </h3>
             {isCreationMode && (
               <button

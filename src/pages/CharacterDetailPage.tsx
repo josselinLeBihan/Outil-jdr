@@ -7,6 +7,8 @@ import CapacitesSection from "../components/Sections/CapacitesSection";
 import CombatSection from "../components/Sections/CombatSection";
 import EquipementSection from "../components/Sections/EquipementSection";
 import CompetencesSection from "../components/Sections/CompetencesSection";
+import ArbresSection from "../components/Sections/ArbresSection";
+import AvantagesSection from "../components/Sections/AvantagesSection";
 import { exportToMarkdown } from "../utils/characterUtils";
 import { Arbre, Character, Equipement, Lignage, Religion } from "../types";
 
@@ -38,6 +40,7 @@ type CharacterDetailPageProps = {
   onAddArme: () => void;
   onRemoveArme: (id: number) => void;
   onUpdateArme: (id: number, data: any) => void;
+  updateAvantagesConsome: (value: number) => void;
 };
 
 const CharacterDetailPage: React.FC<CharacterDetailPageProps> = ({
@@ -68,6 +71,7 @@ const CharacterDetailPage: React.FC<CharacterDetailPageProps> = ({
   onAddArme,
   onRemoveArme,
   onUpdateArme,
+  updateAvantagesConsome,
 }) => {
   return (
     <div className="min-h-screen  text-gray-100 p-6">
@@ -117,12 +121,14 @@ const CharacterDetailPage: React.FC<CharacterDetailPageProps> = ({
           character={character}
           editMode={editMode}
           onUpdate={onUpdate}
+          updateAvantagesConsome={updateAvantagesConsome}
         />
 
         <CapacitesSection
           character={character}
           editMode={editMode}
           onUpdate={onUpdate}
+          updateAvantagesConsome={updateAvantagesConsome}
         />
 
         <CombatSection
@@ -150,6 +156,19 @@ const CharacterDetailPage: React.FC<CharacterDetailPageProps> = ({
           onUpdate={onUpdateEquipement}
           onAdd={onAddEquipement}
           onRemove={onRemoveEquipement}
+        />
+
+        <ArbresSection
+          character={character}
+          editMode={editMode}
+          onUpdate={onUpdate}
+          arbres={arbres}
+        />
+
+        <AvantagesSection
+          character={character}
+          editMode={editMode}
+          onUpdate={onUpdate}
         />
 
         <CompetencesSection

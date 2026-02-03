@@ -1,0 +1,137 @@
+{
+  "nom": "Soldat",
+  "prenom": "",
+  "lignage": "",
+  "classe": "",
+  "magie": "",
+  "concept": "",
+  "caracteristiques": {
+    "physique": {
+      "force": 4,
+      "constitution": 3,
+      "adresse": 3
+    },
+    "social": {
+      "charisme": 2,
+      "manipulation": 2,
+      "sangFroid": 3
+    },
+    "mental": {
+      "perception": 2,
+      "intelligence": 1,
+      "astuce": 2
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 3,
+      "discretion": 1,
+      "escalade": 2,
+      "equitation": 1,
+      "natation": 2,
+      "survie": 3
+    },
+    "social": {
+      "animaux": 0,
+      "bluff": 0,
+      "commandement": 4,
+      "empathie": 0,
+      "expRue": 0,
+      "representation": 0
+    },
+    "mental": {
+      "artisanat": 0,
+      "artMagie": 0,
+      "erudition": 0,
+      "investigation": 0,
+      "medecine": 0,
+      "religion": 3
+    }
+  },
+  "combat": {
+    "armure": "Aucune",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [
+      {
+        "type": "Armes courantes",
+        "niveau": 0
+      },
+      {
+        "type": "Armes de guerre",
+        "niveau": 6
+      },
+      {
+        "type": "Armes de jet",
+        "niveau": 3
+      },
+      {
+        "type": "Armes gênantes",
+        "niveau": 0
+      },
+      {
+        "type": "Mains nu",
+        "niveau": 0
+      }
+    ],
+    "armes": [
+      {
+        "nom": "Epée longue, masse, lance",
+        "maitriseGenerale": "Armes de guerre",
+        "attaque": "6",
+        "degats": "3"
+      }
+    ]
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [
+    {
+      "id": "1767968843816",
+      "nom": "Formation",
+      "description": "Le chevalier excelle dans l'art de la coopération, lui permettant de mettre en place des formations aussi efficaces pour les combats que pour les actions de groupe.",
+      "fonctionnement": "Test : [travail en équipe + commandement] \nGagne 1pt de réserve pour chaque dés réussi.\n\nBonus : Améliore la posture d'un personnage (+2 dégats/-2 dégats subit/-2 cout PE, +2 aux tests)\nMax 1 bonus par action\nGagne une spécialité en commandement\nPrend une action à lancer",
+      "niveau": 1,
+      "modificationPhysique": ""
+    }
+  ],
+  "equipements": [
+    {
+      "nom": "Armure moyenne",
+      "usage": "Protection 2",
+      "type": "Combat",
+      "disponibilite": 3,
+      "encombrement": 2
+    },
+    {
+      "nom": "Arme de guerre 1 main",
+      "usage": "3 dégats",
+      "type": "Combat",
+      "disponibilite": 2,
+      "encombrement": 1
+    },
+    {
+      "nom": "Bandages simples",
+      "usage": "Utilise médecine pour soigner une blessure grave",
+      "type": "Soins",
+      "disponibilite": 1,
+      "encombrement": 1
+    },
+    {
+      "nom": "Rondache",
+      "usage": "+2 Attaque",
+      "type": "Combat",
+      "disponibilite": 2,
+      "encombrement": 1
+    }
+  ],
+  "id": "char_1767968852688_pptwv3n"
+}

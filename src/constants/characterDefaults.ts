@@ -66,15 +66,26 @@ export const DEFAULT_CAPACITES = {
     medecine: 0,
     religion: 0,
   },
+  maitrisesGenerales: {
+    armesCourantes: 0,
+    armesDeGuerre: 0,
+    armesDeJet: 0,
+    armesGenantes: 0,
+    mainsNu: 0,
+  },
 };
 
 export const EMPTY_CHARACTER: Character = {
   nom: "",
   prenom: "",
-  lignage: "",
+  lignage: undefined,
   classe: "",
   magie: "",
   concept: "",
+  avantages: 11,
+  avantagesConsome: 0,
+  caracteristiquesAvantagesCost: 2,
+  capacitesAvantagesCost: 0,
   caracteristiques: {
     ...DEFAULT_CARACTERISTIQUES,
   },
@@ -83,29 +94,30 @@ export const EMPTY_CHARACTER: Character = {
   },
   combat: {
     armure: "Aucune",
-    attaques: [{ titre: "", valeur: "" }],
-    maitrisesGenerales: [
-      { type: "Armes courantes", niveau: 0 },
-      { type: "Armes de guerre", niveau: 0 },
-      { type: "Armes de jet", niveau: 0 },
-      { type: "Armes gênantes", niveau: 0 },
-      { type: "Mains nu", niveau: 0 },
-    ],
     armes: [],
   },
   equipement: [{ nom: "", descriptif: "" }],
-  competences: [
-    {
-      nom: "",
-      description: "",
-      niveau: 1,
-      fonctionnement: "",
-    },
-  ],
+  arbres: { classe: 0, lignage: 0, magie: 0 },
+  competences: [],
 };
 
-export const CARACTERISTIQUES_TARGET = { at4: 1, at3: 3, at2: 4, at1: 1 };
-export const CAPACITES_TARGET = { at4: 1, at3: 3, at2: 2, at1: 2 };
+export const CARACTERISTIQUES_TARGET = {
+  at5: 0,
+  at4: 1,
+  at3: 3,
+  at2: 4,
+  at1: 1,
+};
+export const CAPACITES_TARGET = {
+  at8: 0,
+  at7: 0,
+  at6: 0,
+  at5: 0,
+  at4: 1,
+  at3: 3,
+  at2: 2,
+  at1: 2,
+};
 
 export const CAPACITY_NAMES = {
   acrobaties: "Acrobaties",
@@ -126,4 +138,9 @@ export const CAPACITY_NAMES = {
   investigation: "Investigation",
   medecine: "Médecine",
   religion: "Religion",
+  armesCourantes: "Armes courantes",
+  armesDeGuerre: "Armes de guerre",
+  armesDeJet: "Armes de jet",
+  armesGenantes: "Armes gênantes",
+  mainsNu: "Mains nu",
 };

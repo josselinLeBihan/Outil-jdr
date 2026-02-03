@@ -1,0 +1,122 @@
+{
+  "nom": "Milicien",
+  "prenom": "",
+  "lignage": "",
+  "classe": "",
+  "magie": "",
+  "concept": "",
+  "caracteristiques": {
+    "physique": {
+      "force": 4,
+      "constitution": 3,
+      "adresse": 2
+    },
+    "social": {
+      "charisme": 2,
+      "manipulation": 1,
+      "sangFroid": 3
+    },
+    "mental": {
+      "perception": 3,
+      "intelligence": 2,
+      "astuce": 2
+    }
+  },
+  "capacites": {
+    "physique": {
+      "acrobaties": 3,
+      "discretion": 0,
+      "escalade": 0,
+      "equitation": 0,
+      "natation": 0,
+      "survie": 1
+    },
+    "social": {
+      "animaux": 0,
+      "bluff": 1,
+      "commandement": 4,
+      "empathie": 2,
+      "expRue": 2,
+      "representation": 0
+    },
+    "mental": {
+      "artisanat": 0,
+      "artMagie": 0,
+      "erudition": 0,
+      "investigation": 3,
+      "medecine": 0,
+      "religion": 3
+    }
+  },
+  "combat": {
+    "armure": "Aucune",
+    "attaques": [
+      {
+        "titre": "",
+        "valeur": ""
+      }
+    ],
+    "maitrisesGenerales": [
+      {
+        "type": "Armes courantes",
+        "niveau": 4
+      },
+      {
+        "type": "Armes de guerre",
+        "niveau": 0
+      },
+      {
+        "type": "Armes de jet",
+        "niveau": 0
+      },
+      {
+        "type": "Armes gênantes",
+        "niveau": 3
+      },
+      {
+        "type": "Mains nu",
+        "niveau": 0
+      }
+    ],
+    "armes": [
+      {
+        "nom": "Mattraque",
+        "maitriseGenerale": "Armes courantes",
+        "attaque": "4",
+        "degats": "2"
+      }
+    ]
+  },
+  "equipement": [
+    {
+      "nom": "",
+      "descriptif": ""
+    }
+  ],
+  "competences": [
+    {
+      "nom": "Rallier le peuple",
+      "description": "+1 dé pour rallier ou calmer des civils.",
+      "niveau": 1,
+      "fonctionnement": ""
+    }
+  ],
+  "equipements": [
+    {
+      "nom": "Bocle",
+      "usage": "2 de défense",
+      "type": "Combat",
+      "disponibilite": 1,
+      "encombrement": null
+    },
+    {
+      "nom": "Table",
+      "usage": "Bouclier, casque simple",
+      "type": "click",
+      "disponibilite": "",
+      "encombrement": "",
+      "descriptif": "1 Corne d’alerte\n2 Lanterne à volet\n3 Chaînes\n4 Insigne local\n5 Vieille blessure\n6 Ordre douteux"
+    }
+  ],
+  "id": "char_1767619051617_992f00s"
+}

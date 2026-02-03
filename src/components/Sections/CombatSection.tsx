@@ -96,25 +96,6 @@ const CombatSection: React.FC<CombatSectionProps> = ({
         </select>
       </div>
 
-      {/* Maitrises générales */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium mb-4">
-          Maitrises générales
-        </label>
-        <div className="mb-4 w-fit">
-          {character.combat.maitrisesGenerales?.map((m, i) => (
-            <DotRating
-              key={i}
-              label={m.type}
-              value={m.niveau ?? 0}
-              maxValue={8}
-              onChange={(v) => onUpdateMaitriseGenerale(i, "niveau", v)}
-              disabled={!editMode}
-            />
-          ))}
-        </div>
-      </div>
-
       {/* Armes */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-3">
@@ -162,11 +143,11 @@ const CombatSection: React.FC<CombatSectionProps> = ({
                     className="w-full bg-gray-600 border border-gray-500 rounded px-3 py-2 disabled:opacity-50"
                   >
                     <option value="">Aucune</option>
-                    <option value="Armes courantes">Armes courantes</option>
-                    <option value="Armes de guerre">Armes de guerre</option>
-                    <option value="Armes de jet">Armes de jet</option>
-                    <option value="Armes gênantes">Armes gênantes</option>
-                    <option value="Mains nu">Mains nu</option>
+                    <option value="armesCourantes">Armes courantes</option>
+                    <option value="armesDeGuerre">Armes de guerre</option>
+                    <option value="armesDeJet">Armes de jet</option>
+                    <option value="armesGenantes">Armes gênantes</option>
+                    <option value="mainsNu">Mains nu</option>
                   </select>
                 </div>
               </div>

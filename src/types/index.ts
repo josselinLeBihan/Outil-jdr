@@ -72,27 +72,8 @@ export interface Caracteristiques {
   };
 }
 
-// Types pour le combat
-
-interface Maitrise {
-  type:
-    | "Armes courantes"
-    | "Armes de guerre"
-    | "Armes de jet"
-    | "Armes gênantes"
-    | "Mains nu";
-  niveau: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-}
-
 export interface Combat {
   armure: string;
-  maitrisesGenerales: [
-    armesCourantes: Maitrise,
-    armesDeGuerre: Maitrise,
-    armesDeJet: Maitrise,
-    armesGenantes: Maitrise,
-    mainsNu: Maitrise,
-  ];
   armes: Array<{
     nom: string;
     maitriseGenerale: string;
@@ -114,12 +95,27 @@ export interface Character {
   concept?: string;
   description?: string;
   caracteristiques: Caracteristiques;
+
   capacites: {
     physique: Record<string, number>;
     social: Record<string, number>;
     mental: Record<string, number>;
+    maitrisesGenerales: Record<string, number>;
   };
   combat: Combat;
+  arbres?: {
+    classe?: number;
+    lignage?: number;
+    magie?: number;
+    classeSousArbre?: string;
+    classe2SousArbre?: string;
+    lignageSousArbre?: string;
+    magieSousArbre?: string;
+  };
+  avantages: number;
+  avantagesConsome?: number;
+  caracteristiquesAvantagesCost?: number;
+  capacitesAvantagesCost?: number;
   equipements: Equipement[];
   competences: Competence[];
 }
