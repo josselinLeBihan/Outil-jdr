@@ -7,6 +7,14 @@ interface CompetenceSearchModalProps {
   onClose: () => void;
   onSelect: (competence: Competence) => void;
   arbres: Arbre[];
+  character?: {
+    arbres?: {
+      classeSousArbre?: string;
+      classe2SousArbre?: string;
+      lignageSousArbre?: string;
+      magieSousArbre?: string;
+    };
+  };
 }
 
 const CompetenceSearchModal: React.FC<CompetenceSearchModalProps> = ({
@@ -14,6 +22,7 @@ const CompetenceSearchModal: React.FC<CompetenceSearchModalProps> = ({
   onClose,
   onSelect,
   arbres = [],
+  character,
 }) => {
   const [step, setStep] = useState<
     "arbres" | "sousArbres" | "competences" | "competenceDetail"
@@ -69,6 +78,50 @@ const CompetenceSearchModal: React.FC<CompetenceSearchModalProps> = ({
     } else {
       onClose && onClose();
     }
+  };
+
+  // Fonction pour filtrer les sous-arbres en fonction du character
+  const getFilteredSousArbres = (arbre: Arbre): SousArbre[] => {
+    // Si pas de configuration d'arbres sur le character => tout afficher
+    if (!character?.arbres) return arbre.sousArbres || [];
+
+    const arbresConfig = character.arbres as Record<string, any>;
+
+    // Déterminer le type d'arbre (classe, lignage, magie) via l'id ou le nom
+    const key = String(arbre.id || arbre.nom || "").toLowerCase();
+
+    let selectionsRaw: Array<string | undefined | null> = [];
+
+    if (key.includes("classe")) {
+      selectionsRaw = [
+        arbresConfig?.classeSousArbre,
+        arbresConfig?.classe2SousArbre,
+      ];
+    } else if (key.includes("lignage")) {
+      selectionsRaw = [arbresConfig?.lignageSousArbre];
+    } else if (key.includes("magie")) {
+      selectionsRaw = [arbresConfig?.magieSousArbre];
+    } else {
+      // fallback : prendre toutes les sélections disponibles
+      selectionsRaw = [
+        arbresConfig?.classeSousArbre,
+        arbresConfig?.classe2SousArbre,
+        arbresConfig?.lignageSousArbre,
+        arbresConfig?.magieSousArbre,
+      ];
+    }
+
+    // Normaliser et filtrer les valeurs invalides ("", null, "aucun")
+    const selections = selectionsRaw
+      .filter(Boolean)
+      .map((s) => String(s).trim())
+      .filter((s) => s !== "" && s.toLowerCase() !== "aucun");
+
+    // Aucun sous-arbre sélectionné pour CE type d'arbre -> afficher tous
+    if (selections.length === 0) return arbre.sousArbres || [];
+
+    // Afficher seulement les sous-arbres correspondant aux sélections pour CE type
+    return (arbre.sousArbres || []).filter((sa) => selections.includes(sa.nom));
   };
 
   return (
@@ -129,8 +182,8 @@ const CompetenceSearchModal: React.FC<CompetenceSearchModalProps> = ({
           {step === "sousArbres" && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {Array.isArray(selectedArbre?.sousArbres) &&
-              selectedArbre.sousArbres.length > 0 ? (
-                selectedArbre.sousArbres.map((sa, idx) => (
+              getFilteredSousArbres(selectedArbre!).length > 0 ? (
+                getFilteredSousArbres(selectedArbre!).map((sa, idx) => (
                   <div
                     key={idx}
                     onClick={() => handleSelectSousArbre(sa)}

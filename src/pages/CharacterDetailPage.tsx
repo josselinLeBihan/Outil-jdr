@@ -165,12 +165,6 @@ const CharacterDetailPage: React.FC<CharacterDetailPageProps> = ({
           arbres={arbres}
         />
 
-        <AvantagesSection
-          character={character}
-          editMode={editMode}
-          onUpdate={onUpdate}
-        />
-
         <CompetencesSection
           arbres={arbres}
           character={character}
@@ -178,6 +172,12 @@ const CharacterDetailPage: React.FC<CharacterDetailPageProps> = ({
           onUpdate={onUpdateCompetence}
           onAdd={onAddCompetence}
           onRemove={onRemoveCompetence}
+        />
+
+        <AvantagesSection
+          character={character}
+          editMode={editMode}
+          onUpdate={onUpdate}
         />
       </div>
     </div>

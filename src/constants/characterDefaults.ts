@@ -84,7 +84,7 @@ export const EMPTY_CHARACTER: Character = {
   concept: "",
   avantages: 11,
   avantagesConsome: 0,
-  caracteristiquesAvantagesCost: 2,
+  caracteristiquesAvantagesCost: 0,
   capacitesAvantagesCost: 0,
   caracteristiques: {
     ...DEFAULT_CARACTERISTIQUES,

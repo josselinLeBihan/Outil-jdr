@@ -119,20 +119,45 @@ export const getCapacitesStatus = (character: Character) => {
 export const calculateCaracteristiquesAvantagesCost = (
   character: Character,
 ) => {
-  const dist = calculateCaracteristiquesDistribution(character);
+  // We compute cost per point above the baseline distribution on a per-attribute basis.
+  // Strategy:
+  // - Build the baseline array from CARACTERISTIQUES_TARGET (e.g. [4,3,3,3,2,2,2,2,1])
+  // - Get current attribute values, sort descending
+  // - For each position, if current > baseline, add (current - baseline) * 2 to cost
   const standard = CARACTERISTIQUES_TARGET;
+  const flatStandardCount = 4;
+  // Build baseline array according to target distribution
+  const baseline: number[] = [];
+  Object.keys(standard)
+    .sort(
+      (a, b) =>
+        Number(b.replace(/[^0-9]/g, "")) - Number(a.replace(/[^0-9]/g, "")),
+    )
+    .forEach((key) => {
+      const count = (standard as any)[key] || 0;
+      const value = Number(key.replace(/[^0-9]/g, ""));
+      for (let i = 0; i < count; i++) baseline.push(value);
+    });
+
+  // Current values (physique + social + mental)
+  const values = [
+    ...Object.values(character.caracteristiques.physique),
+    ...Object.values(character.caracteristiques.social),
+    ...Object.values(character.caracteristiques.mental),
+  ].map((v) => Number(v));
+
+  // Ensure arrays are same length: if baseline shorter, pad with 0s; if longer, pad baseline with 0s
+  const maxLen = Math.max(baseline.length, values.length);
+  const sortedBaseline = [...baseline].sort((a, b) => b - a);
+  while (sortedBaseline.length < maxLen) sortedBaseline.push(0);
+  const sortedValues = [...values].sort((a, b) => b - a);
+  while (sortedValues.length < maxLen) sortedValues.push(0);
+
   let cost = 0;
-
-  // Calculer le coût : pour chaque niveau au-dessus du standard, on paye ce niveau
-  const excess4 = Math.max(0, dist.at4 - standard.at4);
-  const excess3 = Math.max(0, dist.at3 - standard.at3);
-  const excess2 = Math.max(0, dist.at2 - standard.at2);
-  const excess1 = Math.max(0, dist.at1 - standard.at1);
-
-  cost += excess4 * 4;
-  cost += excess3 * 3;
-  cost += excess2 * 2;
-  cost += excess1 * 1;
+  for (let i = 0; i < maxLen; i++) {
+    const diff = sortedValues[i] - sortedBaseline[i];
+    if (diff > 0) cost += diff * flatStandardCount; // 2 points per extra point
+  }
 
   return cost;
 };
@@ -143,28 +168,42 @@ export const calculateCaracteristiquesAvantagesCost = (
  * Exemple: 2×4 coûte 4 points (1 niveau de 4 au-dessus du standard)
  */
 export const calculateCapacitesAvantagesCost = (character: Character) => {
-  const dist = calculateCapacitesDistribution(character);
+  // Similar approach as characteristics: build baseline array from CAPACITES_TARGET
+  // and compare sorted current values position-wise. Each excess point costs 2pt.
   const standard = CAPACITES_TARGET;
+
+  // Build baseline array according to target distribution (e.g. [8,8,...,7,7,...])
+  const baseline: number[] = [];
+  Object.keys(standard)
+    .sort(
+      (a, b) =>
+        Number(b.replace(/[^0-9]/g, "")) - Number(a.replace(/[^0-9]/g, "")),
+    )
+    .forEach((key) => {
+      const count = (standard as any)[key] || 0;
+      const value = Number(key.replace(/[^0-9]/g, ""));
+      for (let i = 0; i < count; i++) baseline.push(value);
+    });
+
+  // Current values (all capacities)
+  const values = [
+    ...Object.values(character.capacites.physique),
+    ...Object.values(character.capacites.social),
+    ...Object.values(character.capacites.mental),
+    ...Object.values(character.capacites.maitrisesGenerales),
+  ].map((v) => Number(v));
+
+  const maxLen = Math.max(baseline.length, values.length);
+  const sortedBaseline = [...baseline].sort((a, b) => b - a);
+  while (sortedBaseline.length < maxLen) sortedBaseline.push(0);
+  const sortedValues = [...values].sort((a, b) => b - a);
+  while (sortedValues.length < maxLen) sortedValues.push(0);
+
   let cost = 0;
-
-  // Calculer le coût : pour chaque niveau au-dessus du standard, on paye ce niveau
-  const excess8 = Math.max(0, dist.at8 - standard.at8);
-  const excess7 = Math.max(0, dist.at7 - standard.at7);
-  const excess6 = Math.max(0, dist.at6 - standard.at6);
-  const excess5 = Math.max(0, dist.at5 - standard.at5);
-  const excess4 = Math.max(0, dist.at4 - standard.at4);
-  const excess3 = Math.max(0, dist.at3 - standard.at3);
-  const excess2 = Math.max(0, dist.at2 - standard.at2);
-  const excess1 = Math.max(0, dist.at1 - standard.at1);
-
-  cost += excess8 * 8;
-  cost += excess7 * 7;
-  cost += excess6 * 6;
-  cost += excess5 * 5;
-  cost += excess4 * 4;
-  cost += excess3 * 3;
-  cost += excess2 * 2;
-  cost += excess1 * 1;
+  for (let i = 0; i < maxLen; i++) {
+    const diff = sortedValues[i] - sortedBaseline[i];
+    if (diff > 0) cost += diff * 2; // 2 points per extra point
+  }
 
   return cost;
 };

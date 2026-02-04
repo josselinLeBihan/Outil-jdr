@@ -150,6 +150,7 @@ const CompetencesSection: React.FC<CompetencesSectionProps> = ({
         onClose={() => setIsModalOpen(false)}
         onSelect={handleCompetenceSelect}
         arbres={arbres}
+        character={character}
       />
     </div>
   );
